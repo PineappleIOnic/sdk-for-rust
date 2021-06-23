@@ -120,7 +120,7 @@ impl Storage {
     /// files (jpg, png, and gif), other supported formats, like pdf, docs, slides,
     /// and spreadsheets, will return the file icon image. You can also pass query
     /// string arguments for cutting and resizing your preview image.
-    pub fn get_file_preview(&self, file_id: &str, width: i64, height: i64, quality: i64, border_width: i64, border_color: &str, border_radius: i64, opacity: number, rotation: i64, background: &str, output: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn get_file_preview(&self, file_id: &str, width: i64, height: i64, quality: i64, border_width: i64, border_color: &str, border_radius: i64, opacity: f64, rotation: i64, background: &str, output: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/storage/files/fileId/preview".replace("fileId", &file_id);
 
         let headers: HashMap<String, String> = [
@@ -134,7 +134,7 @@ impl Storage {
             ("borderWidth".to_string(),  ParamType::Number(border_width)),
             ("borderColor".to_string(), ParamType::String(border_color.to_string())),
             ("borderRadius".to_string(),  ParamType::Number(border_radius)),
-            ("opacity".to_string(), opacity)),
+            ("opacity".to_string(),  ParamType::Float(opacity)),
             ("rotation".to_string(),  ParamType::Number(rotation)),
             ("background".to_string(), ParamType::String(background.to_string())),
             ("output".to_string(), ParamType::String(output.to_string())),
