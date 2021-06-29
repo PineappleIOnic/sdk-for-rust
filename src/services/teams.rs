@@ -18,17 +18,26 @@ impl Teams {
     /// filter your results. On admin mode, this endpoint will return a list of all
     /// of the project's teams. [Learn more about different API
     /// modes](/docs/admin).
-    pub fn list(&self, search: &str, limit: i64, offset: i64, order_type: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn list(&self, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, order_type: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/teams";
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+    let search:&str = match search {
+        Some(data) => data,
+        None => ""
+    };
+    let order_type:&str = match order_type {
+        Some(data) => data,
+        None => ""
+    };
+
         let params: HashMap<String, ParamType> = [
             ("search".to_string(), ParamType::String(search.to_string())),
-            ("limit".to_string(),  ParamType::Number(limit)),
-            ("offset".to_string(),  ParamType::Number(offset)),
+            ("limit".to_string(),  ParamType::OptionalNumber(limit)),
+            ("offset".to_string(),  ParamType::OptionalNumber(offset)),
             ("orderType".to_string(), ParamType::String(order_type.to_string())),
         ].iter().cloned().collect();
 
@@ -39,12 +48,17 @@ impl Teams {
     /// assigned as the owner of the team. The team owner can invite new members,
     /// who will be able add new owners and update or delete the team from your
     /// project.
-    pub fn create(&self, name: &str, roles: &[&str]) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn create(&self, name: &str, roles: Option<&[&str]>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/teams";
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let roles:&[&str] = match roles {
+        Some(data) => data,
+        None => &[]
+    };
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -63,6 +77,7 @@ impl Teams {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -77,6 +92,7 @@ impl Teams {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -94,6 +110,7 @@ impl Teams {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -102,17 +119,26 @@ impl Teams {
 
     /// Get a team members by the team unique ID. All team members have read access
     /// for this list of resources.
-    pub fn get_memberships(&self, team_id: &str, search: &str, limit: i64, offset: i64, order_type: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn get_memberships(&self, team_id: &str, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, order_type: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/teams/teamId/memberships".replace("teamId", &team_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+    let search:&str = match search {
+        Some(data) => data,
+        None => ""
+    };
+    let order_type:&str = match order_type {
+        Some(data) => data,
+        None => ""
+    };
+
         let params: HashMap<String, ParamType> = [
             ("search".to_string(), ParamType::String(search.to_string())),
-            ("limit".to_string(),  ParamType::Number(limit)),
-            ("offset".to_string(),  ParamType::Number(offset)),
+            ("limit".to_string(),  ParamType::OptionalNumber(limit)),
+            ("offset".to_string(),  ParamType::OptionalNumber(offset)),
             ("orderType".to_string(), ParamType::String(order_type.to_string())),
         ].iter().cloned().collect();
 
@@ -132,12 +158,17 @@ impl Teams {
     /// Attacks](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md)
     /// the only valid redirect URL's are the once from domains you have set when
     /// added your platforms in the console interface.
-    pub fn create_membership(&self, team_id: &str, email: &str, roles: &[&str], url: &str, name: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn create_membership(&self, team_id: &str, email: &str, roles: &[&str], url: &str, name: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/teams/teamId/memberships".replace("teamId", &team_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let name:&str = match name {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("email".to_string(), ParamType::String(email.to_string())),
@@ -156,6 +187,7 @@ impl Teams {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
             ("roles".to_string(), ParamType::Array(roles.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
         ].iter().cloned().collect();
@@ -173,6 +205,7 @@ impl Teams {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -188,6 +221,7 @@ impl Teams {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
             ("userId".to_string(), ParamType::String(user_id.to_string())),

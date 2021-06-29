@@ -14,29 +14,75 @@ impl Projects {
         }
     }
 
-    pub fn list(&self, search: &str, limit: i64, offset: i64, order_type: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn list(&self, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, order_type: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects";
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+    let search:&str = match search {
+        Some(data) => data,
+        None => ""
+    };
+    let order_type:&str = match order_type {
+        Some(data) => data,
+        None => ""
+    };
+
         let params: HashMap<String, ParamType> = [
             ("search".to_string(), ParamType::String(search.to_string())),
-            ("limit".to_string(),  ParamType::Number(limit)),
-            ("offset".to_string(),  ParamType::Number(offset)),
+            ("limit".to_string(),  ParamType::OptionalNumber(limit)),
+            ("offset".to_string(),  ParamType::OptionalNumber(offset)),
             ("orderType".to_string(), ParamType::String(order_type.to_string())),
         ].iter().cloned().collect();
 
         return self.client.clone().call("GET", &path, Some(headers), Some(params) );
     }
 
-    pub fn create(&self, name: &str, team_id: &str, description: &str, logo: &str, url: &str, legal_name: &str, legal_country: &str, legal_state: &str, legal_city: &str, legal_address: &str, legal_tax_id: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn create(&self, name: &str, team_id: &str, description: Option<&str>, logo: Option<&str>, url: Option<&str>, legal_name: Option<&str>, legal_country: Option<&str>, legal_state: Option<&str>, legal_city: Option<&str>, legal_address: Option<&str>, legal_tax_id: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects";
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let description:&str = match description {
+        Some(data) => data,
+        None => ""
+    };
+    let logo:&str = match logo {
+        Some(data) => data,
+        None => ""
+    };
+    let url:&str = match url {
+        Some(data) => data,
+        None => ""
+    };
+    let legal_name:&str = match legal_name {
+        Some(data) => data,
+        None => ""
+    };
+    let legal_country:&str = match legal_country {
+        Some(data) => data,
+        None => ""
+    };
+    let legal_state:&str = match legal_state {
+        Some(data) => data,
+        None => ""
+    };
+    let legal_city:&str = match legal_city {
+        Some(data) => data,
+        None => ""
+    };
+    let legal_address:&str = match legal_address {
+        Some(data) => data,
+        None => ""
+    };
+    let legal_tax_id:&str = match legal_tax_id {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -62,18 +108,56 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("GET", &path, Some(headers), Some(params) );
     }
 
-    pub fn update(&self, project_id: &str, name: &str, description: &str, logo: &str, url: &str, legal_name: &str, legal_country: &str, legal_state: &str, legal_city: &str, legal_address: &str, legal_tax_id: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn update(&self, project_id: &str, name: &str, description: Option<&str>, logo: Option<&str>, url: Option<&str>, legal_name: Option<&str>, legal_country: Option<&str>, legal_state: Option<&str>, legal_city: Option<&str>, legal_address: Option<&str>, legal_tax_id: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects/projectId".replace("projectId", &project_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let description:&str = match description {
+        Some(data) => data,
+        None => ""
+    };
+    let logo:&str = match logo {
+        Some(data) => data,
+        None => ""
+    };
+    let url:&str = match url {
+        Some(data) => data,
+        None => ""
+    };
+    let legal_name:&str = match legal_name {
+        Some(data) => data,
+        None => ""
+    };
+    let legal_country:&str = match legal_country {
+        Some(data) => data,
+        None => ""
+    };
+    let legal_state:&str = match legal_state {
+        Some(data) => data,
+        None => ""
+    };
+    let legal_city:&str = match legal_city {
+        Some(data) => data,
+        None => ""
+    };
+    let legal_address:&str = match legal_address {
+        Some(data) => data,
+        None => ""
+    };
+    let legal_tax_id:&str = match legal_tax_id {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -98,6 +182,7 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
             ("password".to_string(), ParamType::String(password.to_string())),
         ].iter().cloned().collect();
@@ -111,6 +196,7 @@ impl Projects {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
             ("limit".to_string(), ParamType::String(limit.to_string())),
@@ -126,6 +212,7 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
             ("status".to_string(), ParamType::Bool(status)),
         ].iter().cloned().collect();
@@ -140,6 +227,7 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -152,6 +240,7 @@ impl Projects {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
             ("domain".to_string(), ParamType::String(domain.to_string())),
@@ -167,6 +256,7 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -179,6 +269,7 @@ impl Projects {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -193,6 +284,7 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -206,6 +298,7 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -218,6 +311,7 @@ impl Projects {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -234,6 +328,7 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -246,6 +341,7 @@ impl Projects {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -262,18 +358,28 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("DELETE", &path, Some(headers), Some(params) );
     }
 
-    pub fn update_o_auth2(&self, project_id: &str, provider: &str, app_id: &str, secret: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn update_o_auth2(&self, project_id: &str, provider: &str, app_id: Option<&str>, secret: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects/projectId/oauth2".replace("projectId", &project_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let app_id:&str = match app_id {
+        Some(data) => data,
+        None => ""
+    };
+    let secret:&str = match secret {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("provider".to_string(), ParamType::String(provider.to_string())),
@@ -291,18 +397,32 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("GET", &path, Some(headers), Some(params) );
     }
 
-    pub fn create_platform(&self, project_id: &str, xtype: &str, name: &str, key: &str, store: &str, hostname: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn create_platform(&self, project_id: &str, xtype: &str, name: &str, key: Option<&str>, store: Option<&str>, hostname: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects/projectId/platforms".replace("projectId", &project_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let key:&str = match key {
+        Some(data) => data,
+        None => ""
+    };
+    let store:&str = match store {
+        Some(data) => data,
+        None => ""
+    };
+    let hostname:&str = match hostname {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("type".to_string(), ParamType::String(xtype.to_string())),
@@ -322,18 +442,32 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("GET", &path, Some(headers), Some(params) );
     }
 
-    pub fn update_platform(&self, project_id: &str, platform_id: &str, name: &str, key: &str, store: &str, hostname: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn update_platform(&self, project_id: &str, platform_id: &str, name: &str, key: Option<&str>, store: Option<&str>, hostname: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects/projectId/platforms/platformId".replace("projectId", &project_id).replace("platformId", &platform_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let key:&str = match key {
+        Some(data) => data,
+        None => ""
+    };
+    let store:&str = match store {
+        Some(data) => data,
+        None => ""
+    };
+    let hostname:&str = match hostname {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -352,6 +486,7 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -365,18 +500,32 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("GET", &path, Some(headers), Some(params) );
     }
 
-    pub fn create_task(&self, project_id: &str, name: &str, status: &str, schedule: &str, security: bool, http_method: &str, http_url: &str, http_headers: &[&str], http_user: &str, http_pass: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn create_task(&self, project_id: &str, name: &str, status: &str, schedule: &str, security: bool, http_method: &str, http_url: &str, http_headers: Option<&[&str]>, http_user: Option<&str>, http_pass: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects/projectId/tasks".replace("projectId", &project_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let http_headers:&[&str] = match http_headers {
+        Some(data) => data,
+        None => &[]
+    };
+    let http_user:&str = match http_user {
+        Some(data) => data,
+        None => ""
+    };
+    let http_pass:&str = match http_pass {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -400,18 +549,32 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("GET", &path, Some(headers), Some(params) );
     }
 
-    pub fn update_task(&self, project_id: &str, task_id: &str, name: &str, status: &str, schedule: &str, security: bool, http_method: &str, http_url: &str, http_headers: &[&str], http_user: &str, http_pass: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn update_task(&self, project_id: &str, task_id: &str, name: &str, status: &str, schedule: &str, security: bool, http_method: &str, http_url: &str, http_headers: Option<&[&str]>, http_user: Option<&str>, http_pass: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects/projectId/tasks/taskId".replace("projectId", &project_id).replace("taskId", &task_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let http_headers:&[&str] = match http_headers {
+        Some(data) => data,
+        None => &[]
+    };
+    let http_user:&str = match http_user {
+        Some(data) => data,
+        None => ""
+    };
+    let http_pass:&str = match http_pass {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -435,18 +598,24 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("DELETE", &path, Some(headers), Some(params) );
     }
 
-    pub fn get_usage(&self, project_id: &str, range: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn get_usage(&self, project_id: &str, range: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects/projectId/usage".replace("projectId", &project_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let range:&str = match range {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("range".to_string(), ParamType::String(range.to_string())),
@@ -462,18 +631,28 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("GET", &path, Some(headers), Some(params) );
     }
 
-    pub fn create_webhook(&self, project_id: &str, name: &str, events: &[&str], url: &str, security: bool, http_user: &str, http_pass: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn create_webhook(&self, project_id: &str, name: &str, events: &[&str], url: &str, security: bool, http_user: Option<&str>, http_pass: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects/projectId/webhooks".replace("projectId", &project_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let http_user:&str = match http_user {
+        Some(data) => data,
+        None => ""
+    };
+    let http_pass:&str = match http_pass {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -494,18 +673,28 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("GET", &path, Some(headers), Some(params) );
     }
 
-    pub fn update_webhook(&self, project_id: &str, webhook_id: &str, name: &str, events: &[&str], url: &str, security: bool, http_user: &str, http_pass: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn update_webhook(&self, project_id: &str, webhook_id: &str, name: &str, events: &[&str], url: &str, security: bool, http_user: Option<&str>, http_pass: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects/projectId/webhooks/webhookId".replace("projectId", &project_id).replace("webhookId", &webhook_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let http_user:&str = match http_user {
+        Some(data) => data,
+        None => ""
+    };
+    let http_pass:&str = match http_pass {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -525,6 +714,7 @@ impl Projects {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();

@@ -16,17 +16,26 @@ impl Users {
 
     /// Get a list of all the project's users. You can use the query params to
     /// filter your results.
-    pub fn list(&self, search: &str, limit: i64, offset: i64, order_type: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn list(&self, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, order_type: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/users";
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+    let search:&str = match search {
+        Some(data) => data,
+        None => ""
+    };
+    let order_type:&str = match order_type {
+        Some(data) => data,
+        None => ""
+    };
+
         let params: HashMap<String, ParamType> = [
             ("search".to_string(), ParamType::String(search.to_string())),
-            ("limit".to_string(),  ParamType::Number(limit)),
-            ("offset".to_string(),  ParamType::Number(offset)),
+            ("limit".to_string(),  ParamType::OptionalNumber(limit)),
+            ("offset".to_string(),  ParamType::OptionalNumber(offset)),
             ("orderType".to_string(), ParamType::String(order_type.to_string())),
         ].iter().cloned().collect();
 
@@ -34,12 +43,17 @@ impl Users {
     }
 
     /// Create a new user.
-    pub fn create(&self, email: &str, password: &str, name: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn create(&self, email: &str, password: &str, name: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/users";
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let name:&str = match name {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("email".to_string(), ParamType::String(email.to_string())),
@@ -58,6 +72,7 @@ impl Users {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -71,6 +86,7 @@ impl Users {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -86,6 +102,7 @@ impl Users {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -99,6 +116,7 @@ impl Users {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -115,6 +133,7 @@ impl Users {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
             ("prefs".to_string(), ParamType::Object(prefs.unwrap())),
         ].iter().cloned().collect();
@@ -130,6 +149,7 @@ impl Users {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -143,6 +163,7 @@ impl Users {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -158,6 +179,7 @@ impl Users {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -171,6 +193,7 @@ impl Users {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
             ("status".to_string(),  ParamType::Number(status)),

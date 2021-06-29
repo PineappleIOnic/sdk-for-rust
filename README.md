@@ -1,4 +1,3 @@
-# NOTICE!!! THIS IS TEMPORARY AND SHOULD NOT BE USED. IT IS ONLY HERE FOR TESTING!
 # Appwrite NAME SDK
 
 ![License](https://img.shields.io/github/license/repoowner/reponame.svg?v=1)

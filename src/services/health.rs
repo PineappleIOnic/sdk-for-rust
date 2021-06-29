@@ -22,6 +22,7 @@ impl Health {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -35,6 +36,7 @@ impl Health {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -51,6 +53,7 @@ impl Health {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -64,6 +67,7 @@ impl Health {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -81,6 +85,7 @@ impl Health {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -93,6 +98,7 @@ impl Health {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -109,6 +115,7 @@ impl Health {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -123,6 +130,7 @@ impl Health {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -139,6 +147,7 @@ impl Health {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -154,6 +163,7 @@ impl Health {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -167,6 +177,7 @@ impl Health {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -187,6 +198,7 @@ impl Health {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();

@@ -16,17 +16,26 @@ impl Functions {
 
     /// Get a list of all the project's functions. You can use the query params to
     /// filter your results.
-    pub fn list(&self, search: &str, limit: i64, offset: i64, order_type: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn list(&self, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, order_type: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/functions";
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+    let search:&str = match search {
+        Some(data) => data,
+        None => ""
+    };
+    let order_type:&str = match order_type {
+        Some(data) => data,
+        None => ""
+    };
+
         let params: HashMap<String, ParamType> = [
             ("search".to_string(), ParamType::String(search.to_string())),
-            ("limit".to_string(),  ParamType::Number(limit)),
-            ("offset".to_string(),  ParamType::Number(offset)),
+            ("limit".to_string(),  ParamType::OptionalNumber(limit)),
+            ("offset".to_string(),  ParamType::OptionalNumber(offset)),
             ("orderType".to_string(), ParamType::String(order_type.to_string())),
         ].iter().cloned().collect();
 
@@ -36,21 +45,30 @@ impl Functions {
     /// Create a new function. You can pass a list of
     /// [permissions](/docs/permissions) to allow different project users or team
     /// with access to execute the function using the client API.
-    pub fn create(&self, name: &str, execute: &[&str], env: &str, vars: Option<HashMap<String, crate::client::ParamType>>, events: &[&str], schedule: &str, timeout: i64) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn create(&self, name: &str, execute: &[&str], env: &str, vars: Option<Option<HashMap<String, crate::client::ParamType>>>, events: Option<&[&str]>, schedule: Option<&str>, timeout: Option<i64>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/functions";
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+    let events:&[&str] = match events {
+        Some(data) => data,
+        None => &[]
+    };
+    let schedule:&str = match schedule {
+        Some(data) => data,
+        None => ""
+    };
+
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
             ("execute".to_string(), ParamType::Array(execute.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
             ("env".to_string(), ParamType::String(env.to_string())),
-            ("vars".to_string(), ParamType::Object(vars.unwrap())),
+            ("vars".to_string(), ParamType::OptionalObject(vars.unwrap())),
             ("events".to_string(), ParamType::Array(events.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
             ("schedule".to_string(), ParamType::String(schedule.to_string())),
-            ("timeout".to_string(),  ParamType::Number(timeout)),
+            ("timeout".to_string(),  ParamType::OptionalNumber(timeout)),
         ].iter().cloned().collect();
 
         return self.client.clone().call("POST", &path, Some(headers), Some(params) );
@@ -64,6 +82,7 @@ impl Functions {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -71,20 +90,29 @@ impl Functions {
     }
 
     /// Update function by its unique ID.
-    pub fn update(&self, function_id: &str, name: &str, execute: &[&str], vars: Option<HashMap<String, crate::client::ParamType>>, events: &[&str], schedule: &str, timeout: i64) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn update(&self, function_id: &str, name: &str, execute: &[&str], vars: Option<Option<HashMap<String, crate::client::ParamType>>>, events: Option<&[&str]>, schedule: Option<&str>, timeout: Option<i64>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/functions/functionId".replace("functionId", &function_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+    let events:&[&str] = match events {
+        Some(data) => data,
+        None => &[]
+    };
+    let schedule:&str = match schedule {
+        Some(data) => data,
+        None => ""
+    };
+
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
             ("execute".to_string(), ParamType::Array(execute.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
-            ("vars".to_string(), ParamType::Object(vars.unwrap())),
+            ("vars".to_string(), ParamType::OptionalObject(vars.unwrap())),
             ("events".to_string(), ParamType::Array(events.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
             ("schedule".to_string(), ParamType::String(schedule.to_string())),
-            ("timeout".to_string(),  ParamType::Number(timeout)),
+            ("timeout".to_string(),  ParamType::OptionalNumber(timeout)),
         ].iter().cloned().collect();
 
         return self.client.clone().call("PUT", &path, Some(headers), Some(params) );
@@ -98,6 +126,7 @@ impl Functions {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -108,17 +137,26 @@ impl Functions {
     /// query params to filter your results. On admin mode, this endpoint will
     /// return a list of all of the project's executions. [Learn more about
     /// different API modes](/docs/admin).
-    pub fn list_executions(&self, function_id: &str, search: &str, limit: i64, offset: i64, order_type: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn list_executions(&self, function_id: &str, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, order_type: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/functions/functionId/executions".replace("functionId", &function_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+    let search:&str = match search {
+        Some(data) => data,
+        None => ""
+    };
+    let order_type:&str = match order_type {
+        Some(data) => data,
+        None => ""
+    };
+
         let params: HashMap<String, ParamType> = [
             ("search".to_string(), ParamType::String(search.to_string())),
-            ("limit".to_string(),  ParamType::Number(limit)),
-            ("offset".to_string(),  ParamType::Number(offset)),
+            ("limit".to_string(),  ParamType::OptionalNumber(limit)),
+            ("offset".to_string(),  ParamType::OptionalNumber(offset)),
             ("orderType".to_string(), ParamType::String(order_type.to_string())),
         ].iter().cloned().collect();
 
@@ -129,12 +167,17 @@ impl Functions {
     /// current execution status. You can ping the `Get Execution` endpoint to get
     /// updates on the current execution status. Once this endpoint is called, your
     /// function execution process will start asynchronously.
-    pub fn create_execution(&self, function_id: &str, data: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn create_execution(&self, function_id: &str, data: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/functions/functionId/executions".replace("functionId", &function_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let data:&str = match data {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("data".to_string(), ParamType::String(data.to_string())),
@@ -150,6 +193,7 @@ impl Functions {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -167,6 +211,7 @@ impl Functions {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
             ("tag".to_string(), ParamType::String(tag.to_string())),
         ].iter().cloned().collect();
@@ -176,17 +221,26 @@ impl Functions {
 
     /// Get a list of all the project's code tags. You can use the query params to
     /// filter your results.
-    pub fn list_tags(&self, function_id: &str, search: &str, limit: i64, offset: i64, order_type: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn list_tags(&self, function_id: &str, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, order_type: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/functions/functionId/tags".replace("functionId", &function_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+    let search:&str = match search {
+        Some(data) => data,
+        None => ""
+    };
+    let order_type:&str = match order_type {
+        Some(data) => data,
+        None => ""
+    };
+
         let params: HashMap<String, ParamType> = [
             ("search".to_string(), ParamType::String(search.to_string())),
-            ("limit".to_string(),  ParamType::Number(limit)),
-            ("offset".to_string(),  ParamType::Number(offset)),
+            ("limit".to_string(),  ParamType::OptionalNumber(limit)),
+            ("offset".to_string(),  ParamType::OptionalNumber(offset)),
             ("orderType".to_string(), ParamType::String(order_type.to_string())),
         ].iter().cloned().collect();
 
@@ -210,6 +264,7 @@ impl Functions {
             ("content-type".to_string(), "multipart/form-data".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
             ("command".to_string(), ParamType::String(command.to_string())),
             ("code".to_string(), ParamType::FilePath(code)),
@@ -226,6 +281,7 @@ impl Functions {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -240,18 +296,24 @@ impl Functions {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("DELETE", &path, Some(headers), Some(params) );
     }
 
-    pub fn get_usage(&self, function_id: &str, range: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn get_usage(&self, function_id: &str, range: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/functions/functionId/usage".replace("functionId", &function_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let range:&str = match range {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("range".to_string(), ParamType::String(range.to_string())),

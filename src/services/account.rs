@@ -22,6 +22,7 @@ impl Account {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -34,12 +35,17 @@ impl Account {
     /// route to start verifying the user email address. To allow the new user to
     /// login to their new account, you need to create a new [account
     /// session](/docs/client/account#accountCreateSession).
-    pub fn create(&self, email: &str, password: &str, name: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn create(&self, email: &str, password: &str, name: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/account";
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let name:&str = match name {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("email".to_string(), ParamType::String(email.to_string())),
@@ -62,6 +68,7 @@ impl Account {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -80,6 +87,7 @@ impl Account {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
             ("email".to_string(), ParamType::String(email.to_string())),
@@ -100,6 +108,7 @@ impl Account {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -115,6 +124,7 @@ impl Account {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -129,6 +139,7 @@ impl Account {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
         ].iter().cloned().collect();
@@ -139,12 +150,17 @@ impl Account {
     /// Update currently logged in user password. For validation, user is required
     /// to pass in the new password, and the old password. For users created with
     /// OAuth and Team Invites, oldPassword is optional.
-    pub fn update_password(&self, password: &str, old_password: &str) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn update_password(&self, password: &str, old_password: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/account/password";
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let old_password:&str = match old_password {
+        Some(data) => data,
+        None => ""
+    };
 
         let params: HashMap<String, ParamType> = [
             ("password".to_string(), ParamType::String(password.to_string())),
@@ -162,6 +178,7 @@ impl Account {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -176,6 +193,7 @@ impl Account {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
             ("prefs".to_string(), ParamType::Object(prefs.unwrap())),
@@ -198,6 +216,7 @@ impl Account {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
             ("email".to_string(), ParamType::String(email.to_string())),
@@ -223,6 +242,7 @@ impl Account {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
             ("userId".to_string(), ParamType::String(user_id.to_string())),
             ("secret".to_string(), ParamType::String(secret.to_string())),
@@ -242,6 +262,7 @@ impl Account {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -256,6 +277,7 @@ impl Account {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
             ("email".to_string(), ParamType::String(email.to_string())),
@@ -273,6 +295,7 @@ impl Account {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -292,6 +315,7 @@ impl Account {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -302,12 +326,25 @@ impl Account {
     /// choice. Each OAuth2 provider should be enabled from the Appwrite console
     /// first. Use the success and failure arguments to provide a redirect URL's
     /// back to your app when login is completed.
-    pub fn create_o_auth2_session(&self, provider: &str, success: &str, failure: &str, scopes: &[&str]) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn create_o_auth2_session(&self, provider: &str, success: Option<&str>, failure: Option<&str>, scopes: Option<&[&str]>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/account/sessions/oauth2/provider".replace("provider", &provider);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
+    let success:&str = match success {
+        Some(data) => data,
+        None => ""
+    };
+    let failure:&str = match failure {
+        Some(data) => data,
+        None => ""
+    };
+    let scopes:&[&str] = match scopes {
+        Some(data) => data,
+        None => &[]
+    };
 
         let params: HashMap<String, ParamType> = [
             ("success".to_string(), ParamType::String(success.to_string())),
@@ -327,6 +364,7 @@ impl Account {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -356,6 +394,7 @@ impl Account {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
+
         let params: HashMap<String, ParamType> = [
             ("url".to_string(), ParamType::String(url.to_string())),
         ].iter().cloned().collect();
@@ -373,6 +412,7 @@ impl Account {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
+
 
         let params: HashMap<String, ParamType> = [
             ("userId".to_string(), ParamType::String(user_id.to_string())),
