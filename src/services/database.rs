@@ -15,6 +15,164 @@ impl Database {
         }
     }
 
+    /// Get a list of all the user collections. You can use the query params to
+    /// filter your results. On admin mode, this endpoint will return a list of all
+    /// of the project's collections. [Learn more about different API
+    /// modes](/docs/admin).
+    pub fn list_collections(&self, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, order_type: Option<&str>) -> Result<models::CollectionList, AppwriteException> {
+        let path = "/database/collections";
+        let headers: HashMap<String, String> = [
+            ("content-type".to_string(), "application/json".to_string()),
+        ].iter().cloned().collect();
+
+        let search:&str = match search {
+            Some(data) => data,
+            None => ""
+        };
+
+        let order_type:&str = match order_type {
+            Some(data) => data,
+            None => ""
+        };
+
+        let params: HashMap<String, ParamType> = [
+            ("search".to_string(), ParamType::String(search.to_string())),
+            ("limit".to_string(),  ParamType::OptionalNumber(limit)),
+            ("offset".to_string(),  ParamType::OptionalNumber(offset)),
+            ("orderType".to_string(), ParamType::String(order_type.to_string())),
+        ].iter().cloned().collect();
+
+        let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
+
+        let processedResponse:models::CollectionList = match response {
+            Ok(r) => {
+                r.json().unwrap()
+            }
+            Err(e) => {
+                return Err(e);
+            }
+        };
+
+        Ok(processedResponse)
+
+    }
+
+    /// Create a new Collection.
+    pub fn create_collection(&self, name: &str, read: &[&str], write: &[&str], rules: &[&str]) -> Result<models::Collection, AppwriteException> {
+        let path = "/database/collections";
+        let headers: HashMap<String, String> = [
+            ("content-type".to_string(), "application/json".to_string()),
+        ].iter().cloned().collect();
+
+        let params: HashMap<String, ParamType> = [
+            ("name".to_string(), ParamType::String(name.to_string())),
+            ("read".to_string(), ParamType::Array(read.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
+            ("write".to_string(), ParamType::Array(write.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
+            ("rules".to_string(), ParamType::Array(rules.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
+        ].iter().cloned().collect();
+
+        let response = self.client.clone().call("POST", &path, Some(headers), Some(params) );
+
+        let processedResponse:models::Collection = match response {
+            Ok(r) => {
+                r.json().unwrap()
+            }
+            Err(e) => {
+                return Err(e);
+            }
+        };
+
+        Ok(processedResponse)
+
+    }
+
+    /// Get a collection by its unique ID. This endpoint response returns a JSON
+    /// object with the collection metadata.
+    pub fn get_collection(&self, collection_id: &str) -> Result<models::Collection, AppwriteException> {
+        let path = "/database/collections/collectionId".replace("collectionId", &collection_id);
+        let headers: HashMap<String, String> = [
+            ("content-type".to_string(), "application/json".to_string()),
+        ].iter().cloned().collect();
+
+        let params: HashMap<String, ParamType> = [
+        ].iter().cloned().collect();
+
+        let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
+
+        let processedResponse:models::Collection = match response {
+            Ok(r) => {
+                r.json().unwrap()
+            }
+            Err(e) => {
+                return Err(e);
+            }
+        };
+
+        Ok(processedResponse)
+
+    }
+
+    /// Update a collection by its unique ID.
+    pub fn update_collection(&self, collection_id: &str, name: &str, read: Option<&[&str]>, write: Option<&[&str]>, rules: Option<&[&str]>) -> Result<models::Collection, AppwriteException> {
+        let path = "/database/collections/collectionId".replace("collectionId", &collection_id);
+        let headers: HashMap<String, String> = [
+            ("content-type".to_string(), "application/json".to_string()),
+        ].iter().cloned().collect();
+
+        let read:&[&str] = match read {
+            Some(data) => data,
+            None => &[]
+        };
+
+        let write:&[&str] = match write {
+            Some(data) => data,
+            None => &[]
+        };
+
+        let rules:&[&str] = match rules {
+            Some(data) => data,
+            None => &[]
+        };
+
+        let params: HashMap<String, ParamType> = [
+            ("name".to_string(), ParamType::String(name.to_string())),
+            ("read".to_string(), ParamType::Array(read.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
+            ("write".to_string(), ParamType::Array(write.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
+            ("rules".to_string(), ParamType::Array(rules.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
+        ].iter().cloned().collect();
+
+        let response = self.client.clone().call("PUT", &path, Some(headers), Some(params) );
+
+        let processedResponse:models::Collection = match response {
+            Ok(r) => {
+                r.json().unwrap()
+            }
+            Err(e) => {
+                return Err(e);
+            }
+        };
+
+        Ok(processedResponse)
+
+    }
+
+    /// Delete a collection by its unique ID. Only users with write permissions
+    /// have access to delete this resource.
+    pub fn delete_collection(&self, collection_id: &str) -> Result<bool, AppwriteException> {
+        let path = "/database/collections/collectionId".replace("collectionId", &collection_id);
+        let headers: HashMap<String, String> = [
+            ("content-type".to_string(), "application/json".to_string()),
+        ].iter().cloned().collect();
+
+        let params: HashMap<String, ParamType> = [
+        ].iter().cloned().collect();
+
+        let response = self.client.clone().call("DELETE", &path, Some(headers), Some(params) );
+
+        Ok(response.unwrap().status().is_success())
+
+    }
+
     /// Get a list of all the user documents. You can use the query params to
     /// filter your results. On admin mode, this endpoint will return a list of all
     /// of the project's documents. [Learn more about different API

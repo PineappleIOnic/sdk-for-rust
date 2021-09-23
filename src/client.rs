@@ -105,6 +105,11 @@ impl Client {
         self.add_header("X-Appwrite-Project".to_string(), value.to_string())
     }
 
+    /// Sets Your secret API key
+    pub fn set_key(&mut self, value: &str) {
+        self.add_header("X-Appwrite-Key".to_string(), value.to_string())
+    }
+
     /// Sets Your secret JSON Web Token
     pub fn set_jwt(&mut self, value: &str) {
         self.add_header("X-Appwrite-JWT".to_string(), value.to_string())

@@ -40,44 +40,6 @@ impl Account {
 
     }
 
-    /// Use this endpoint to allow a new user to register a new account in your
-    /// project. After the user registration completes successfully, you can use
-    /// the [/account/verfication](/docs/client/account#accountCreateVerification)
-    /// route to start verifying the user email address. To allow the new user to
-    /// login to their new account, you need to create a new [account
-    /// session](/docs/client/account#accountCreateSession).
-    pub fn create(&self, email: &str, password: &str, name: Option<&str>) -> Result<models::User, AppwriteException> {
-        let path = "/account";
-        let headers: HashMap<String, String> = [
-            ("content-type".to_string(), "application/json".to_string()),
-        ].iter().cloned().collect();
-
-        let name:&str = match name {
-            Some(data) => data,
-            None => ""
-        };
-
-        let params: HashMap<String, ParamType> = [
-            ("email".to_string(), ParamType::String(email.to_string())),
-            ("password".to_string(), ParamType::String(password.to_string())),
-            ("name".to_string(), ParamType::String(name.to_string())),
-        ].iter().cloned().collect();
-
-        let response = self.client.clone().call("POST", &path, Some(headers), Some(params) );
-
-        let processedResponse:models::User = match response {
-            Ok(r) => {
-                r.json().unwrap()
-            }
-            Err(e) => {
-                return Err(e);
-            }
-        };
-
-        Ok(processedResponse)
-
-    }
-
     /// Delete a currently logged in user account. Behind the scene, the user
     /// record is not deleted but permanently blocked from any access. This is done
     /// to avoid deleted accounts being overtaken by new users with the same email
@@ -118,35 +80,6 @@ impl Account {
         let response = self.client.clone().call("PATCH", &path, Some(headers), Some(params) );
 
         let processedResponse:models::User = match response {
-            Ok(r) => {
-                r.json().unwrap()
-            }
-            Err(e) => {
-                return Err(e);
-            }
-        };
-
-        Ok(processedResponse)
-
-    }
-
-    /// Use this endpoint to create a JSON Web Token. You can use the resulting JWT
-    /// to authenticate on behalf of the current user when working with the
-    /// Appwrite server-side API and SDKs. The JWT secret is valid for 15 minutes
-    /// from its creation and will be invalid if the user will logout in that time
-    /// frame.
-    pub fn create_jwt(&self) -> Result<models::Jwt, AppwriteException> {
-        let path = "/account/jwt";
-        let headers: HashMap<String, String> = [
-            ("content-type".to_string(), "application/json".to_string()),
-        ].iter().cloned().collect();
-
-        let params: HashMap<String, ParamType> = [
-        ].iter().cloned().collect();
-
-        let response = self.client.clone().call("POST", &path, Some(headers), Some(params) );
-
-        let processedResponse:models::Jwt = match response {
             Ok(r) => {
                 r.json().unwrap()
             }
@@ -394,34 +327,6 @@ impl Account {
 
     }
 
-    /// Allow the user to login into their account by providing a valid email and
-    /// password combination. This route will create a new session for the user.
-    pub fn create_session(&self, email: &str, password: &str) -> Result<models::Session, AppwriteException> {
-        let path = "/account/sessions";
-        let headers: HashMap<String, String> = [
-            ("content-type".to_string(), "application/json".to_string()),
-        ].iter().cloned().collect();
-
-        let params: HashMap<String, ParamType> = [
-            ("email".to_string(), ParamType::String(email.to_string())),
-            ("password".to_string(), ParamType::String(password.to_string())),
-        ].iter().cloned().collect();
-
-        let response = self.client.clone().call("POST", &path, Some(headers), Some(params) );
-
-        let processedResponse:models::Session = match response {
-            Ok(r) => {
-                r.json().unwrap()
-            }
-            Err(e) => {
-                return Err(e);
-            }
-        };
-
-        Ok(processedResponse)
-
-    }
-
     /// Delete all sessions from the user account and remove any sessions cookies
     /// from the end client.
     pub fn delete_sessions(&self) -> Result<bool, AppwriteException> {
@@ -434,159 +339,6 @@ impl Account {
         ].iter().cloned().collect();
 
         let response = self.client.clone().call("DELETE", &path, Some(headers), Some(params) );
-
-        Ok(response.unwrap().status().is_success())
-
-    }
-
-    /// Use this endpoint to allow a new user to register an anonymous account in
-    /// your project. This route will also create a new session for the user. To
-    /// allow the new user to convert an anonymous account to a normal account, you
-    /// need to update its [email and
-    /// password](/docs/client/account#accountUpdateEmail) or create an [OAuth2
-    /// session](/docs/client/account#accountCreateOAuth2Session).
-    pub fn create_anonymous_session(&self) -> Result<models::Session, AppwriteException> {
-        let path = "/account/sessions/anonymous";
-        let headers: HashMap<String, String> = [
-            ("content-type".to_string(), "application/json".to_string()),
-        ].iter().cloned().collect();
-
-        let params: HashMap<String, ParamType> = [
-        ].iter().cloned().collect();
-
-        let response = self.client.clone().call("POST", &path, Some(headers), Some(params) );
-
-        let processedResponse:models::Session = match response {
-            Ok(r) => {
-                r.json().unwrap()
-            }
-            Err(e) => {
-                return Err(e);
-            }
-        };
-
-        Ok(processedResponse)
-
-    }
-
-    /// Sends the user an email with a secret key for creating a session. When the
-    /// user clicks the link in the email, the user is redirected back to the URL
-    /// you provided with the secret key and userId values attached to the URL
-    /// query string. Use the query string parameters to submit a request to the
-    /// [PUT
-    /// /account/sessions/magic-url](/docs/client/account#accountUpdateMagicURLSession)
-    /// endpoint to complete the login process. The link sent to the user's email
-    /// address is valid for 1 hour. If you are on a mobile device you can leave
-    /// the URL parameter empty, so that the login completion will be handled by
-    /// your Appwrite instance by default.
-    pub fn create_magic_url_session(&self, email: &str, url: Option<&str>) -> Result<models::Token, AppwriteException> {
-        let path = "/account/sessions/magic-url";
-        let headers: HashMap<String, String> = [
-            ("content-type".to_string(), "application/json".to_string()),
-        ].iter().cloned().collect();
-
-        let url:&str = match url {
-            Some(data) => data,
-            None => ""
-        };
-
-        let params: HashMap<String, ParamType> = [
-            ("email".to_string(), ParamType::String(email.to_string())),
-            ("url".to_string(), ParamType::String(url.to_string())),
-        ].iter().cloned().collect();
-
-        let response = self.client.clone().call("POST", &path, Some(headers), Some(params) );
-
-        let processedResponse:models::Token = match response {
-            Ok(r) => {
-                r.json().unwrap()
-            }
-            Err(e) => {
-                return Err(e);
-            }
-        };
-
-        Ok(processedResponse)
-
-    }
-
-    /// Use this endpoint to complete creating the session with the Magic URL. Both
-    /// the **userId** and **secret** arguments will be passed as query parameters
-    /// to the redirect URL you have provided when sending your request to the
-    /// [POST
-    /// /account/sessions/magic-url](/docs/client/account#accountCreateMagicURLSession)
-    /// endpoint.
-    /// 
-    /// Please note that in order to avoid a [Redirect
-    /// Attack](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md)
-    /// the only valid redirect URLs are the ones from domains you have set when
-    /// adding your platforms in the console interface.
-    pub fn update_magic_url_session(&self, user_id: &str, secret: &str) -> Result<models::Session, AppwriteException> {
-        let path = "/account/sessions/magic-url";
-        let headers: HashMap<String, String> = [
-            ("content-type".to_string(), "application/json".to_string()),
-        ].iter().cloned().collect();
-
-        let params: HashMap<String, ParamType> = [
-            ("userId".to_string(), ParamType::String(user_id.to_string())),
-            ("secret".to_string(), ParamType::String(secret.to_string())),
-        ].iter().cloned().collect();
-
-        let response = self.client.clone().call("PUT", &path, Some(headers), Some(params) );
-
-        let processedResponse:models::Session = match response {
-            Ok(r) => {
-                r.json().unwrap()
-            }
-            Err(e) => {
-                return Err(e);
-            }
-        };
-
-        Ok(processedResponse)
-
-    }
-
-    /// Allow the user to login to their account using the OAuth2 provider of their
-    /// choice. Each OAuth2 provider should be enabled from the Appwrite console
-    /// first. Use the success and failure arguments to provide a redirect URL's
-    /// back to your app when login is completed.
-    /// 
-    /// If there is already an active session, the new session will be attached to
-    /// the logged-in account. If there are no active sessions, the server will
-    /// attempt to look for a user with the same email address as the email
-    /// received from the OAuth2 provider and attach the new session to the
-    /// existing user. If no matching user is found - the server will create a new
-    /// user..
-    /// 
-    pub fn create_o_auth2_session(&self, provider: &str, success: Option<&str>, failure: Option<&str>, scopes: Option<&[&str]>) -> Result<bool, AppwriteException> {
-        let path = "/account/sessions/oauth2/provider".replace("provider", &provider);
-        let headers: HashMap<String, String> = [
-            ("content-type".to_string(), "application/json".to_string()),
-        ].iter().cloned().collect();
-
-        let success:&str = match success {
-            Some(data) => data,
-            None => ""
-        };
-
-        let failure:&str = match failure {
-            Some(data) => data,
-            None => ""
-        };
-
-        let scopes:&[&str] = match scopes {
-            Some(data) => data,
-            None => &[]
-        };
-
-        let params: HashMap<String, ParamType> = [
-            ("success".to_string(), ParamType::String(success.to_string())),
-            ("failure".to_string(), ParamType::String(failure.to_string())),
-            ("scopes".to_string(), ParamType::Array(scopes.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
-        ].iter().cloned().collect();
-
-        let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
 
         Ok(response.unwrap().status().is_success())
 

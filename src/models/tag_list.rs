@@ -4,12 +4,13 @@ use serde_json::value::Value;
 use super::*;
 
 #[derive(Serialize, Deserialize)]
-pub struct Jwt {
-    jwt: String,
+pub struct TagList {
+    sum: i64,
+    tags: Vec<Tag>,
 }
 
-impl Jwt {
-    pub fn new(jwt: String) -> Self {
-        Jwt { jwt  }
+impl TagList {
+    pub fn new(sum: i64, tags: Vec<Tag>) -> Self {
+        TagList { sum , tags  }
     }
 }
