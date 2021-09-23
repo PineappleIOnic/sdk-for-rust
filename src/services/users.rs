@@ -23,14 +23,15 @@ impl Users {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-    let search:&str = match search {
-        Some(data) => data,
-        None => ""
-    };
-    let order_type:&str = match order_type {
-        Some(data) => data,
-        None => ""
-    };
+        let search:&str = match search {
+            Some(data) => data,
+            None => ""
+        };
+
+        let order_type:&str = match order_type {
+            Some(data) => data,
+            None => ""
+        };
 
         let params: HashMap<String, ParamType> = [
             ("search".to_string(), ParamType::String(search.to_string())),
@@ -50,10 +51,10 @@ impl Users {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-    let name:&str = match name {
-        Some(data) => data,
-        None => ""
-    };
+        let name:&str = match name {
+            Some(data) => data,
+            None => ""
+        };
 
         let params: HashMap<String, ParamType> = [
             ("email".to_string(), ParamType::String(email.to_string())),
@@ -72,7 +73,6 @@ impl Users {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -86,7 +86,6 @@ impl Users {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
-
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -102,7 +101,6 @@ impl Users {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -116,7 +114,6 @@ impl Users {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
-
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -133,7 +130,6 @@ impl Users {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
             ("prefs".to_string(), ParamType::Object(prefs.unwrap())),
         ].iter().cloned().collect();
@@ -149,7 +145,6 @@ impl Users {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -163,7 +158,6 @@ impl Users {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
-
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -179,7 +173,6 @@ impl Users {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -193,7 +186,6 @@ impl Users {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
-
 
         let params: HashMap<String, ParamType> = [
             ("status".to_string(),  ParamType::Number(status)),

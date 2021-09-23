@@ -21,14 +21,15 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-    let search:&str = match search {
-        Some(data) => data,
-        None => ""
-    };
-    let order_type:&str = match order_type {
-        Some(data) => data,
-        None => ""
-    };
+        let search:&str = match search {
+            Some(data) => data,
+            None => ""
+        };
+
+        let order_type:&str = match order_type {
+            Some(data) => data,
+            None => ""
+        };
 
         let params: HashMap<String, ParamType> = [
             ("search".to_string(), ParamType::String(search.to_string())),
@@ -47,42 +48,50 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-    let description:&str = match description {
-        Some(data) => data,
-        None => ""
-    };
-    let logo:&str = match logo {
-        Some(data) => data,
-        None => ""
-    };
-    let url:&str = match url {
-        Some(data) => data,
-        None => ""
-    };
-    let legal_name:&str = match legal_name {
-        Some(data) => data,
-        None => ""
-    };
-    let legal_country:&str = match legal_country {
-        Some(data) => data,
-        None => ""
-    };
-    let legal_state:&str = match legal_state {
-        Some(data) => data,
-        None => ""
-    };
-    let legal_city:&str = match legal_city {
-        Some(data) => data,
-        None => ""
-    };
-    let legal_address:&str = match legal_address {
-        Some(data) => data,
-        None => ""
-    };
-    let legal_tax_id:&str = match legal_tax_id {
-        Some(data) => data,
-        None => ""
-    };
+        let description:&str = match description {
+            Some(data) => data,
+            None => ""
+        };
+
+        let logo:&str = match logo {
+            Some(data) => data,
+            None => ""
+        };
+
+        let url:&str = match url {
+            Some(data) => data,
+            None => ""
+        };
+
+        let legal_name:&str = match legal_name {
+            Some(data) => data,
+            None => ""
+        };
+
+        let legal_country:&str = match legal_country {
+            Some(data) => data,
+            None => ""
+        };
+
+        let legal_state:&str = match legal_state {
+            Some(data) => data,
+            None => ""
+        };
+
+        let legal_city:&str = match legal_city {
+            Some(data) => data,
+            None => ""
+        };
+
+        let legal_address:&str = match legal_address {
+            Some(data) => data,
+            None => ""
+        };
+
+        let legal_tax_id:&str = match legal_tax_id {
+            Some(data) => data,
+            None => ""
+        };
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -108,7 +117,6 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -122,42 +130,50 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-    let description:&str = match description {
-        Some(data) => data,
-        None => ""
-    };
-    let logo:&str = match logo {
-        Some(data) => data,
-        None => ""
-    };
-    let url:&str = match url {
-        Some(data) => data,
-        None => ""
-    };
-    let legal_name:&str = match legal_name {
-        Some(data) => data,
-        None => ""
-    };
-    let legal_country:&str = match legal_country {
-        Some(data) => data,
-        None => ""
-    };
-    let legal_state:&str = match legal_state {
-        Some(data) => data,
-        None => ""
-    };
-    let legal_city:&str = match legal_city {
-        Some(data) => data,
-        None => ""
-    };
-    let legal_address:&str = match legal_address {
-        Some(data) => data,
-        None => ""
-    };
-    let legal_tax_id:&str = match legal_tax_id {
-        Some(data) => data,
-        None => ""
-    };
+        let description:&str = match description {
+            Some(data) => data,
+            None => ""
+        };
+
+        let logo:&str = match logo {
+            Some(data) => data,
+            None => ""
+        };
+
+        let url:&str = match url {
+            Some(data) => data,
+            None => ""
+        };
+
+        let legal_name:&str = match legal_name {
+            Some(data) => data,
+            None => ""
+        };
+
+        let legal_country:&str = match legal_country {
+            Some(data) => data,
+            None => ""
+        };
+
+        let legal_state:&str = match legal_state {
+            Some(data) => data,
+            None => ""
+        };
+
+        let legal_city:&str = match legal_city {
+            Some(data) => data,
+            None => ""
+        };
+
+        let legal_address:&str = match legal_address {
+            Some(data) => data,
+            None => ""
+        };
+
+        let legal_tax_id:&str = match legal_tax_id {
+            Some(data) => data,
+            None => ""
+        };
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -182,7 +198,6 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
             ("password".to_string(), ParamType::String(password.to_string())),
         ].iter().cloned().collect();
@@ -196,7 +211,6 @@ impl Projects {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
-
 
         let params: HashMap<String, ParamType> = [
             ("limit".to_string(), ParamType::String(limit.to_string())),
@@ -212,7 +226,6 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
             ("status".to_string(), ParamType::Bool(status)),
         ].iter().cloned().collect();
@@ -227,7 +240,6 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -240,7 +252,6 @@ impl Projects {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
-
 
         let params: HashMap<String, ParamType> = [
             ("domain".to_string(), ParamType::String(domain.to_string())),
@@ -256,7 +267,6 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -269,7 +279,6 @@ impl Projects {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
-
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
@@ -284,7 +293,6 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -298,20 +306,18 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("GET", &path, Some(headers), Some(params) );
     }
 
-    pub fn create_key(&self, project_id: &str, name: &str, scopes: &[&str]) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn create_key(&self, project_id: &str, name: &str, scopes: &[&ParamType]) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects/projectId/keys".replace("projectId", &project_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
-
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -328,20 +334,18 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("GET", &path, Some(headers), Some(params) );
     }
 
-    pub fn update_key(&self, project_id: &str, key_id: &str, name: &str, scopes: &[&str]) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn update_key(&self, project_id: &str, key_id: &str, name: &str, scopes: &[&ParamType]) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects/projectId/keys/keyId".replace("projectId", &project_id).replace("keyId", &key_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
-
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -358,7 +362,6 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -372,14 +375,15 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-    let app_id:&str = match app_id {
-        Some(data) => data,
-        None => ""
-    };
-    let secret:&str = match secret {
-        Some(data) => data,
-        None => ""
-    };
+        let app_id:&str = match app_id {
+            Some(data) => data,
+            None => ""
+        };
+
+        let secret:&str = match secret {
+            Some(data) => data,
+            None => ""
+        };
 
         let params: HashMap<String, ParamType> = [
             ("provider".to_string(), ParamType::String(provider.to_string())),
@@ -397,7 +401,6 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -411,18 +414,20 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-    let key:&str = match key {
-        Some(data) => data,
-        None => ""
-    };
-    let store:&str = match store {
-        Some(data) => data,
-        None => ""
-    };
-    let hostname:&str = match hostname {
-        Some(data) => data,
-        None => ""
-    };
+        let key:&str = match key {
+            Some(data) => data,
+            None => ""
+        };
+
+        let store:&str = match store {
+            Some(data) => data,
+            None => ""
+        };
+
+        let hostname:&str = match hostname {
+            Some(data) => data,
+            None => ""
+        };
 
         let params: HashMap<String, ParamType> = [
             ("type".to_string(), ParamType::String(xtype.to_string())),
@@ -442,7 +447,6 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -456,18 +460,20 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-    let key:&str = match key {
-        Some(data) => data,
-        None => ""
-    };
-    let store:&str = match store {
-        Some(data) => data,
-        None => ""
-    };
-    let hostname:&str = match hostname {
-        Some(data) => data,
-        None => ""
-    };
+        let key:&str = match key {
+            Some(data) => data,
+            None => ""
+        };
+
+        let store:&str = match store {
+            Some(data) => data,
+            None => ""
+        };
+
+        let hostname:&str = match hostname {
+            Some(data) => data,
+            None => ""
+        };
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -486,7 +492,6 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -500,32 +505,33 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("GET", &path, Some(headers), Some(params) );
     }
 
-    pub fn create_task(&self, project_id: &str, name: &str, status: &str, schedule: &str, security: bool, http_method: &str, http_url: &str, http_headers: Option<&[&str]>, http_user: Option<&str>, http_pass: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn create_task(&self, project_id: &str, name: &str, status: &str, schedule: &str, security: bool, http_method: &str, http_url: &str, http_headers: Option<&[&ParamType]>, http_user: Option<&str>, http_pass: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects/projectId/tasks".replace("projectId", &project_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-    let http_headers:&[&str] = match http_headers {
-        Some(data) => data,
-        None => &[]
-    };
-    let http_user:&str = match http_user {
-        Some(data) => data,
-        None => ""
-    };
-    let http_pass:&str = match http_pass {
-        Some(data) => data,
-        None => ""
-    };
+        let http_headers:&[&ParamType] = match http_headers {
+            Some(data) => data,
+            None => &[]
+        };
+
+        let http_user:&str = match http_user {
+            Some(data) => data,
+            None => ""
+        };
+
+        let http_pass:&str = match http_pass {
+            Some(data) => data,
+            None => ""
+        };
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -549,32 +555,33 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("GET", &path, Some(headers), Some(params) );
     }
 
-    pub fn update_task(&self, project_id: &str, task_id: &str, name: &str, status: &str, schedule: &str, security: bool, http_method: &str, http_url: &str, http_headers: Option<&[&str]>, http_user: Option<&str>, http_pass: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn update_task(&self, project_id: &str, task_id: &str, name: &str, status: &str, schedule: &str, security: bool, http_method: &str, http_url: &str, http_headers: Option<&[&ParamType]>, http_user: Option<&str>, http_pass: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects/projectId/tasks/taskId".replace("projectId", &project_id).replace("taskId", &task_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-    let http_headers:&[&str] = match http_headers {
-        Some(data) => data,
-        None => &[]
-    };
-    let http_user:&str = match http_user {
-        Some(data) => data,
-        None => ""
-    };
-    let http_pass:&str = match http_pass {
-        Some(data) => data,
-        None => ""
-    };
+        let http_headers:&[&ParamType] = match http_headers {
+            Some(data) => data,
+            None => &[]
+        };
+
+        let http_user:&str = match http_user {
+            Some(data) => data,
+            None => ""
+        };
+
+        let http_pass:&str = match http_pass {
+            Some(data) => data,
+            None => ""
+        };
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -598,7 +605,6 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
@@ -612,10 +618,10 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-    let range:&str = match range {
-        Some(data) => data,
-        None => ""
-    };
+        let range:&str = match range {
+            Some(data) => data,
+            None => ""
+        };
 
         let params: HashMap<String, ParamType> = [
             ("range".to_string(), ParamType::String(range.to_string())),
@@ -631,28 +637,28 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("GET", &path, Some(headers), Some(params) );
     }
 
-    pub fn create_webhook(&self, project_id: &str, name: &str, events: &[&str], url: &str, security: bool, http_user: Option<&str>, http_pass: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn create_webhook(&self, project_id: &str, name: &str, events: &[&ParamType], url: &str, security: bool, http_user: Option<&str>, http_pass: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects/projectId/webhooks".replace("projectId", &project_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-    let http_user:&str = match http_user {
-        Some(data) => data,
-        None => ""
-    };
-    let http_pass:&str = match http_pass {
-        Some(data) => data,
-        None => ""
-    };
+        let http_user:&str = match http_user {
+            Some(data) => data,
+            None => ""
+        };
+
+        let http_pass:&str = match http_pass {
+            Some(data) => data,
+            None => ""
+        };
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -673,28 +679,28 @@ impl Projects {
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         return self.client.clone().call("GET", &path, Some(headers), Some(params) );
     }
 
-    pub fn update_webhook(&self, project_id: &str, webhook_id: &str, name: &str, events: &[&str], url: &str, security: bool, http_user: Option<&str>, http_pass: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
+    pub fn update_webhook(&self, project_id: &str, webhook_id: &str, name: &str, events: &[&ParamType], url: &str, security: bool, http_user: Option<&str>, http_pass: Option<&str>) -> Result<reqwest::blocking::Response, AppwriteException> {
         let path = "/projects/projectId/webhooks/webhookId".replace("projectId", &project_id).replace("webhookId", &webhook_id);
 
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-    let http_user:&str = match http_user {
-        Some(data) => data,
-        None => ""
-    };
-    let http_pass:&str = match http_pass {
-        Some(data) => data,
-        None => ""
-    };
+        let http_user:&str = match http_user {
+            Some(data) => data,
+            None => ""
+        };
+
+        let http_pass:&str = match http_pass {
+            Some(data) => data,
+            None => ""
+        };
 
         let params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
@@ -714,7 +720,6 @@ impl Projects {
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
-
 
         let params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
