@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use serde_json::value::Value;
 use super::*;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct LanguageList {
     pub sum: i64,
     pub languages: Vec<Language>,

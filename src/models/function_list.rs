@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use serde_json::value::Value;
 use super::*;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct FunctionList {
     pub sum: i64,
     pub functions: Vec<Function>,

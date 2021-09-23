@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use serde_json::value::Value;
 use super::*;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Permissions {
     pub read: Vec<String>,
     pub write: Vec<String>,
