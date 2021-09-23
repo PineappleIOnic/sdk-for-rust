@@ -5,10 +5,10 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Document {
-    id: String,
-    collection: String,
-    permissions: Permissions,
-    data: HashMap<String, Value>,
+    pub id: String,
+    pub collection: String,
+    pub permissions: Permissions,
+    pub data: HashMap<String, Value>,
 }
 
 impl Document {

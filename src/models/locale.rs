@@ -5,13 +5,13 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Locale {
-    ip: String,
-    countryCode: String,
-    country: String,
-    continentCode: String,
-    continent: String,
-    eu: bool,
-    currency: String,
+    pub ip: String,
+    pub countryCode: String,
+    pub country: String,
+    pub continentCode: String,
+    pub continent: String,
+    pub eu: bool,
+    pub currency: String,
 }
 
 impl Locale {

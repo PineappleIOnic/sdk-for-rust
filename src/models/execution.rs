@@ -5,16 +5,16 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Execution {
-    id: String,
-    permissions: Permissions,
-    functionId: String,
-    dateCreated: i64,
-    trigger: String,
-    status: String,
-    exitCode: i64,
-    stdout: String,
-    stderr: String,
-    time: f64,
+    pub id: String,
+    pub permissions: Permissions,
+    pub functionId: String,
+    pub dateCreated: i64,
+    pub trigger: String,
+    pub status: String,
+    pub exitCode: i64,
+    pub stdout: String,
+    pub stderr: String,
+    pub time: f64,
 }
 
 impl Execution {

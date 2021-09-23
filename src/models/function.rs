@@ -5,20 +5,20 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Function {
-    id: String,
-    permissions: Permissions,
-    name: String,
-    dateCreated: i64,
-    dateUpdated: i64,
-    status: String,
-    runtime: String,
-    tag: String,
-    vars: String,
-    events: Vec<String>,
-    schedule: String,
-    scheduleNext: i64,
-    schedulePrevious: i64,
-    timeout: i64,
+    pub id: String,
+    pub permissions: Permissions,
+    pub name: String,
+    pub dateCreated: i64,
+    pub dateUpdated: i64,
+    pub status: String,
+    pub runtime: String,
+    pub tag: String,
+    pub vars: String,
+    pub events: Vec<String>,
+    pub schedule: String,
+    pub scheduleNext: i64,
+    pub schedulePrevious: i64,
+    pub timeout: i64,
 }
 
 impl Function {

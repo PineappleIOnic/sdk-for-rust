@@ -5,13 +5,13 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Currency {
-    symbol: String,
-    name: String,
-    symbolNative: String,
-    decimalDigits: i64,
-    rounding: f64,
-    code: String,
-    namePlural: String,
+    pub symbol: String,
+    pub name: String,
+    pub symbolNative: String,
+    pub decimalDigits: i64,
+    pub rounding: f64,
+    pub code: String,
+    pub namePlural: String,
 }
 
 impl Currency {

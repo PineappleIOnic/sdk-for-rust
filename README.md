@@ -1,4 +1,4 @@
-# Appwrite NAME SDK
+# Appwrite Appwrite Rust SDK SDK
 
 ![License](https://img.shields.io/github/license/repoowner/reponame.svg?v=1)
 ![Version](https://img.shields.io/badge/api%20version-0.10.4-blue.svg?v=1)

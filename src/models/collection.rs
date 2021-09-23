@@ -5,12 +5,12 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Collection {
-    id: String,
-    permissions: Permissions,
-    name: String,
-    dateCreated: i64,
-    dateUpdated: i64,
-    rules: Vec<Rule>,
+    pub id: String,
+    pub permissions: Permissions,
+    pub name: String,
+    pub dateCreated: i64,
+    pub dateUpdated: i64,
+    pub rules: Vec<Rule>,
 }
 
 impl Collection {

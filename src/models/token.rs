@@ -5,10 +5,10 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Token {
-    id: String,
-    userId: String,
-    secret: String,
-    expire: i64,
+    pub id: String,
+    pub userId: String,
+    pub secret: String,
+    pub expire: i64,
 }
 
 impl Token {

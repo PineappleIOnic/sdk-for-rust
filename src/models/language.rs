@@ -5,9 +5,9 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Language {
-    name: String,
-    code: String,
-    nativeName: String,
+    pub name: String,
+    pub code: String,
+    pub nativeName: String,
 }
 
 impl Language {

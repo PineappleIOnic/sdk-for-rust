@@ -5,13 +5,13 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct File {
-    id: String,
-    permissions: Permissions,
-    name: String,
-    dateCreated: i64,
-    signature: String,
-    mimeType: String,
-    sizeOriginal: i64,
+    pub id: String,
+    pub permissions: Permissions,
+    pub name: String,
+    pub dateCreated: i64,
+    pub signature: String,
+    pub mimeType: String,
+    pub sizeOriginal: i64,
 }
 
 impl File {

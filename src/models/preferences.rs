@@ -5,7 +5,7 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Preferences {
-    data: HashMap<String, Value>,
+    pub data: HashMap<String, Value>,
 }
 
 impl Preferences {

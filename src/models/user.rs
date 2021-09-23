@@ -5,14 +5,14 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct User {
-    id: String,
-    name: String,
-    registration: i64,
-    status: i64,
-    passwordUpdate: i64,
-    email: String,
-    emailVerification: bool,
-    prefs: Preferences,
+    pub id: String,
+    pub name: String,
+    pub registration: i64,
+    pub status: i64,
+    pub passwordUpdate: i64,
+    pub email: String,
+    pub emailVerification: bool,
+    pub prefs: Preferences,
 }
 
 impl User {

@@ -5,8 +5,8 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Permissions {
-    read: Vec<String>,
-    write: Vec<String>,
+    pub read: Vec<String>,
+    pub write: Vec<String>,
 }
 
 impl Permissions {

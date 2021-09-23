@@ -5,15 +5,15 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Membership {
-    id: String,
-    userId: String,
-    teamId: String,
-    name: String,
-    email: String,
-    invited: i64,
-    joined: i64,
-    confirm: bool,
-    roles: Vec<String>,
+    pub id: String,
+    pub userId: String,
+    pub teamId: String,
+    pub name: String,
+    pub email: String,
+    pub invited: i64,
+    pub joined: i64,
+    pub confirm: bool,
+    pub roles: Vec<String>,
 }
 
 impl Membership {

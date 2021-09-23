@@ -5,8 +5,8 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct FileList {
-    sum: i64,
-    files: Vec<File>,
+    pub sum: i64,
+    pub files: Vec<File>,
 }
 
 impl FileList {

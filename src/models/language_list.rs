@@ -5,8 +5,8 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct LanguageList {
-    sum: i64,
-    languages: Vec<Language>,
+    pub sum: i64,
+    pub languages: Vec<Language>,
 }
 
 impl LanguageList {

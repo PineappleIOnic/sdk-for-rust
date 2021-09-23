@@ -5,8 +5,8 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Continent {
-    name: String,
-    code: String,
+    pub name: String,
+    pub code: String,
 }
 
 impl Continent {

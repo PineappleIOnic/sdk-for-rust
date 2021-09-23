@@ -5,11 +5,11 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Tag {
-    id: String,
-    functionId: String,
-    dateCreated: i64,
-    command: String,
-    size: String,
+    pub id: String,
+    pub functionId: String,
+    pub dateCreated: i64,
+    pub command: String,
+    pub size: String,
 }
 
 impl Tag {

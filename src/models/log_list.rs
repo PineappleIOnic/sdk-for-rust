@@ -5,7 +5,7 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct LogList {
-    logs: Vec<Log>,
+    pub logs: Vec<Log>,
 }
 
 impl LogList {

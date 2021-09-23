@@ -5,10 +5,10 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Team {
-    id: String,
-    name: String,
-    dateCreated: i64,
-    sum: i64,
+    pub id: String,
+    pub name: String,
+    pub dateCreated: i64,
+    pub sum: i64,
 }
 
 impl Team {

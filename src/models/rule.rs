@@ -5,15 +5,15 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Rule {
-    id: String,
-    collection: String,
-    xtype: String,
-    key: String,
-    label: String,
-    default: String,
-    array: bool,
-    required: bool,
-    list: Vec<String>,
+    pub id: String,
+    pub collection: String,
+    pub xtype: String,
+    pub key: String,
+    pub label: String,
+    pub default: String,
+    pub array: bool,
+    pub required: bool,
+    pub list: Vec<String>,
 }
 
 impl Rule {

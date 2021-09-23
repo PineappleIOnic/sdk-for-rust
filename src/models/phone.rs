@@ -5,9 +5,9 @@ use super::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct Phone {
-    code: String,
-    countryCode: String,
-    countryName: String,
+    pub code: String,
+    pub countryCode: String,
+    pub countryName: String,
 }
 
 impl Phone {
