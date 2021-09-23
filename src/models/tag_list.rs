@@ -5,12 +5,12 @@ use super::*;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct TagList {
-    pub sum: i64,
-    pub tags: Vec<Tag>,
+    pub sum: Option<i64>,
+    pub tags: Option<Vec<Tag>>,
 }
 
 impl TagList {
-    pub fn new(sum: i64, tags: Vec<Tag>) -> Self {
+    pub fn new(sum: Option<i64>, tags: Option<Vec<Tag>>) -> Self {
         TagList { sum , tags  }
     }
 }

@@ -5,13 +5,13 @@ use super::*;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Language {
-    pub name: String,
-    pub code: String,
-    pub nativeName: String,
+    pub name: Option<String>,
+    pub code: Option<String>,
+    pub nativeName: Option<String>,
 }
 
 impl Language {
-    pub fn new(name: String, code: String, nativeName: String) -> Self {
+    pub fn new(name: Option<String>, code: Option<String>, nativeName: Option<String>) -> Self {
         Language { name , code , nativeName  }
     }
 }

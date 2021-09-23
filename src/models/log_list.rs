@@ -5,11 +5,11 @@ use super::*;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct LogList {
-    pub logs: Vec<Log>,
+    pub logs: Option<Vec<Log>>,
 }
 
 impl LogList {
-    pub fn new(logs: Vec<Log>) -> Self {
+    pub fn new(logs: Option<Vec<Log>>) -> Self {
         LogList { logs  }
     }
 }

@@ -5,12 +5,12 @@ use super::*;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct CurrencyList {
-    pub sum: i64,
-    pub currencies: Vec<Currency>,
+    pub sum: Option<i64>,
+    pub currencies: Option<Vec<Currency>>,
 }
 
 impl CurrencyList {
-    pub fn new(sum: i64, currencies: Vec<Currency>) -> Self {
+    pub fn new(sum: Option<i64>, currencies: Option<Vec<Currency>>) -> Self {
         CurrencyList { sum , currencies  }
     }
 }

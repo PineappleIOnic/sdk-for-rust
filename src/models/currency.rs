@@ -5,17 +5,17 @@ use super::*;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Currency {
-    pub symbol: String,
-    pub name: String,
-    pub symbolNative: String,
-    pub decimalDigits: i64,
-    pub rounding: f64,
-    pub code: String,
-    pub namePlural: String,
+    pub symbol: Option<String>,
+    pub name: Option<String>,
+    pub symbolNative: Option<String>,
+    pub decimalDigits: Option<i64>,
+    pub rounding: Option<f64>,
+    pub code: Option<String>,
+    pub namePlural: Option<String>,
 }
 
 impl Currency {
-    pub fn new(symbol: String, name: String, symbolNative: String, decimalDigits: i64, rounding: f64, code: String, namePlural: String) -> Self {
+    pub fn new(symbol: Option<String>, name: Option<String>, symbolNative: Option<String>, decimalDigits: Option<i64>, rounding: Option<f64>, code: Option<String>, namePlural: Option<String>) -> Self {
         Currency { symbol , name , symbolNative , decimalDigits , rounding , code , namePlural  }
     }
 }

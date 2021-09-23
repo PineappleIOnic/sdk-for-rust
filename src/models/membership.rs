@@ -5,19 +5,22 @@ use super::*;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Membership {
-    pub id: String,
-    pub userId: String,
-    pub teamId: String,
-    pub name: String,
-    pub email: String,
-    pub invited: i64,
-    pub joined: i64,
-    pub confirm: bool,
-    pub roles: Vec<String>,
+    pub id: Option<String>,
+    pub userId: Option<String>,
+    pub teamId: Option<String>,
+    pub name: Option<String>,
+    pub email: Option<String>,
+    pub invited: Option<i64>,
+    pub joined: Option<i64>,
+    pub confirm: Option<bool>,
+    pub roles: Option<Vec<String>>,
 }
 
 impl Membership {
-    pub fn new(id: String, userId: String, teamId: String, name: String, email: String, invited: i64, joined: i64, confirm: bool, roles: &[&str]) -> Self {
-        Membership { id , userId , teamId , name , email , invited , joined , confirm , roles: roles.iter().map(|&s| s.to_string()).collect()  }
+    pub fn new(id: Option<String>, userId: Option<String>, teamId: Option<String>, name: Option<String>, email: Option<String>, invited: Option<i64>, joined: Option<i64>, confirm: Option<bool>, roles: Option<&[&str]>) -> Self {
+        Membership { id , userId , teamId , name , email , invited , joined , confirm , roles: match roles {
+            Some(data) => Some(data.iter().map(|&s| s.to_string()).collect()),
+            None => None,
+        }   }
     }
 }

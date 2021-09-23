@@ -5,15 +5,15 @@ use super::*;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Tag {
-    pub id: String,
-    pub functionId: String,
-    pub dateCreated: i64,
-    pub command: String,
-    pub size: String,
+    pub id: Option<String>,
+    pub functionId: Option<String>,
+    pub dateCreated: Option<i64>,
+    pub command: Option<String>,
+    pub size: Option<String>,
 }
 
 impl Tag {
-    pub fn new(id: String, functionId: String, dateCreated: i64, command: String, size: String) -> Self {
+    pub fn new(id: Option<String>, functionId: Option<String>, dateCreated: Option<i64>, command: Option<String>, size: Option<String>) -> Self {
         Tag { id , functionId , dateCreated , command , size  }
     }
 }

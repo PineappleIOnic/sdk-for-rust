@@ -5,16 +5,16 @@ use super::*;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Collection {
-    pub id: String,
-    pub permissions: Permissions,
-    pub name: String,
-    pub dateCreated: i64,
-    pub dateUpdated: i64,
-    pub rules: Vec<Rule>,
+    pub id: Option<String>,
+    pub permissions: Option<Permissions>,
+    pub name: Option<String>,
+    pub dateCreated: Option<i64>,
+    pub dateUpdated: Option<i64>,
+    pub rules: Option<Vec<Rule>>,
 }
 
 impl Collection {
-    pub fn new(id: String, permissions: Permissions, name: String, dateCreated: i64, dateUpdated: i64, rules: Vec<Rule>) -> Self {
+    pub fn new(id: Option<String>, permissions: Option<Permissions>, name: Option<String>, dateCreated: Option<i64>, dateUpdated: Option<i64>, rules: Option<Vec<Rule>>) -> Self {
         Collection { id , permissions , name , dateCreated , dateUpdated , rules  }
     }
 }

@@ -5,18 +5,18 @@ use super::*;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct User {
-    pub id: String,
-    pub name: String,
-    pub registration: i64,
-    pub status: i64,
-    pub passwordUpdate: i64,
-    pub email: String,
-    pub emailVerification: bool,
-    pub prefs: Preferences,
+    pub id: Option<String>,
+    pub name: Option<String>,
+    pub registration: Option<i64>,
+    pub status: Option<i64>,
+    pub passwordUpdate: Option<i64>,
+    pub email: Option<String>,
+    pub emailVerification: Option<bool>,
+    pub prefs: Option<Preferences>,
 }
 
 impl User {
-    pub fn new(id: String, name: String, registration: i64, status: i64, passwordUpdate: i64, email: String, emailVerification: bool, prefs: Preferences) -> Self {
+    pub fn new(id: Option<String>, name: Option<String>, registration: Option<i64>, status: Option<i64>, passwordUpdate: Option<i64>, email: Option<String>, emailVerification: Option<bool>, prefs: Option<Preferences>) -> Self {
         User { id , name , registration , status , passwordUpdate , email , emailVerification , prefs  }
     }
 }

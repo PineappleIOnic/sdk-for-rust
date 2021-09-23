@@ -5,12 +5,12 @@ use super::*;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Continent {
-    pub name: String,
-    pub code: String,
+    pub name: Option<String>,
+    pub code: Option<String>,
 }
 
 impl Continent {
-    pub fn new(name: String, code: String) -> Self {
+    pub fn new(name: Option<String>, code: Option<String>) -> Self {
         Continent { name , code  }
     }
 }
