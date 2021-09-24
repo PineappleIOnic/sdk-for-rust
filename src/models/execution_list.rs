@@ -4,8 +4,6 @@ use std::collections::HashMap;
 use serde_json::value::Value;
 use super::*;
 
-use serde_derive::{Deserialize, Serialize};
-
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 #[serde(untagged)]

@@ -1,5 +1,5 @@
 [package]
-name = "Appwrite"
+name = "appwrite"
 version = "0.0.1"
 authors = ["Bradley Schofield <ionicisere@gmail.com>"]
 edition = "2018"
