@@ -14,7 +14,7 @@ Repo description goes here
 To install via [Crates.io](https://www.crates.io/) add the following to your Cargo.toml under dependencies:
 
 ```toml
-Appwrite = "1"
+appwrite = "1"
 ```
 
 

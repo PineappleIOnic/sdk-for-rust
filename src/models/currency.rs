@@ -45,11 +45,11 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Currency {
-    pub symbol: EmptyOption<String>,
-    pub name: EmptyOption<String>,
-    pub symbolNative: EmptyOption<String>,
-    pub decimalDigits: EmptyOption<i64>,
-    pub rounding: EmptyOption<f64>,
-    pub code: EmptyOption<String>,
-    pub namePlural: EmptyOption<String>,
+        pub symbol: EmptyOption<String>,
+        pub name: EmptyOption<String>,
+        pub symbolNative: EmptyOption<String>,
+        pub decimalDigits: EmptyOption<i64>,
+        pub rounding: EmptyOption<f64>,
+        pub code: EmptyOption<String>,
+        pub namePlural: EmptyOption<String>,
 }

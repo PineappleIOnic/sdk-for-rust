@@ -44,13 +44,13 @@ impl<T> EmptyOption<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-#[serde(rename(serialize = "$id", deserialize = "id"))]
-#[serde(rename(serialize = "$permissions", deserialize = "permissions"))]
 pub struct Collection {
-    pub id: EmptyOption<String>,
-    pub permissions: EmptyOption<Permissions>,
-    pub name: EmptyOption<String>,
-    pub dateCreated: EmptyOption<i64>,
-    pub dateUpdated: EmptyOption<i64>,
-    pub rules: EmptyOption<Vec<Rule>>,
+        #[serde(rename(serialize = "$id", deserialize = "id"))]
+        pub id: EmptyOption<String>,
+        #[serde(rename(serialize = "$permissions", deserialize = "permissions"))]
+        pub permissions: EmptyOption<Permissions>,
+        pub name: EmptyOption<String>,
+        pub dateCreated: EmptyOption<i64>,
+        pub dateUpdated: EmptyOption<i64>,
+        pub rules: EmptyOption<Vec<Rule>>,
 }

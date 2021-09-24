@@ -45,6 +45,6 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct UserList {
-    pub sum: EmptyOption<i64>,
-    pub users: EmptyOption<Vec<User>>,
+        pub sum: EmptyOption<i64>,
+        pub users: EmptyOption<Vec<User>>,
 }

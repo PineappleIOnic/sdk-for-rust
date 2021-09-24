@@ -44,14 +44,14 @@ impl<T> EmptyOption<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-#[serde(rename(serialize = "$id", deserialize = "id"))]
 pub struct User {
-    pub id: EmptyOption<String>,
-    pub name: EmptyOption<String>,
-    pub registration: EmptyOption<i64>,
-    pub status: EmptyOption<i64>,
-    pub passwordUpdate: EmptyOption<i64>,
-    pub email: EmptyOption<String>,
-    pub emailVerification: EmptyOption<bool>,
-    pub prefs: EmptyOption<Preferences>,
+        #[serde(rename(serialize = "$id", deserialize = "id"))]
+        pub id: EmptyOption<String>,
+        pub name: EmptyOption<String>,
+        pub registration: EmptyOption<i64>,
+        pub status: EmptyOption<i64>,
+        pub passwordUpdate: EmptyOption<i64>,
+        pub email: EmptyOption<String>,
+        pub emailVerification: EmptyOption<bool>,
+        pub prefs: EmptyOption<Preferences>,
 }

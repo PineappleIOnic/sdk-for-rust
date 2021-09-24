@@ -44,17 +44,17 @@ impl<T> EmptyOption<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-#[serde(rename(serialize = "$id", deserialize = "id"))]
-#[serde(rename(serialize = "$permissions", deserialize = "permissions"))]
 pub struct Execution {
-    pub id: EmptyOption<String>,
-    pub permissions: EmptyOption<Permissions>,
-    pub functionId: EmptyOption<String>,
-    pub dateCreated: EmptyOption<i64>,
-    pub trigger: EmptyOption<String>,
-    pub status: EmptyOption<String>,
-    pub exitCode: EmptyOption<i64>,
-    pub stdout: EmptyOption<String>,
-    pub stderr: EmptyOption<String>,
-    pub time: EmptyOption<f64>,
+        #[serde(rename(serialize = "$id", deserialize = "id"))]
+        pub id: EmptyOption<String>,
+        #[serde(rename(serialize = "$permissions", deserialize = "permissions"))]
+        pub permissions: EmptyOption<Permissions>,
+        pub functionId: EmptyOption<String>,
+        pub dateCreated: EmptyOption<i64>,
+        pub trigger: EmptyOption<String>,
+        pub status: EmptyOption<String>,
+        pub exitCode: EmptyOption<i64>,
+        pub stdout: EmptyOption<String>,
+        pub stderr: EmptyOption<String>,
+        pub time: EmptyOption<f64>,
 }

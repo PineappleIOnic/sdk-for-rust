@@ -45,7 +45,7 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Language {
-    pub name: EmptyOption<String>,
-    pub code: EmptyOption<String>,
-    pub nativeName: EmptyOption<String>,
+        pub name: EmptyOption<String>,
+        pub code: EmptyOption<String>,
+        pub nativeName: EmptyOption<String>,
 }

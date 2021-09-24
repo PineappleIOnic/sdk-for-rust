@@ -45,6 +45,6 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct LanguageList {
-    pub sum: EmptyOption<i64>,
-    pub languages: EmptyOption<Vec<Language>>,
+        pub sum: EmptyOption<i64>,
+        pub languages: EmptyOption<Vec<Language>>,
 }

@@ -45,11 +45,11 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Locale {
-    pub ip: EmptyOption<String>,
-    pub countryCode: EmptyOption<String>,
-    pub country: EmptyOption<String>,
-    pub continentCode: EmptyOption<String>,
-    pub continent: EmptyOption<String>,
-    pub eu: EmptyOption<bool>,
-    pub currency: EmptyOption<String>,
+        pub ip: EmptyOption<String>,
+        pub countryCode: EmptyOption<String>,
+        pub country: EmptyOption<String>,
+        pub continentCode: EmptyOption<String>,
+        pub continent: EmptyOption<String>,
+        pub eu: EmptyOption<bool>,
+        pub currency: EmptyOption<String>,
 }

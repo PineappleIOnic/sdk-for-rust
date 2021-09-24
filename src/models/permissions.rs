@@ -45,6 +45,6 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Permissions {
-    pub read: EmptyOption<Vec<String>>,
-    pub write: EmptyOption<Vec<String>>,
+        pub read: EmptyOption<Vec<String>>,
+        pub write: EmptyOption<Vec<String>>,
 }

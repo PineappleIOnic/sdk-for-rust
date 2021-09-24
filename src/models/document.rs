@@ -44,12 +44,12 @@ impl<T> EmptyOption<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-#[serde(rename(serialize = "$id", deserialize = "id"))]
-#[serde(rename(serialize = "$collection", deserialize = "collection"))]
-#[serde(rename(serialize = "$permissions", deserialize = "permissions"))]
 pub struct Document {
-    pub id: EmptyOption<String>,
-    pub collection: EmptyOption<String>,
-    pub permissions: EmptyOption<Permissions>,
+        #[serde(rename(serialize = "$id", deserialize = "id"))]
+        pub id: EmptyOption<String>,
+        #[serde(rename(serialize = "$collection", deserialize = "collection"))]
+        pub collection: EmptyOption<String>,
+        #[serde(rename(serialize = "$permissions", deserialize = "permissions"))]
+        pub permissions: EmptyOption<Permissions>,
     pub data: HashMap<String, Value>,
 }

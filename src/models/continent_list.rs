@@ -45,6 +45,6 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ContinentList {
-    pub sum: EmptyOption<i64>,
-    pub continents: EmptyOption<Vec<Continent>>,
+        pub sum: EmptyOption<i64>,
+        pub continents: EmptyOption<Vec<Continent>>,
 }

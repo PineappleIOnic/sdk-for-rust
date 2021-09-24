@@ -45,7 +45,7 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Phone {
-    pub code: EmptyOption<String>,
-    pub countryCode: EmptyOption<String>,
-    pub countryName: EmptyOption<String>,
+        pub code: EmptyOption<String>,
+        pub countryCode: EmptyOption<String>,
+        pub countryName: EmptyOption<String>,
 }

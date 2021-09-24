@@ -45,5 +45,5 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct LogList {
-    pub logs: EmptyOption<Vec<Log>>,
+        pub logs: EmptyOption<Vec<Log>>,
 }

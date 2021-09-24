@@ -45,6 +45,6 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Continent {
-    pub name: EmptyOption<String>,
-    pub code: EmptyOption<String>,
+        pub name: EmptyOption<String>,
+        pub code: EmptyOption<String>,
 }

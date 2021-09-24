@@ -44,21 +44,21 @@ impl<T> EmptyOption<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-#[serde(rename(serialize = "$id", deserialize = "id"))]
-#[serde(rename(serialize = "$permissions", deserialize = "permissions"))]
 pub struct Function {
-    pub id: EmptyOption<String>,
-    pub permissions: EmptyOption<Permissions>,
-    pub name: EmptyOption<String>,
-    pub dateCreated: EmptyOption<i64>,
-    pub dateUpdated: EmptyOption<i64>,
-    pub status: EmptyOption<String>,
-    pub runtime: EmptyOption<String>,
-    pub tag: EmptyOption<String>,
-    pub vars: EmptyOption<String>,
-    pub events: EmptyOption<Vec<String>>,
-    pub schedule: EmptyOption<String>,
-    pub scheduleNext: EmptyOption<i64>,
-    pub schedulePrevious: EmptyOption<i64>,
-    pub timeout: EmptyOption<i64>,
+        #[serde(rename(serialize = "$id", deserialize = "id"))]
+        pub id: EmptyOption<String>,
+        #[serde(rename(serialize = "$permissions", deserialize = "permissions"))]
+        pub permissions: EmptyOption<Permissions>,
+        pub name: EmptyOption<String>,
+        pub dateCreated: EmptyOption<i64>,
+        pub dateUpdated: EmptyOption<i64>,
+        pub status: EmptyOption<String>,
+        pub runtime: EmptyOption<String>,
+        pub tag: EmptyOption<String>,
+        pub vars: EmptyOption<String>,
+        pub events: EmptyOption<Vec<String>>,
+        pub schedule: EmptyOption<String>,
+        pub scheduleNext: EmptyOption<i64>,
+        pub schedulePrevious: EmptyOption<i64>,
+        pub timeout: EmptyOption<i64>,
 }

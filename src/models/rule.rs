@@ -44,16 +44,16 @@ impl<T> EmptyOption<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-#[serde(rename(serialize = "$id", deserialize = "id"))]
-#[serde(rename(serialize = "$collection", deserialize = "collection"))]
 pub struct Rule {
-    pub id: EmptyOption<String>,
-    pub collection: EmptyOption<String>,
-    pub xtype: EmptyOption<String>,
-    pub key: EmptyOption<String>,
-    pub label: EmptyOption<String>,
-    pub default: EmptyOption<String>,
-    pub array: EmptyOption<bool>,
-    pub required: EmptyOption<bool>,
-    pub list: EmptyOption<Vec<String>>,
+        #[serde(rename(serialize = "$id", deserialize = "id"))]
+        pub id: EmptyOption<String>,
+        #[serde(rename(serialize = "$collection", deserialize = "collection"))]
+        pub collection: EmptyOption<String>,
+        pub xtype: EmptyOption<String>,
+        pub key: EmptyOption<String>,
+        pub label: EmptyOption<String>,
+        pub default: EmptyOption<String>,
+        pub array: EmptyOption<bool>,
+        pub required: EmptyOption<bool>,
+        pub list: EmptyOption<Vec<String>>,
 }

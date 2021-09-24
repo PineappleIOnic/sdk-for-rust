@@ -44,10 +44,10 @@ impl<T> EmptyOption<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-#[serde(rename(serialize = "$id", deserialize = "id"))]
 pub struct Team {
-    pub id: EmptyOption<String>,
-    pub name: EmptyOption<String>,
-    pub dateCreated: EmptyOption<i64>,
-    pub sum: EmptyOption<i64>,
+        #[serde(rename(serialize = "$id", deserialize = "id"))]
+        pub id: EmptyOption<String>,
+        pub name: EmptyOption<String>,
+        pub dateCreated: EmptyOption<i64>,
+        pub sum: EmptyOption<i64>,
 }
