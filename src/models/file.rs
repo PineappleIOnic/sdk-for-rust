@@ -44,6 +44,8 @@ impl<T> EmptyOption<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename(serialize = "$id", deserialize = "id"))]
+#[serde(rename(serialize = "$permissions", deserialize = "permissions"))]
 pub struct File {
     pub id: EmptyOption<String>,
     pub permissions: EmptyOption<Permissions>,

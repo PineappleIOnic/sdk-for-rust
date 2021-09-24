@@ -44,6 +44,7 @@ impl<T> EmptyOption<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename(serialize = "$id", deserialize = "id"))]
 pub struct Tag {
     pub id: EmptyOption<String>,
     pub functionId: EmptyOption<String>,

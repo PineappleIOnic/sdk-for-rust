@@ -44,6 +44,8 @@ impl<T> EmptyOption<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename(serialize = "$id", deserialize = "id"))]
+#[serde(rename(serialize = "$collection", deserialize = "collection"))]
 pub struct Rule {
     pub id: EmptyOption<String>,
     pub collection: EmptyOption<String>,
