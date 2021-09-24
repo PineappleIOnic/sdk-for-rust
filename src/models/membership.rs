@@ -45,7 +45,7 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Membership {
-        #[serde(rename(serialize = "$id", deserialize = "id"))]
+        #[serde(rename(serialize = "id", deserialize = "$id"))]
         pub id: EmptyOption<String>,
         pub userId: EmptyOption<String>,
         pub teamId: EmptyOption<String>,
