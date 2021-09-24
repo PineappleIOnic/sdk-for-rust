@@ -1,26 +1,59 @@
+#![allow(unused)]
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
 use super::*;
 
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Rule {
-    pub id: Option<String>,
-    pub collection: Option<String>,
-    pub xtype: Option<String>,
-    pub key: Option<String>,
-    pub label: Option<String>,
-    pub default: Option<String>,
-    pub array: Option<bool>,
-    pub required: Option<bool>,
-    pub list: Option<Vec<String>>,
+use serde_derive::{Deserialize, Serialize};
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+#[serde(untagged)]
+pub enum EmptyOption<T> {
+    Some(T),
+    None {},
 }
 
-impl Rule {
-    pub fn new(id: Option<String>, collection: Option<String>, xtype: Option<String>, key: Option<String>, label: Option<String>, default: Option<String>, array: Option<bool>, required: Option<bool>, list: Option<&[&str]>) -> Self {
-        Rule { id , collection , xtype , key , label , default , array , required , list: match list {
-            Some(data) => Some(data.iter().map(|&s| s.to_string()).collect()),
-            None => None,
-        }   }
+
+impl<T> From<EmptyOption<T>> for Option<T> {
+    fn from(empty_option: EmptyOption<T>) -> Option<T> {
+        match empty_option {
+            EmptyOption::Some(option) => Some(option),
+            EmptyOption::None {} => None,
+        }
     }
+}
+
+impl<T> From<Option<T>> for EmptyOption<T> {
+    fn from(option: Option<T>) -> EmptyOption<T> {
+        match option {
+            Some(option) => EmptyOption::Some(option),
+            None {} => EmptyOption::None {},
+        }
+    }
+}
+
+impl<T> EmptyOption<T> {
+    fn into_option(self) -> Option<T> {
+        self.into()
+    }
+    fn as_option(&self) -> Option<&T> {
+        match self {
+            EmptyOption::Some(option) => Some(option),
+            EmptyOption::None {} => None,
+        }
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Rule {
+    pub id: EmptyOption<String>,
+    pub collection: EmptyOption<String>,
+    pub xtype: EmptyOption<String>,
+    pub key: EmptyOption<String>,
+    pub label: EmptyOption<String>,
+    pub default: EmptyOption<String>,
+    pub array: EmptyOption<bool>,
+    pub required: EmptyOption<bool>,
+    pub list: EmptyOption<Vec<String>>,
 }

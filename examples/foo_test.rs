@@ -4,7 +4,7 @@
 //
 
 use std::path::PathBuf;
-use appwrite;
+use Appwrite;
 use reqwest::blocking::Response;
 use serde_derive::Deserialize;
 
@@ -32,16 +32,16 @@ fn parse_response(data: Response) -> String {
 }
 
 fn main() {
-    let mut client = appwrite::client::Client::new();
+    let mut client = Appwrite::client::Client::new();
 
     client.set_endpoint("https://appwrite.io/");
     client.set_project("");
 
     println!("Test Started");
 
-    let foo = appwrite::services::Foo::new(&client);
-    let bar = appwrite::services::Bar::new(&client);
-    let general = appwrite::services::General::new(&client);
+    let foo = Appwrite::services::Foo::new(&client);
+    let bar = Appwrite::services::Bar::new(&client);
+    let general = Appwrite::services::General::new(&client);
 
     // Foo
 

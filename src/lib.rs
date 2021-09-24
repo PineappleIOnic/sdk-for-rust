@@ -11,7 +11,7 @@ used by adding `appwrite` to your dependencies in your project's `Cargo.toml`.
 
 ```toml
 [dependencies]
-appwrite = "1"
+Appwrite = "1"
 ```
 
 # Contibution

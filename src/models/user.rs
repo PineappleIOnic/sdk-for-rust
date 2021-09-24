@@ -1,22 +1,58 @@
+#![allow(unused)]
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
 use super::*;
 
-#[derive(Serialize, Deserialize, Debug)]
-pub struct User {
-    pub id: Option<String>,
-    pub name: Option<String>,
-    pub registration: Option<i64>,
-    pub status: Option<i64>,
-    pub passwordUpdate: Option<i64>,
-    pub email: Option<String>,
-    pub emailVerification: Option<bool>,
-    pub prefs: Option<Preferences>,
+use serde_derive::{Deserialize, Serialize};
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+#[serde(untagged)]
+pub enum EmptyOption<T> {
+    Some(T),
+    None {},
 }
 
-impl User {
-    pub fn new(id: Option<String>, name: Option<String>, registration: Option<i64>, status: Option<i64>, passwordUpdate: Option<i64>, email: Option<String>, emailVerification: Option<bool>, prefs: Option<Preferences>) -> Self {
-        User { id , name , registration , status , passwordUpdate , email , emailVerification , prefs  }
+
+impl<T> From<EmptyOption<T>> for Option<T> {
+    fn from(empty_option: EmptyOption<T>) -> Option<T> {
+        match empty_option {
+            EmptyOption::Some(option) => Some(option),
+            EmptyOption::None {} => None,
+        }
     }
+}
+
+impl<T> From<Option<T>> for EmptyOption<T> {
+    fn from(option: Option<T>) -> EmptyOption<T> {
+        match option {
+            Some(option) => EmptyOption::Some(option),
+            None {} => EmptyOption::None {},
+        }
+    }
+}
+
+impl<T> EmptyOption<T> {
+    fn into_option(self) -> Option<T> {
+        self.into()
+    }
+    fn as_option(&self) -> Option<&T> {
+        match self {
+            EmptyOption::Some(option) => Some(option),
+            EmptyOption::None {} => None,
+        }
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct User {
+    pub id: EmptyOption<String>,
+    pub name: EmptyOption<String>,
+    pub registration: EmptyOption<i64>,
+    pub status: EmptyOption<i64>,
+    pub passwordUpdate: EmptyOption<i64>,
+    pub email: EmptyOption<String>,
+    pub emailVerification: EmptyOption<bool>,
+    pub prefs: EmptyOption<Preferences>,
 }

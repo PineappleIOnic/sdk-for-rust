@@ -61,14 +61,14 @@ fn handleOptional(param: ParamType) -> Option<ParamType> {
 
 /// Example
 /// ```rust
-/// let mut client = appwrite::client::Client::new();
+/// let mut client = Appwrite::client::Client::new();
 /// 
 /// client.set_endpoint("Your Endpoint URL");
 /// client.set_project("Your Project ID");
 /// client.set_key("Your API Key");
 /// 
 /// // Create a user as a example
-/// let userService = appwrite::services::Users::new(&client);
+/// let userService = Appwrite::services::Users::new(&client);
 /// let response = userService.create("amadeus@example.com", "supersecurepassword", "Wolfgang Amadeus Mozart");
 /// 
 /// println!("{}", response.text().unwrap()); // Here you can also check the status code to see success

@@ -1,4 +1,4 @@
-# Appwrite Appwrite Rust SDK SDK
+# Appwrite NAME SDK
 
 ![License](https://img.shields.io/github/license/repoowner/reponame.svg?v=1)
 ![Version](https://img.shields.io/badge/api%20version-0.10.4-blue.svg?v=1)
@@ -14,7 +14,7 @@ Repo description goes here
 To install via [Crates.io](https://www.crates.io/) add the following to your Cargo.toml under dependencies:
 
 ```toml
-appwrite = "1"
+Appwrite = "1"
 ```
 
 
