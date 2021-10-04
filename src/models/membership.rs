@@ -56,3 +56,19 @@ pub struct Membership {
         pub confirm: EmptyOption<bool>,
         pub roles: EmptyOption<Vec<String>>,
 }
+
+impl Membership {
+    pub fn new(id: EmptyOption<String>, userId: EmptyOption<String>, teamId: EmptyOption<String>, name: EmptyOption<String>, email: EmptyOption<String>, invited: EmptyOption<i64>, joined: EmptyOption<i64>, confirm: EmptyOption<bool>, roles: EmptyOption<Vec<String>>, ) -> Self {
+        Self {
+            id: EmptyOption::from(id),
+            userId: EmptyOption::from(userId),
+            teamId: EmptyOption::from(teamId),
+            name: EmptyOption::from(name),
+            email: EmptyOption::from(email),
+            invited: EmptyOption::from(invited),
+            joined: EmptyOption::from(joined),
+            confirm: EmptyOption::from(confirm),
+            roles: EmptyOption::from(roles),
+            }
+    }
+}

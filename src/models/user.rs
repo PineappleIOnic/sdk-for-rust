@@ -55,3 +55,18 @@ pub struct User {
         pub emailVerification: EmptyOption<bool>,
         pub prefs: EmptyOption<Preferences>,
 }
+
+impl User {
+    pub fn new(id: EmptyOption<String>, name: EmptyOption<String>, registration: EmptyOption<i64>, status: EmptyOption<i64>, passwordUpdate: EmptyOption<i64>, email: EmptyOption<String>, emailVerification: EmptyOption<bool>, prefs: EmptyOption<Preferences>, ) -> Self {
+        Self {
+            id: EmptyOption::from(id),
+            name: EmptyOption::from(name),
+            registration: EmptyOption::from(registration),
+            status: EmptyOption::from(status),
+            passwordUpdate: EmptyOption::from(passwordUpdate),
+            email: EmptyOption::from(email),
+            emailVerification: EmptyOption::from(emailVerification),
+            prefs: EmptyOption::from(prefs),
+            }
+    }
+}

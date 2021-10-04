@@ -48,3 +48,12 @@ pub struct FunctionList {
         pub sum: EmptyOption<i64>,
         pub functions: EmptyOption<Vec<Function>>,
 }
+
+impl FunctionList {
+    pub fn new(sum: EmptyOption<i64>, functions: EmptyOption<Vec<Function>>, ) -> Self {
+        Self {
+            sum: EmptyOption::from(sum),
+            functions: EmptyOption::from(functions),
+            }
+    }
+}

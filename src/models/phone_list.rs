@@ -48,3 +48,12 @@ pub struct PhoneList {
         pub sum: EmptyOption<i64>,
         pub phones: EmptyOption<Vec<Phone>>,
 }
+
+impl PhoneList {
+    pub fn new(sum: EmptyOption<i64>, phones: EmptyOption<Vec<Phone>>, ) -> Self {
+        Self {
+            sum: EmptyOption::from(sum),
+            phones: EmptyOption::from(phones),
+            }
+    }
+}

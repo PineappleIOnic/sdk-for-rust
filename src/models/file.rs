@@ -55,3 +55,17 @@ pub struct File {
         pub mimeType: EmptyOption<String>,
         pub sizeOriginal: EmptyOption<i64>,
 }
+
+impl File {
+    pub fn new(id: EmptyOption<String>, permissions: EmptyOption<Permissions>, name: EmptyOption<String>, dateCreated: EmptyOption<i64>, signature: EmptyOption<String>, mimeType: EmptyOption<String>, sizeOriginal: EmptyOption<i64>, ) -> Self {
+        Self {
+            id: EmptyOption::from(id),
+            permissions: EmptyOption::from(permissions),
+            name: EmptyOption::from(name),
+            dateCreated: EmptyOption::from(dateCreated),
+            signature: EmptyOption::from(signature),
+            mimeType: EmptyOption::from(mimeType),
+            sizeOriginal: EmptyOption::from(sizeOriginal),
+            }
+    }
+}

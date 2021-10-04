@@ -49,3 +49,13 @@ pub struct Language {
         pub code: EmptyOption<String>,
         pub nativeName: EmptyOption<String>,
 }
+
+impl Language {
+    pub fn new(name: EmptyOption<String>, code: EmptyOption<String>, nativeName: EmptyOption<String>, ) -> Self {
+        Self {
+            name: EmptyOption::from(name),
+            code: EmptyOption::from(code),
+            nativeName: EmptyOption::from(nativeName),
+            }
+    }
+}

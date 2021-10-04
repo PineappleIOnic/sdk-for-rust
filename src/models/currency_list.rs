@@ -48,3 +48,12 @@ pub struct CurrencyList {
         pub sum: EmptyOption<i64>,
         pub currencies: EmptyOption<Vec<Currency>>,
 }
+
+impl CurrencyList {
+    pub fn new(sum: EmptyOption<i64>, currencies: EmptyOption<Vec<Currency>>, ) -> Self {
+        Self {
+            sum: EmptyOption::from(sum),
+            currencies: EmptyOption::from(currencies),
+            }
+    }
+}

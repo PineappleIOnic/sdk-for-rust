@@ -48,3 +48,12 @@ pub struct ContinentList {
         pub sum: EmptyOption<i64>,
         pub continents: EmptyOption<Vec<Continent>>,
 }
+
+impl ContinentList {
+    pub fn new(sum: EmptyOption<i64>, continents: EmptyOption<Vec<Continent>>, ) -> Self {
+        Self {
+            sum: EmptyOption::from(sum),
+            continents: EmptyOption::from(continents),
+            }
+    }
+}

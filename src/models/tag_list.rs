@@ -48,3 +48,12 @@ pub struct TagList {
         pub sum: EmptyOption<i64>,
         pub tags: EmptyOption<Vec<Tag>>,
 }
+
+impl TagList {
+    pub fn new(sum: EmptyOption<i64>, tags: EmptyOption<Vec<Tag>>, ) -> Self {
+        Self {
+            sum: EmptyOption::from(sum),
+            tags: EmptyOption::from(tags),
+            }
+    }
+}

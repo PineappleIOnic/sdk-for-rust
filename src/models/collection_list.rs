@@ -48,3 +48,12 @@ pub struct CollectionList {
         pub sum: EmptyOption<i64>,
         pub collections: EmptyOption<Vec<Collection>>,
 }
+
+impl CollectionList {
+    pub fn new(sum: EmptyOption<i64>, collections: EmptyOption<Vec<Collection>>, ) -> Self {
+        Self {
+            sum: EmptyOption::from(sum),
+            collections: EmptyOption::from(collections),
+            }
+    }
+}

@@ -48,3 +48,12 @@ pub struct Permissions {
         pub read: EmptyOption<Vec<String>>,
         pub write: EmptyOption<Vec<String>>,
 }
+
+impl Permissions {
+    pub fn new(read: EmptyOption<Vec<String>>, write: EmptyOption<Vec<String>>, ) -> Self {
+        Self {
+            read: EmptyOption::from(read),
+            write: EmptyOption::from(write),
+            }
+    }
+}

@@ -53,3 +53,17 @@ pub struct Currency {
         pub code: EmptyOption<String>,
         pub namePlural: EmptyOption<String>,
 }
+
+impl Currency {
+    pub fn new(symbol: EmptyOption<String>, name: EmptyOption<String>, symbolNative: EmptyOption<String>, decimalDigits: EmptyOption<i64>, rounding: EmptyOption<f64>, code: EmptyOption<String>, namePlural: EmptyOption<String>, ) -> Self {
+        Self {
+            symbol: EmptyOption::from(symbol),
+            name: EmptyOption::from(name),
+            symbolNative: EmptyOption::from(symbolNative),
+            decimalDigits: EmptyOption::from(decimalDigits),
+            rounding: EmptyOption::from(rounding),
+            code: EmptyOption::from(code),
+            namePlural: EmptyOption::from(namePlural),
+            }
+    }
+}

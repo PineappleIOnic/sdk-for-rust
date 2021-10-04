@@ -62,3 +62,24 @@ pub struct Function {
         pub schedulePrevious: EmptyOption<i64>,
         pub timeout: EmptyOption<i64>,
 }
+
+impl Function {
+    pub fn new(id: EmptyOption<String>, permissions: EmptyOption<Permissions>, name: EmptyOption<String>, dateCreated: EmptyOption<i64>, dateUpdated: EmptyOption<i64>, status: EmptyOption<String>, runtime: EmptyOption<String>, tag: EmptyOption<String>, vars: EmptyOption<String>, events: EmptyOption<Vec<String>>, schedule: EmptyOption<String>, scheduleNext: EmptyOption<i64>, schedulePrevious: EmptyOption<i64>, timeout: EmptyOption<i64>, ) -> Self {
+        Self {
+            id: EmptyOption::from(id),
+            permissions: EmptyOption::from(permissions),
+            name: EmptyOption::from(name),
+            dateCreated: EmptyOption::from(dateCreated),
+            dateUpdated: EmptyOption::from(dateUpdated),
+            status: EmptyOption::from(status),
+            runtime: EmptyOption::from(runtime),
+            tag: EmptyOption::from(tag),
+            vars: EmptyOption::from(vars),
+            events: EmptyOption::from(events),
+            schedule: EmptyOption::from(schedule),
+            scheduleNext: EmptyOption::from(scheduleNext),
+            schedulePrevious: EmptyOption::from(schedulePrevious),
+            timeout: EmptyOption::from(timeout),
+            }
+    }
+}

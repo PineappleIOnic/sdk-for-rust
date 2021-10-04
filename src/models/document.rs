@@ -53,3 +53,14 @@ pub struct Document {
         pub permissions: EmptyOption<Permissions>,
     pub data: HashMap<String, Value>,
 }
+
+impl Document {
+    pub fn new(id: EmptyOption<String>, collection: EmptyOption<String>, permissions: EmptyOption<Permissions>, ) -> Self {
+        Self {
+            id: EmptyOption::from(id),
+            collection: EmptyOption::from(collection),
+            permissions: EmptyOption::from(permissions),
+            data: HashMap::new(),
+}
+    }
+}

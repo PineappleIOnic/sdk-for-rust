@@ -47,3 +47,11 @@ impl<T> EmptyOption<T> {
 pub struct Preferences {
     pub data: HashMap<String, Value>,
 }
+
+impl Preferences {
+    pub fn new() -> Self {
+        Self {
+            data: HashMap::new(),
+}
+    }
+}

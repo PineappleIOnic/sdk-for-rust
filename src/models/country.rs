@@ -48,3 +48,12 @@ pub struct Country {
         pub name: EmptyOption<String>,
         pub code: EmptyOption<String>,
 }
+
+impl Country {
+    pub fn new(name: EmptyOption<String>, code: EmptyOption<String>, ) -> Self {
+        Self {
+            name: EmptyOption::from(name),
+            code: EmptyOption::from(code),
+            }
+    }
+}

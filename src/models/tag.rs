@@ -52,3 +52,15 @@ pub struct Tag {
         pub command: EmptyOption<String>,
         pub size: EmptyOption<String>,
 }
+
+impl Tag {
+    pub fn new(id: EmptyOption<String>, functionId: EmptyOption<String>, dateCreated: EmptyOption<i64>, command: EmptyOption<String>, size: EmptyOption<String>, ) -> Self {
+        Self {
+            id: EmptyOption::from(id),
+            functionId: EmptyOption::from(functionId),
+            dateCreated: EmptyOption::from(dateCreated),
+            command: EmptyOption::from(command),
+            size: EmptyOption::from(size),
+            }
+    }
+}

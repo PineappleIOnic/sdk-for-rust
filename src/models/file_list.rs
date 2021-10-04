@@ -48,3 +48,12 @@ pub struct FileList {
         pub sum: EmptyOption<i64>,
         pub files: EmptyOption<Vec<File>>,
 }
+
+impl FileList {
+    pub fn new(sum: EmptyOption<i64>, files: EmptyOption<Vec<File>>, ) -> Self {
+        Self {
+            sum: EmptyOption::from(sum),
+            files: EmptyOption::from(files),
+            }
+    }
+}

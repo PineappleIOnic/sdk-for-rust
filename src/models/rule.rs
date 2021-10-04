@@ -57,3 +57,19 @@ pub struct Rule {
         pub required: EmptyOption<bool>,
         pub list: EmptyOption<Vec<String>>,
 }
+
+impl Rule {
+    pub fn new(id: EmptyOption<String>, collection: EmptyOption<String>, xtype: EmptyOption<String>, key: EmptyOption<String>, label: EmptyOption<String>, default: EmptyOption<String>, array: EmptyOption<bool>, required: EmptyOption<bool>, list: EmptyOption<Vec<String>>, ) -> Self {
+        Self {
+            id: EmptyOption::from(id),
+            collection: EmptyOption::from(collection),
+            xtype: EmptyOption::from(xtype),
+            key: EmptyOption::from(key),
+            label: EmptyOption::from(label),
+            default: EmptyOption::from(default),
+            array: EmptyOption::from(array),
+            required: EmptyOption::from(required),
+            list: EmptyOption::from(list),
+            }
+    }
+}

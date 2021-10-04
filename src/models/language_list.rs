@@ -48,3 +48,12 @@ pub struct LanguageList {
         pub sum: EmptyOption<i64>,
         pub languages: EmptyOption<Vec<Language>>,
 }
+
+impl LanguageList {
+    pub fn new(sum: EmptyOption<i64>, languages: EmptyOption<Vec<Language>>, ) -> Self {
+        Self {
+            sum: EmptyOption::from(sum),
+            languages: EmptyOption::from(languages),
+            }
+    }
+}

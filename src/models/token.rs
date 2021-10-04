@@ -51,3 +51,14 @@ pub struct Token {
         pub secret: EmptyOption<String>,
         pub expire: EmptyOption<i64>,
 }
+
+impl Token {
+    pub fn new(id: EmptyOption<String>, userId: EmptyOption<String>, secret: EmptyOption<String>, expire: EmptyOption<i64>, ) -> Self {
+        Self {
+            id: EmptyOption::from(id),
+            userId: EmptyOption::from(userId),
+            secret: EmptyOption::from(secret),
+            expire: EmptyOption::from(expire),
+            }
+    }
+}

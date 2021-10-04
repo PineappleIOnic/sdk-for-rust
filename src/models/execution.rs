@@ -58,3 +58,20 @@ pub struct Execution {
         pub stderr: EmptyOption<String>,
         pub time: EmptyOption<f64>,
 }
+
+impl Execution {
+    pub fn new(id: EmptyOption<String>, permissions: EmptyOption<Permissions>, functionId: EmptyOption<String>, dateCreated: EmptyOption<i64>, trigger: EmptyOption<String>, status: EmptyOption<String>, exitCode: EmptyOption<i64>, stdout: EmptyOption<String>, stderr: EmptyOption<String>, time: EmptyOption<f64>, ) -> Self {
+        Self {
+            id: EmptyOption::from(id),
+            permissions: EmptyOption::from(permissions),
+            functionId: EmptyOption::from(functionId),
+            dateCreated: EmptyOption::from(dateCreated),
+            trigger: EmptyOption::from(trigger),
+            status: EmptyOption::from(status),
+            exitCode: EmptyOption::from(exitCode),
+            stdout: EmptyOption::from(stdout),
+            stderr: EmptyOption::from(stderr),
+            time: EmptyOption::from(time),
+            }
+    }
+}

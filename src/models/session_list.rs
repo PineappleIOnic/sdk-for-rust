@@ -48,3 +48,12 @@ pub struct SessionList {
         pub sum: EmptyOption<i64>,
         pub sessions: EmptyOption<Vec<Session>>,
 }
+
+impl SessionList {
+    pub fn new(sum: EmptyOption<i64>, sessions: EmptyOption<Vec<Session>>, ) -> Self {
+        Self {
+            sum: EmptyOption::from(sum),
+            sessions: EmptyOption::from(sessions),
+            }
+    }
+}

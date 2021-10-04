@@ -48,3 +48,12 @@ pub struct TeamList {
         pub sum: EmptyOption<i64>,
         pub teams: EmptyOption<Vec<Team>>,
 }
+
+impl TeamList {
+    pub fn new(sum: EmptyOption<i64>, teams: EmptyOption<Vec<Team>>, ) -> Self {
+        Self {
+            sum: EmptyOption::from(sum),
+            teams: EmptyOption::from(teams),
+            }
+    }
+}

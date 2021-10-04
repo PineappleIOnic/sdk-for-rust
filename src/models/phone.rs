@@ -49,3 +49,13 @@ pub struct Phone {
         pub countryCode: EmptyOption<String>,
         pub countryName: EmptyOption<String>,
 }
+
+impl Phone {
+    pub fn new(code: EmptyOption<String>, countryCode: EmptyOption<String>, countryName: EmptyOption<String>, ) -> Self {
+        Self {
+            code: EmptyOption::from(code),
+            countryCode: EmptyOption::from(countryCode),
+            countryName: EmptyOption::from(countryName),
+            }
+    }
+}

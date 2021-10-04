@@ -63,3 +63,27 @@ pub struct Log {
         pub countryCode: EmptyOption<String>,
         pub countryName: EmptyOption<String>,
 }
+
+impl Log {
+    pub fn new(event: EmptyOption<String>, ip: EmptyOption<String>, time: EmptyOption<i64>, osCode: EmptyOption<String>, osName: EmptyOption<String>, osVersion: EmptyOption<String>, clientType: EmptyOption<String>, clientCode: EmptyOption<String>, clientName: EmptyOption<String>, clientVersion: EmptyOption<String>, clientEngine: EmptyOption<String>, clientEngineVersion: EmptyOption<String>, deviceName: EmptyOption<String>, deviceBrand: EmptyOption<String>, deviceModel: EmptyOption<String>, countryCode: EmptyOption<String>, countryName: EmptyOption<String>, ) -> Self {
+        Self {
+            event: EmptyOption::from(event),
+            ip: EmptyOption::from(ip),
+            time: EmptyOption::from(time),
+            osCode: EmptyOption::from(osCode),
+            osName: EmptyOption::from(osName),
+            osVersion: EmptyOption::from(osVersion),
+            clientType: EmptyOption::from(clientType),
+            clientCode: EmptyOption::from(clientCode),
+            clientName: EmptyOption::from(clientName),
+            clientVersion: EmptyOption::from(clientVersion),
+            clientEngine: EmptyOption::from(clientEngine),
+            clientEngineVersion: EmptyOption::from(clientEngineVersion),
+            deviceName: EmptyOption::from(deviceName),
+            deviceBrand: EmptyOption::from(deviceBrand),
+            deviceModel: EmptyOption::from(deviceModel),
+            countryCode: EmptyOption::from(countryCode),
+            countryName: EmptyOption::from(countryName),
+            }
+    }
+}

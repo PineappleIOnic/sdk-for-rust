@@ -48,3 +48,12 @@ pub struct ExecutionList {
         pub sum: EmptyOption<i64>,
         pub executions: EmptyOption<Vec<Execution>>,
 }
+
+impl ExecutionList {
+    pub fn new(sum: EmptyOption<i64>, executions: EmptyOption<Vec<Execution>>, ) -> Self {
+        Self {
+            sum: EmptyOption::from(sum),
+            executions: EmptyOption::from(executions),
+            }
+    }
+}

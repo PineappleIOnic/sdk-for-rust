@@ -48,3 +48,12 @@ pub struct Continent {
         pub name: EmptyOption<String>,
         pub code: EmptyOption<String>,
 }
+
+impl Continent {
+    pub fn new(name: EmptyOption<String>, code: EmptyOption<String>, ) -> Self {
+        Self {
+            name: EmptyOption::from(name),
+            code: EmptyOption::from(code),
+            }
+    }
+}

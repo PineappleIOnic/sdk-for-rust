@@ -54,3 +54,16 @@ pub struct Collection {
         pub dateUpdated: EmptyOption<i64>,
         pub rules: EmptyOption<Vec<Rule>>,
 }
+
+impl Collection {
+    pub fn new(id: EmptyOption<String>, permissions: EmptyOption<Permissions>, name: EmptyOption<String>, dateCreated: EmptyOption<i64>, dateUpdated: EmptyOption<i64>, rules: EmptyOption<Vec<Rule>>, ) -> Self {
+        Self {
+            id: EmptyOption::from(id),
+            permissions: EmptyOption::from(permissions),
+            name: EmptyOption::from(name),
+            dateCreated: EmptyOption::from(dateCreated),
+            dateUpdated: EmptyOption::from(dateUpdated),
+            rules: EmptyOption::from(rules),
+            }
+    }
+}

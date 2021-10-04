@@ -53,3 +53,17 @@ pub struct Locale {
         pub eu: EmptyOption<bool>,
         pub currency: EmptyOption<String>,
 }
+
+impl Locale {
+    pub fn new(ip: EmptyOption<String>, countryCode: EmptyOption<String>, country: EmptyOption<String>, continentCode: EmptyOption<String>, continent: EmptyOption<String>, eu: EmptyOption<bool>, currency: EmptyOption<String>, ) -> Self {
+        Self {
+            ip: EmptyOption::from(ip),
+            countryCode: EmptyOption::from(countryCode),
+            country: EmptyOption::from(country),
+            continentCode: EmptyOption::from(continentCode),
+            continent: EmptyOption::from(continent),
+            eu: EmptyOption::from(eu),
+            currency: EmptyOption::from(currency),
+            }
+    }
+}

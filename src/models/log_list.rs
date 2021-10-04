@@ -47,3 +47,11 @@ impl<T> EmptyOption<T> {
 pub struct LogList {
         pub logs: EmptyOption<Vec<Log>>,
 }
+
+impl LogList {
+    pub fn new(logs: EmptyOption<Vec<Log>>, ) -> Self {
+        Self {
+            logs: EmptyOption::from(logs),
+            }
+    }
+}
