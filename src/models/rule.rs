@@ -49,6 +49,7 @@ pub struct Rule {
         pub id: String,
         #[serde(rename(serialize = "collection", deserialize = "$collection"))]
         pub collection: String,
+        #[serde(rename(serialize = "xtype", deserialize = "type"))]
         pub xtype: String,
         pub key: String,
         pub label: String,
