@@ -46,19 +46,19 @@ impl<T> EmptyOption<T> {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Token {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
-        pub id: EmptyOption<String>,
-        pub userId: EmptyOption<String>,
-        pub secret: EmptyOption<String>,
-        pub expire: EmptyOption<i64>,
+        pub id: String,
+        pub userId: String,
+        pub secret: String,
+        pub expire: i64,
 }
 
 impl Token {
-    pub fn new(id: EmptyOption<String>, userId: EmptyOption<String>, secret: EmptyOption<String>, expire: EmptyOption<i64>, ) -> Self {
+    pub fn new(id: String, userId: String, secret: String, expire: i64, ) -> Self {
         Self {
-            id: EmptyOption::from(id),
-            userId: EmptyOption::from(userId),
-            secret: EmptyOption::from(secret),
-            expire: EmptyOption::from(expire),
+            id: id,
+            userId: userId,
+            secret: secret,
+            expire: expire,
             }
     }
 }

@@ -45,15 +45,15 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Permissions {
-        pub read: EmptyOption<Vec<String>>,
-        pub write: EmptyOption<Vec<String>>,
+        pub read: Vec<String>,
+        pub write: Vec<String>,
 }
 
 impl Permissions {
-    pub fn new(read: EmptyOption<Vec<String>>, write: EmptyOption<Vec<String>>, ) -> Self {
+    pub fn new(read: Vec<String>, write: Vec<String>, ) -> Self {
         Self {
-            read: EmptyOption::from(read),
-            write: EmptyOption::from(write),
+            read: read,
+            write: write,
             }
     }
 }

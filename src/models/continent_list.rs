@@ -45,15 +45,15 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ContinentList {
-        pub sum: EmptyOption<i64>,
-        pub continents: EmptyOption<Vec<Continent>>,
+        pub sum: i64,
+        pub continents: Vec<Continent>,
 }
 
 impl ContinentList {
-    pub fn new(sum: EmptyOption<i64>, continents: EmptyOption<Vec<Continent>>, ) -> Self {
+    pub fn new(sum: i64, continents: Vec<Continent>, ) -> Self {
         Self {
-            sum: EmptyOption::from(sum),
-            continents: EmptyOption::from(continents),
+            sum: sum,
+            continents: continents,
             }
     }
 }

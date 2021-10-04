@@ -46,40 +46,40 @@ impl<T> EmptyOption<T> {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Function {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
-        pub id: EmptyOption<String>,
+        pub id: String,
         #[serde(rename(serialize = "permissions", deserialize = "$permissions"))]
-        pub permissions: EmptyOption<Permissions>,
-        pub name: EmptyOption<String>,
-        pub dateCreated: EmptyOption<i64>,
-        pub dateUpdated: EmptyOption<i64>,
-        pub status: EmptyOption<String>,
-        pub runtime: EmptyOption<String>,
-        pub tag: EmptyOption<String>,
-        pub vars: EmptyOption<String>,
-        pub events: EmptyOption<Vec<String>>,
-        pub schedule: EmptyOption<String>,
-        pub scheduleNext: EmptyOption<i64>,
-        pub schedulePrevious: EmptyOption<i64>,
-        pub timeout: EmptyOption<i64>,
+        pub permissions: Permissions,
+        pub name: String,
+        pub dateCreated: i64,
+        pub dateUpdated: i64,
+        pub status: String,
+        pub runtime: String,
+        pub tag: String,
+        pub vars: String,
+        pub events: Vec<String>,
+        pub schedule: String,
+        pub scheduleNext: i64,
+        pub schedulePrevious: i64,
+        pub timeout: i64,
 }
 
 impl Function {
-    pub fn new(id: EmptyOption<String>, permissions: EmptyOption<Permissions>, name: EmptyOption<String>, dateCreated: EmptyOption<i64>, dateUpdated: EmptyOption<i64>, status: EmptyOption<String>, runtime: EmptyOption<String>, tag: EmptyOption<String>, vars: EmptyOption<String>, events: EmptyOption<Vec<String>>, schedule: EmptyOption<String>, scheduleNext: EmptyOption<i64>, schedulePrevious: EmptyOption<i64>, timeout: EmptyOption<i64>, ) -> Self {
+    pub fn new(id: String, permissions: Permissions, name: String, dateCreated: i64, dateUpdated: i64, status: String, runtime: String, tag: String, vars: String, events: Vec<String>, schedule: String, scheduleNext: i64, schedulePrevious: i64, timeout: i64, ) -> Self {
         Self {
-            id: EmptyOption::from(id),
-            permissions: EmptyOption::from(permissions),
-            name: EmptyOption::from(name),
-            dateCreated: EmptyOption::from(dateCreated),
-            dateUpdated: EmptyOption::from(dateUpdated),
-            status: EmptyOption::from(status),
-            runtime: EmptyOption::from(runtime),
-            tag: EmptyOption::from(tag),
-            vars: EmptyOption::from(vars),
-            events: EmptyOption::from(events),
-            schedule: EmptyOption::from(schedule),
-            scheduleNext: EmptyOption::from(scheduleNext),
-            schedulePrevious: EmptyOption::from(schedulePrevious),
-            timeout: EmptyOption::from(timeout),
+            id: id,
+            permissions: permissions,
+            name: name,
+            dateCreated: dateCreated,
+            dateUpdated: dateUpdated,
+            status: status,
+            runtime: runtime,
+            tag: tag,
+            vars: vars,
+            events: events,
+            schedule: schedule,
+            scheduleNext: scheduleNext,
+            schedulePrevious: schedulePrevious,
+            timeout: timeout,
             }
     }
 }

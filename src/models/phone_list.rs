@@ -45,15 +45,15 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct PhoneList {
-        pub sum: EmptyOption<i64>,
-        pub phones: EmptyOption<Vec<Phone>>,
+        pub sum: i64,
+        pub phones: Vec<Phone>,
 }
 
 impl PhoneList {
-    pub fn new(sum: EmptyOption<i64>, phones: EmptyOption<Vec<Phone>>, ) -> Self {
+    pub fn new(sum: i64, phones: Vec<Phone>, ) -> Self {
         Self {
-            sum: EmptyOption::from(sum),
-            phones: EmptyOption::from(phones),
+            sum: sum,
+            phones: phones,
             }
     }
 }

@@ -46,26 +46,26 @@ impl<T> EmptyOption<T> {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct File {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
-        pub id: EmptyOption<String>,
+        pub id: String,
         #[serde(rename(serialize = "permissions", deserialize = "$permissions"))]
-        pub permissions: EmptyOption<Permissions>,
-        pub name: EmptyOption<String>,
-        pub dateCreated: EmptyOption<i64>,
-        pub signature: EmptyOption<String>,
-        pub mimeType: EmptyOption<String>,
-        pub sizeOriginal: EmptyOption<i64>,
+        pub permissions: Permissions,
+        pub name: String,
+        pub dateCreated: i64,
+        pub signature: String,
+        pub mimeType: String,
+        pub sizeOriginal: i64,
 }
 
 impl File {
-    pub fn new(id: EmptyOption<String>, permissions: EmptyOption<Permissions>, name: EmptyOption<String>, dateCreated: EmptyOption<i64>, signature: EmptyOption<String>, mimeType: EmptyOption<String>, sizeOriginal: EmptyOption<i64>, ) -> Self {
+    pub fn new(id: String, permissions: Permissions, name: String, dateCreated: i64, signature: String, mimeType: String, sizeOriginal: i64, ) -> Self {
         Self {
-            id: EmptyOption::from(id),
-            permissions: EmptyOption::from(permissions),
-            name: EmptyOption::from(name),
-            dateCreated: EmptyOption::from(dateCreated),
-            signature: EmptyOption::from(signature),
-            mimeType: EmptyOption::from(mimeType),
-            sizeOriginal: EmptyOption::from(sizeOriginal),
+            id: id,
+            permissions: permissions,
+            name: name,
+            dateCreated: dateCreated,
+            signature: signature,
+            mimeType: mimeType,
+            sizeOriginal: sizeOriginal,
             }
     }
 }

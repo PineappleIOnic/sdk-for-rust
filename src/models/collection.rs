@@ -46,24 +46,24 @@ impl<T> EmptyOption<T> {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Collection {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
-        pub id: EmptyOption<String>,
+        pub id: String,
         #[serde(rename(serialize = "permissions", deserialize = "$permissions"))]
-        pub permissions: EmptyOption<Permissions>,
-        pub name: EmptyOption<String>,
-        pub dateCreated: EmptyOption<i64>,
-        pub dateUpdated: EmptyOption<i64>,
-        pub rules: EmptyOption<Vec<Rule>>,
+        pub permissions: Permissions,
+        pub name: String,
+        pub dateCreated: i64,
+        pub dateUpdated: i64,
+        pub rules: Vec<Rule>,
 }
 
 impl Collection {
-    pub fn new(id: EmptyOption<String>, permissions: EmptyOption<Permissions>, name: EmptyOption<String>, dateCreated: EmptyOption<i64>, dateUpdated: EmptyOption<i64>, rules: EmptyOption<Vec<Rule>>, ) -> Self {
+    pub fn new(id: String, permissions: Permissions, name: String, dateCreated: i64, dateUpdated: i64, rules: Vec<Rule>, ) -> Self {
         Self {
-            id: EmptyOption::from(id),
-            permissions: EmptyOption::from(permissions),
-            name: EmptyOption::from(name),
-            dateCreated: EmptyOption::from(dateCreated),
-            dateUpdated: EmptyOption::from(dateUpdated),
-            rules: EmptyOption::from(rules),
+            id: id,
+            permissions: permissions,
+            name: name,
+            dateCreated: dateCreated,
+            dateUpdated: dateUpdated,
+            rules: rules,
             }
     }
 }

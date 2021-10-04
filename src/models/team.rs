@@ -46,19 +46,19 @@ impl<T> EmptyOption<T> {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Team {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
-        pub id: EmptyOption<String>,
-        pub name: EmptyOption<String>,
-        pub dateCreated: EmptyOption<i64>,
-        pub sum: EmptyOption<i64>,
+        pub id: String,
+        pub name: String,
+        pub dateCreated: i64,
+        pub sum: i64,
 }
 
 impl Team {
-    pub fn new(id: EmptyOption<String>, name: EmptyOption<String>, dateCreated: EmptyOption<i64>, sum: EmptyOption<i64>, ) -> Self {
+    pub fn new(id: String, name: String, dateCreated: i64, sum: i64, ) -> Self {
         Self {
-            id: EmptyOption::from(id),
-            name: EmptyOption::from(name),
-            dateCreated: EmptyOption::from(dateCreated),
-            sum: EmptyOption::from(sum),
+            id: id,
+            name: name,
+            dateCreated: dateCreated,
+            sum: sum,
             }
     }
 }

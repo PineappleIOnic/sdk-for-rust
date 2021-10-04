@@ -46,20 +46,20 @@ impl<T> EmptyOption<T> {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Document {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
-        pub id: EmptyOption<String>,
+        pub id: String,
         #[serde(rename(serialize = "collection", deserialize = "$collection"))]
-        pub collection: EmptyOption<String>,
+        pub collection: String,
         #[serde(rename(serialize = "permissions", deserialize = "$permissions"))]
-        pub permissions: EmptyOption<Permissions>,
+        pub permissions: Permissions,
     pub data: HashMap<String, Value>,
 }
 
 impl Document {
-    pub fn new(id: EmptyOption<String>, collection: EmptyOption<String>, permissions: EmptyOption<Permissions>, ) -> Self {
+    pub fn new(id: String, collection: String, permissions: Permissions, ) -> Self {
         Self {
-            id: EmptyOption::from(id),
-            collection: EmptyOption::from(collection),
-            permissions: EmptyOption::from(permissions),
+            id: id,
+            collection: collection,
+            permissions: permissions,
             data: HashMap::new(),
 }
     }

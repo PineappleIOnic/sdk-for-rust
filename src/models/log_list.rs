@@ -45,13 +45,13 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct LogList {
-        pub logs: EmptyOption<Vec<Log>>,
+        pub logs: Vec<Log>,
 }
 
 impl LogList {
-    pub fn new(logs: EmptyOption<Vec<Log>>, ) -> Self {
+    pub fn new(logs: Vec<Log>, ) -> Self {
         Self {
-            logs: EmptyOption::from(logs),
+            logs: logs,
             }
     }
 }

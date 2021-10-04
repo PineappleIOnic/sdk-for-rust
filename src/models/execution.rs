@@ -46,32 +46,32 @@ impl<T> EmptyOption<T> {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Execution {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
-        pub id: EmptyOption<String>,
+        pub id: String,
         #[serde(rename(serialize = "permissions", deserialize = "$permissions"))]
-        pub permissions: EmptyOption<Permissions>,
-        pub functionId: EmptyOption<String>,
-        pub dateCreated: EmptyOption<i64>,
-        pub trigger: EmptyOption<String>,
-        pub status: EmptyOption<String>,
-        pub exitCode: EmptyOption<i64>,
-        pub stdout: EmptyOption<String>,
-        pub stderr: EmptyOption<String>,
-        pub time: EmptyOption<f64>,
+        pub permissions: Permissions,
+        pub functionId: String,
+        pub dateCreated: i64,
+        pub trigger: String,
+        pub status: String,
+        pub exitCode: i64,
+        pub stdout: String,
+        pub stderr: String,
+        pub time: f64,
 }
 
 impl Execution {
-    pub fn new(id: EmptyOption<String>, permissions: EmptyOption<Permissions>, functionId: EmptyOption<String>, dateCreated: EmptyOption<i64>, trigger: EmptyOption<String>, status: EmptyOption<String>, exitCode: EmptyOption<i64>, stdout: EmptyOption<String>, stderr: EmptyOption<String>, time: EmptyOption<f64>, ) -> Self {
+    pub fn new(id: String, permissions: Permissions, functionId: String, dateCreated: i64, trigger: String, status: String, exitCode: i64, stdout: String, stderr: String, time: f64, ) -> Self {
         Self {
-            id: EmptyOption::from(id),
-            permissions: EmptyOption::from(permissions),
-            functionId: EmptyOption::from(functionId),
-            dateCreated: EmptyOption::from(dateCreated),
-            trigger: EmptyOption::from(trigger),
-            status: EmptyOption::from(status),
-            exitCode: EmptyOption::from(exitCode),
-            stdout: EmptyOption::from(stdout),
-            stderr: EmptyOption::from(stderr),
-            time: EmptyOption::from(time),
+            id: id,
+            permissions: permissions,
+            functionId: functionId,
+            dateCreated: dateCreated,
+            trigger: trigger,
+            status: status,
+            exitCode: exitCode,
+            stdout: stdout,
+            stderr: stderr,
+            time: time,
             }
     }
 }

@@ -45,17 +45,17 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Language {
-        pub name: EmptyOption<String>,
-        pub code: EmptyOption<String>,
-        pub nativeName: EmptyOption<String>,
+        pub name: String,
+        pub code: String,
+        pub nativeName: String,
 }
 
 impl Language {
-    pub fn new(name: EmptyOption<String>, code: EmptyOption<String>, nativeName: EmptyOption<String>, ) -> Self {
+    pub fn new(name: String, code: String, nativeName: String, ) -> Self {
         Self {
-            name: EmptyOption::from(name),
-            code: EmptyOption::from(code),
-            nativeName: EmptyOption::from(nativeName),
+            name: name,
+            code: code,
+            nativeName: nativeName,
             }
     }
 }

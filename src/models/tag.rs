@@ -46,21 +46,21 @@ impl<T> EmptyOption<T> {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Tag {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
-        pub id: EmptyOption<String>,
-        pub functionId: EmptyOption<String>,
-        pub dateCreated: EmptyOption<i64>,
-        pub command: EmptyOption<String>,
-        pub size: EmptyOption<String>,
+        pub id: String,
+        pub functionId: String,
+        pub dateCreated: i64,
+        pub command: String,
+        pub size: String,
 }
 
 impl Tag {
-    pub fn new(id: EmptyOption<String>, functionId: EmptyOption<String>, dateCreated: EmptyOption<i64>, command: EmptyOption<String>, size: EmptyOption<String>, ) -> Self {
+    pub fn new(id: String, functionId: String, dateCreated: i64, command: String, size: String, ) -> Self {
         Self {
-            id: EmptyOption::from(id),
-            functionId: EmptyOption::from(functionId),
-            dateCreated: EmptyOption::from(dateCreated),
-            command: EmptyOption::from(command),
-            size: EmptyOption::from(size),
+            id: id,
+            functionId: functionId,
+            dateCreated: dateCreated,
+            command: command,
+            size: size,
             }
     }
 }

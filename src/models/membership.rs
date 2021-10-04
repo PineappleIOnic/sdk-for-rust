@@ -46,29 +46,29 @@ impl<T> EmptyOption<T> {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Membership {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
-        pub id: EmptyOption<String>,
-        pub userId: EmptyOption<String>,
-        pub teamId: EmptyOption<String>,
-        pub name: EmptyOption<String>,
-        pub email: EmptyOption<String>,
-        pub invited: EmptyOption<i64>,
-        pub joined: EmptyOption<i64>,
-        pub confirm: EmptyOption<bool>,
-        pub roles: EmptyOption<Vec<String>>,
+        pub id: String,
+        pub userId: String,
+        pub teamId: String,
+        pub name: String,
+        pub email: String,
+        pub invited: i64,
+        pub joined: i64,
+        pub confirm: bool,
+        pub roles: Vec<String>,
 }
 
 impl Membership {
-    pub fn new(id: EmptyOption<String>, userId: EmptyOption<String>, teamId: EmptyOption<String>, name: EmptyOption<String>, email: EmptyOption<String>, invited: EmptyOption<i64>, joined: EmptyOption<i64>, confirm: EmptyOption<bool>, roles: EmptyOption<Vec<String>>, ) -> Self {
+    pub fn new(id: String, userId: String, teamId: String, name: String, email: String, invited: i64, joined: i64, confirm: bool, roles: Vec<String>, ) -> Self {
         Self {
-            id: EmptyOption::from(id),
-            userId: EmptyOption::from(userId),
-            teamId: EmptyOption::from(teamId),
-            name: EmptyOption::from(name),
-            email: EmptyOption::from(email),
-            invited: EmptyOption::from(invited),
-            joined: EmptyOption::from(joined),
-            confirm: EmptyOption::from(confirm),
-            roles: EmptyOption::from(roles),
+            id: id,
+            userId: userId,
+            teamId: teamId,
+            name: name,
+            email: email,
+            invited: invited,
+            joined: joined,
+            confirm: confirm,
+            roles: roles,
             }
     }
 }

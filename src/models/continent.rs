@@ -45,15 +45,15 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Continent {
-        pub name: EmptyOption<String>,
-        pub code: EmptyOption<String>,
+        pub name: String,
+        pub code: String,
 }
 
 impl Continent {
-    pub fn new(name: EmptyOption<String>, code: EmptyOption<String>, ) -> Self {
+    pub fn new(name: String, code: String, ) -> Self {
         Self {
-            name: EmptyOption::from(name),
-            code: EmptyOption::from(code),
+            name: name,
+            code: code,
             }
     }
 }

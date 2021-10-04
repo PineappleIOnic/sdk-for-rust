@@ -46,30 +46,30 @@ impl<T> EmptyOption<T> {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Rule {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
-        pub id: EmptyOption<String>,
+        pub id: String,
         #[serde(rename(serialize = "collection", deserialize = "$collection"))]
-        pub collection: EmptyOption<String>,
-        pub xtype: EmptyOption<String>,
-        pub key: EmptyOption<String>,
-        pub label: EmptyOption<String>,
-        pub default: EmptyOption<String>,
-        pub array: EmptyOption<bool>,
-        pub required: EmptyOption<bool>,
-        pub list: EmptyOption<Vec<String>>,
+        pub collection: String,
+        pub xtype: String,
+        pub key: String,
+        pub label: String,
+        pub default: String,
+        pub array: bool,
+        pub required: bool,
+        pub list: Vec<String>,
 }
 
 impl Rule {
-    pub fn new(id: EmptyOption<String>, collection: EmptyOption<String>, xtype: EmptyOption<String>, key: EmptyOption<String>, label: EmptyOption<String>, default: EmptyOption<String>, array: EmptyOption<bool>, required: EmptyOption<bool>, list: EmptyOption<Vec<String>>, ) -> Self {
+    pub fn new(id: String, collection: String, xtype: String, key: String, label: String, default: String, array: bool, required: bool, list: Vec<String>, ) -> Self {
         Self {
-            id: EmptyOption::from(id),
-            collection: EmptyOption::from(collection),
-            xtype: EmptyOption::from(xtype),
-            key: EmptyOption::from(key),
-            label: EmptyOption::from(label),
-            default: EmptyOption::from(default),
-            array: EmptyOption::from(array),
-            required: EmptyOption::from(required),
-            list: EmptyOption::from(list),
+            id: id,
+            collection: collection,
+            xtype: xtype,
+            key: key,
+            label: label,
+            default: default,
+            array: array,
+            required: required,
+            list: list,
             }
     }
 }

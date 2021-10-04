@@ -45,25 +45,25 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Locale {
-        pub ip: EmptyOption<String>,
-        pub countryCode: EmptyOption<String>,
-        pub country: EmptyOption<String>,
-        pub continentCode: EmptyOption<String>,
-        pub continent: EmptyOption<String>,
-        pub eu: EmptyOption<bool>,
-        pub currency: EmptyOption<String>,
+        pub ip: String,
+        pub countryCode: String,
+        pub country: String,
+        pub continentCode: String,
+        pub continent: String,
+        pub eu: bool,
+        pub currency: String,
 }
 
 impl Locale {
-    pub fn new(ip: EmptyOption<String>, countryCode: EmptyOption<String>, country: EmptyOption<String>, continentCode: EmptyOption<String>, continent: EmptyOption<String>, eu: EmptyOption<bool>, currency: EmptyOption<String>, ) -> Self {
+    pub fn new(ip: String, countryCode: String, country: String, continentCode: String, continent: String, eu: bool, currency: String, ) -> Self {
         Self {
-            ip: EmptyOption::from(ip),
-            countryCode: EmptyOption::from(countryCode),
-            country: EmptyOption::from(country),
-            continentCode: EmptyOption::from(continentCode),
-            continent: EmptyOption::from(continent),
-            eu: EmptyOption::from(eu),
-            currency: EmptyOption::from(currency),
+            ip: ip,
+            countryCode: countryCode,
+            country: country,
+            continentCode: continentCode,
+            continent: continent,
+            eu: eu,
+            currency: currency,
             }
     }
 }

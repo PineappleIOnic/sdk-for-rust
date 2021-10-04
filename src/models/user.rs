@@ -46,27 +46,27 @@ impl<T> EmptyOption<T> {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct User {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
-        pub id: EmptyOption<String>,
-        pub name: EmptyOption<String>,
-        pub registration: EmptyOption<i64>,
-        pub status: EmptyOption<i64>,
-        pub passwordUpdate: EmptyOption<i64>,
-        pub email: EmptyOption<String>,
-        pub emailVerification: EmptyOption<bool>,
-        pub prefs: EmptyOption<Preferences>,
+        pub id: String,
+        pub name: String,
+        pub registration: i64,
+        pub status: i64,
+        pub passwordUpdate: i64,
+        pub email: String,
+        pub emailVerification: bool,
+        pub prefs: Preferences,
 }
 
 impl User {
-    pub fn new(id: EmptyOption<String>, name: EmptyOption<String>, registration: EmptyOption<i64>, status: EmptyOption<i64>, passwordUpdate: EmptyOption<i64>, email: EmptyOption<String>, emailVerification: EmptyOption<bool>, prefs: EmptyOption<Preferences>, ) -> Self {
+    pub fn new(id: String, name: String, registration: i64, status: i64, passwordUpdate: i64, email: String, emailVerification: bool, prefs: Preferences, ) -> Self {
         Self {
-            id: EmptyOption::from(id),
-            name: EmptyOption::from(name),
-            registration: EmptyOption::from(registration),
-            status: EmptyOption::from(status),
-            passwordUpdate: EmptyOption::from(passwordUpdate),
-            email: EmptyOption::from(email),
-            emailVerification: EmptyOption::from(emailVerification),
-            prefs: EmptyOption::from(prefs),
+            id: id,
+            name: name,
+            registration: registration,
+            status: status,
+            passwordUpdate: passwordUpdate,
+            email: email,
+            emailVerification: emailVerification,
+            prefs: prefs,
             }
     }
 }

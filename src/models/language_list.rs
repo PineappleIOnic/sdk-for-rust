@@ -45,15 +45,15 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct LanguageList {
-        pub sum: EmptyOption<i64>,
-        pub languages: EmptyOption<Vec<Language>>,
+        pub sum: i64,
+        pub languages: Vec<Language>,
 }
 
 impl LanguageList {
-    pub fn new(sum: EmptyOption<i64>, languages: EmptyOption<Vec<Language>>, ) -> Self {
+    pub fn new(sum: i64, languages: Vec<Language>, ) -> Self {
         Self {
-            sum: EmptyOption::from(sum),
-            languages: EmptyOption::from(languages),
+            sum: sum,
+            languages: languages,
             }
     }
 }

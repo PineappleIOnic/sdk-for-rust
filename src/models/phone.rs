@@ -45,17 +45,17 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Phone {
-        pub code: EmptyOption<String>,
-        pub countryCode: EmptyOption<String>,
-        pub countryName: EmptyOption<String>,
+        pub code: String,
+        pub countryCode: String,
+        pub countryName: String,
 }
 
 impl Phone {
-    pub fn new(code: EmptyOption<String>, countryCode: EmptyOption<String>, countryName: EmptyOption<String>, ) -> Self {
+    pub fn new(code: String, countryCode: String, countryName: String, ) -> Self {
         Self {
-            code: EmptyOption::from(code),
-            countryCode: EmptyOption::from(countryCode),
-            countryName: EmptyOption::from(countryName),
+            code: code,
+            countryCode: countryCode,
+            countryName: countryName,
             }
     }
 }
