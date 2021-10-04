@@ -1,9 +1,9 @@
 [package]
 name = "appwrite"
-version = "0.0.1"
+version = "1.1.0"
 authors = ["Bradley Schofield <ionicisere@gmail.com>"]
 edition = "2018"
-description = "Repo short description goes here"
+description = ""
 licence = ""
 repository = ""
 

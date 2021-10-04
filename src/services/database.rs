@@ -1,7 +1,7 @@
 use crate::client::{Client, ParamType};
 use std::collections::HashMap;
 use crate::services::AppwriteException;
-use crate::models;
+use crate::models::{self, Rule};
 
 #[derive(Clone)]
 pub struct Database {
@@ -58,7 +58,7 @@ impl Database {
     }
 
     /// Create a new Collection.
-    pub fn create_collection(&self, name: &str, read: &[&str], write: &[&str], rules: &[&str]) -> Result<models::Collection, AppwriteException> {
+    pub fn create_collection(&self, name: &str, read: &[&str], write: &[&str], rules: &[Rule]) -> Result<models::Collection, AppwriteException> {
         let path = "/database/collections";
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -68,7 +68,7 @@ impl Database {
             ("name".to_string(), ParamType::String(name.to_string())),
             ("read".to_string(), ParamType::Array(read.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
             ("write".to_string(), ParamType::Array(write.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
-            ("rules".to_string(), ParamType::Array(rules.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
+            ("rules".to_string(), ParamType::Array(rules.into_iter().map(|x| ParamType::Rule(x.to_owned())).collect())),
         ].iter().cloned().collect();
 
         let response = self.client.clone().call("POST", &path, Some(headers), Some(params) );

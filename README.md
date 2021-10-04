@@ -1,11 +1,9 @@
-# Appwrite NAME SDK
+# Appwrite  SDK
 
-![License](https://img.shields.io/github/license/repoowner/reponame.svg?v=1)
+![License](https://img.shields.io/github/license//.svg?v=1)
 ![Version](https://img.shields.io/badge/api%20version-0.10.4-blue.svg?v=1)
 
-**WORK IN PROGRESS - NOT READY FOR USAGE**
 
-Repo description goes here
 
 ![Appwrite](https://appwrite.io/v1/images/console.png)
 

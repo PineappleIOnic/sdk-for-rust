@@ -4,7 +4,7 @@ use std::collections::HashMap;
 use serde_json::value::Value;
 use super::*;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 #[serde(deny_unknown_fields)]
 #[serde(untagged)]
 pub enum EmptyOption<T> {
@@ -43,7 +43,7 @@ impl<T> EmptyOption<T> {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct LogList {
         pub logs: EmptyOption<Vec<Log>>,
 }
