@@ -62,7 +62,9 @@ pub struct AttributeString {
         pub xtype: String,
         pub status: String,
         pub required: bool,
-        pub size: i64,
+        pub array: EmptyOption<bool>,
+        pub size: i32,
+        pub default: EmptyOption<String>,
 }
 
 impl Display for AttributeString {
@@ -72,20 +74,24 @@ impl Display for AttributeString {
         formatBuffer.push_str(&format!("{}", self.xtype));
         formatBuffer.push_str(&format!("{}", self.status));
         formatBuffer.push_str(&format!("{}", self.required));
+        formatBuffer.push_str(&format!("{}", self.array));
         formatBuffer.push_str(&format!("{}", self.size));
+        formatBuffer.push_str(&format!("{}", self.default));
 
         write!(f, "{}", formatBuffer)
     }
 }
 
 impl AttributeString {
-    pub fn new(key: String, xtype: String, status: String, required: bool, array: EmptyOption<bool>, size: i64, default: EmptyOption<String>, ) -> Self {
+    pub fn new(key: String, xtype: String, status: String, required: bool, array: EmptyOption<bool>, size: i32, default: EmptyOption<String>, ) -> Self {
         Self {
             key: key,
             xtype: xtype,
             status: status,
             required: required,
+            array: EmptyOption::from(array),
             size: size,
-        }
+            default: EmptyOption::from(default),
+            }
     }
 }
