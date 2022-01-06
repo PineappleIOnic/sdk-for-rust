@@ -2,6 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
+use std::fmt::Display;
 use super::*;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -47,8 +48,8 @@ impl<T> EmptyOption<T> {
 pub struct Execution {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
         pub id: String,
-        #[serde(rename(serialize = "permissions", deserialize = "$permissions"))]
-        pub permissions: Permissions,
+        #[serde(rename(serialize = "read", deserialize = "$read"))]
+        pub read: Vec<String>,
         pub functionId: String,
         pub dateCreated: i64,
         pub trigger: String,
@@ -59,11 +60,31 @@ pub struct Execution {
         pub time: f64,
 }
 
+impl Display for Execution {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatBuffer = String::new();
+        formatBuffer.push_str(&format!("{}", self.id));
+        for item in &self.read {
+            formatBuffer.push_str(&format!("{}", item));
+        }
+        formatBuffer.push_str(&format!("{}", self.functionId));
+        formatBuffer.push_str(&format!("{}", self.dateCreated));
+        formatBuffer.push_str(&format!("{}", self.trigger));
+        formatBuffer.push_str(&format!("{}", self.status));
+        formatBuffer.push_str(&format!("{}", self.exitCode));
+        formatBuffer.push_str(&format!("{}", self.stdout));
+        formatBuffer.push_str(&format!("{}", self.stderr));
+        formatBuffer.push_str(&format!("{}", self.time));
+
+        write!(f, "{}", formatBuffer)
+    }
+}
+
 impl Execution {
-    pub fn new(id: String, permissions: Permissions, functionId: String, dateCreated: i64, trigger: String, status: String, exitCode: i64, stdout: String, stderr: String, time: f64, ) -> Self {
+    pub fn new(id: String, read: Vec<String>, functionId: String, dateCreated: i64, trigger: String, status: String, exitCode: i64, stdout: String, stderr: String, time: f64, ) -> Self {
         Self {
             id: id,
-            permissions: permissions,
+            read: read,
             functionId: functionId,
             dateCreated: dateCreated,
             trigger: trigger,

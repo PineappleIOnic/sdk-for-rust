@@ -2,6 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
+use std::fmt::Display;
 use super::*;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -44,33 +45,45 @@ impl<T> EmptyOption<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Rule {
-        #[serde(rename(serialize = "id", deserialize = "$id"))]
-        pub id: String,
-        #[serde(rename(serialize = "collection", deserialize = "$collection"))]
-        pub collection: String,
+pub struct AttributeInteger {
+        pub key: String,
         #[serde(rename(serialize = "xtype", deserialize = "type"))]
         pub xtype: String,
-        pub key: String,
-        pub label: String,
-        pub default: String,
-        pub array: bool,
+        pub status: String,
         pub required: bool,
-        pub list: Vec<String>,
+        pub array: bool,
+        pub min: i64,
+        pub max: i64,
+        pub default: i64,
 }
 
-impl Rule {
-    pub fn new(id: String, collection: String, xtype: String, key: String, label: String, default: String, array: bool, required: bool, list: Vec<String>, ) -> Self {
+impl Display for AttributeInteger {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatBuffer = String::new();
+        formatBuffer.push_str(&format!("{}", self.key));
+        formatBuffer.push_str(&format!("{}", self.xtype));
+        formatBuffer.push_str(&format!("{}", self.status));
+        formatBuffer.push_str(&format!("{}", self.required));
+        formatBuffer.push_str(&format!("{}", self.array));
+        formatBuffer.push_str(&format!("{}", self.min));
+        formatBuffer.push_str(&format!("{}", self.max));
+        formatBuffer.push_str(&format!("{}", self.default));
+
+        write!(f, "{}", formatBuffer)
+    }
+}
+
+impl AttributeInteger {
+    pub fn new(key: String, xtype: String, status: String, required: bool, array: bool, min: i64, max: i64, default: i64, ) -> Self {
         Self {
-            id: id,
-            collection: collection,
-            xtype: xtype,
             key: key,
-            label: label,
-            default: default,
-            array: array,
+            xtype: xtype,
+            status: status,
             required: required,
-            list: list,
+            array: array,
+            min: min,
+            max: max,
+            default: default,
             }
     }
 }

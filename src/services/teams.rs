@@ -2,6 +2,7 @@ use crate::client::{Client, ParamType};
 use std::collections::HashMap;
 use crate::services::AppwriteException;
 use crate::models;
+use serde_json::json;
 
 #[derive(Clone)]
 pub struct Teams {
@@ -19,13 +20,23 @@ impl Teams {
     /// filter your results. On admin mode, this endpoint will return a list of all
     /// of the project's teams. [Learn more about different API
     /// modes](/docs/admin).
-    pub fn list(&self, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, order_type: Option<&str>) -> Result<models::TeamList, AppwriteException> {
+    pub fn list(&self, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, cursor: Option<&str>, cursor_direction: Option<&str>, order_type: Option<&str>) -> Result<models::TeamList, AppwriteException> {
         let path = "/teams";
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
         let search:&str = match search {
+            Some(data) => data,
+            None => ""
+        };
+
+        let cursor:&str = match cursor {
+            Some(data) => data,
+            None => ""
+        };
+
+        let cursor_direction:&str = match cursor_direction {
             Some(data) => data,
             None => ""
         };
@@ -39,6 +50,8 @@ impl Teams {
             ("search".to_string(), ParamType::String(search.to_string())),
             ("limit".to_string(),  ParamType::OptionalNumber(limit)),
             ("offset".to_string(),  ParamType::OptionalNumber(offset)),
+            ("cursor".to_string(), ParamType::String(cursor.to_string())),
+            ("cursorDirection".to_string(), ParamType::String(cursor_direction.to_string())),
             ("orderType".to_string(), ParamType::String(order_type.to_string())),
         ].iter().cloned().collect();
 
@@ -61,7 +74,7 @@ impl Teams {
     /// assigned as the owner of the team. The team owner can invite new members,
     /// who will be able add new owners and update or delete the team from your
     /// project.
-    pub fn create(&self, name: &str, roles: Option<&[&str]>) -> Result<models::Team, AppwriteException> {
+    pub fn create(&self, team_id: &str, name: &str, roles: Option<&[&str]>) -> Result<models::Team, AppwriteException> {
         let path = "/teams";
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -73,6 +86,7 @@ impl Teams {
         };
 
         let params: HashMap<String, ParamType> = [
+            ("teamId".to_string(), ParamType::String(team_id.to_string())),
             ("name".to_string(), ParamType::String(name.to_string())),
             ("roles".to_string(), ParamType::Array(roles.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
         ].iter().cloned().collect();
@@ -147,7 +161,7 @@ impl Teams {
 
     /// Delete a team by its unique ID. Only team owners have write access for this
     /// resource.
-    pub fn delete(&self, team_id: &str) -> Result<bool, AppwriteException> {
+    pub fn delete(&self, team_id: &str) -> Result<serde_json::value::Value, AppwriteException> {
         let path = "/teams/teamId".replace("teamId", &team_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -158,19 +172,36 @@ impl Teams {
 
         let response = self.client.clone().call("DELETE", &path, Some(headers), Some(params) );
 
-        Ok(response.unwrap().status().is_success())
+        match response {
+            Ok(r) => {
+                Ok(serde_json::from_str(&r.text().unwrap()).unwrap())
+            }
+            Err(e) => {
+                Err(e)
+            }
+        }
 
     }
 
     /// Get a team members by the team unique ID. All team members have read access
     /// for this list of resources.
-    pub fn get_memberships(&self, team_id: &str, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, order_type: Option<&str>) -> Result<models::MembershipList, AppwriteException> {
+    pub fn get_memberships(&self, team_id: &str, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, cursor: Option<&str>, cursor_direction: Option<&str>, order_type: Option<&str>) -> Result<models::MembershipList, AppwriteException> {
         let path = "/teams/teamId/memberships".replace("teamId", &team_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
         let search:&str = match search {
+            Some(data) => data,
+            None => ""
+        };
+
+        let cursor:&str = match cursor {
+            Some(data) => data,
+            None => ""
+        };
+
+        let cursor_direction:&str = match cursor_direction {
             Some(data) => data,
             None => ""
         };
@@ -184,6 +215,8 @@ impl Teams {
             ("search".to_string(), ParamType::String(search.to_string())),
             ("limit".to_string(),  ParamType::OptionalNumber(limit)),
             ("offset".to_string(),  ParamType::OptionalNumber(offset)),
+            ("cursor".to_string(), ParamType::String(cursor.to_string())),
+            ("cursorDirection".to_string(), ParamType::String(cursor_direction.to_string())),
             ("orderType".to_string(), ParamType::String(order_type.to_string())),
         ].iter().cloned().collect();
 
@@ -231,14 +264,40 @@ impl Teams {
 
         let params: HashMap<String, ParamType> = [
             ("email".to_string(), ParamType::String(email.to_string())),
-            ("name".to_string(), ParamType::String(name.to_string())),
             ("roles".to_string(), ParamType::Array(roles.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
             ("url".to_string(), ParamType::String(url.to_string())),
+            ("name".to_string(), ParamType::String(name.to_string())),
         ].iter().cloned().collect();
 
         let response = self.client.clone().call("POST", &path, Some(headers), Some(params) );
 
         let processedResponse:models::Membership = match response {
+            Ok(r) => {
+                r.json().unwrap()
+            }
+            Err(e) => {
+                return Err(e);
+            }
+        };
+
+        Ok(processedResponse)
+
+    }
+
+    /// Get a team member by the membership unique id. All team members have read
+    /// access for this resource.
+    pub fn get_membership(&self, team_id: &str, membership_id: &str) -> Result<models::MembershipList, AppwriteException> {
+        let path = "/teams/teamId/memberships/membershipId".replace("teamId", &team_id).replace("membershipId", &membership_id);
+        let headers: HashMap<String, String> = [
+            ("content-type".to_string(), "application/json".to_string()),
+        ].iter().cloned().collect();
+
+        let params: HashMap<String, ParamType> = [
+        ].iter().cloned().collect();
+
+        let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
+
+        let processedResponse:models::MembershipList = match response {
             Ok(r) => {
                 r.json().unwrap()
             }
@@ -279,7 +338,7 @@ impl Teams {
     /// This endpoint allows a user to leave a team or for a team owner to delete
     /// the membership of any other team member. You can also use this endpoint to
     /// delete a user membership even if it is not accepted.
-    pub fn delete_membership(&self, team_id: &str, membership_id: &str) -> Result<bool, AppwriteException> {
+    pub fn delete_membership(&self, team_id: &str, membership_id: &str) -> Result<serde_json::value::Value, AppwriteException> {
         let path = "/teams/teamId/memberships/membershipId".replace("teamId", &team_id).replace("membershipId", &membership_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -290,7 +349,14 @@ impl Teams {
 
         let response = self.client.clone().call("DELETE", &path, Some(headers), Some(params) );
 
-        Ok(response.unwrap().status().is_success())
+        match response {
+            Ok(r) => {
+                Ok(serde_json::from_str(&r.text().unwrap()).unwrap())
+            }
+            Err(e) => {
+                Err(e)
+            }
+        }
 
     }
 

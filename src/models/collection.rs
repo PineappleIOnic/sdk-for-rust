@@ -2,6 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
+use std::fmt::Display;
 use super::*;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -47,23 +48,49 @@ impl<T> EmptyOption<T> {
 pub struct Collection {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
         pub id: String,
-        #[serde(rename(serialize = "permissions", deserialize = "$permissions"))]
-        pub permissions: Permissions,
+        #[serde(rename(serialize = "read", deserialize = "$read"))]
+        pub read: Vec<String>,
+        #[serde(rename(serialize = "write", deserialize = "$write"))]
+        pub write: Vec<String>,
         pub name: String,
-        pub dateCreated: i64,
-        pub dateUpdated: i64,
-        pub rules: Vec<Rule>,
+        pub permission: String,
+        pub attributes: Vec<String>,
+        pub indexes: Vec<Index>,
+}
+
+impl Display for Collection {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatBuffer = String::new();
+        formatBuffer.push_str(&format!("{}", self.id));
+        for item in &self.read {
+            formatBuffer.push_str(&format!("{}", item));
+        }
+        for item in &self.write {
+            formatBuffer.push_str(&format!("{}", item));
+        }
+        formatBuffer.push_str(&format!("{}", self.name));
+        formatBuffer.push_str(&format!("{}", self.permission));
+        for item in &self.attributes {
+            formatBuffer.push_str(&format!("{}", item));
+        }
+        for item in &self.indexes {
+            formatBuffer.push_str(&format!("{}", item));
+        }
+
+        write!(f, "{}", formatBuffer)
+    }
 }
 
 impl Collection {
-    pub fn new(id: String, permissions: Permissions, name: String, dateCreated: i64, dateUpdated: i64, rules: Vec<Rule>, ) -> Self {
+    pub fn new(id: String, read: Vec<String>, write: Vec<String>, name: String, permission: String, attributes: Vec<String>, indexes: Vec<Index>, ) -> Self {
         Self {
             id: id,
-            permissions: permissions,
+            read: read,
+            write: write,
             name: name,
-            dateCreated: dateCreated,
-            dateUpdated: dateUpdated,
-            rules: rules,
+            permission: permission,
+            attributes: attributes,
+            indexes: indexes,
             }
     }
 }

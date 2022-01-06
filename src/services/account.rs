@@ -2,6 +2,7 @@ use crate::client::{Client, ParamType};
 use std::collections::HashMap;
 use crate::services::AppwriteException;
 use crate::models;
+use serde_json::json;
 
 #[derive(Clone)]
 pub struct Account {
@@ -45,7 +46,7 @@ impl Account {
     /// to avoid deleted accounts being overtaken by new users with the same email
     /// address. Any user-related resources like documents or storage files should
     /// be deleted separately.
-    pub fn delete(&self) -> Result<bool, AppwriteException> {
+    pub fn delete(&self) -> Result<serde_json::value::Value, AppwriteException> {
         let path = "/account";
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -56,7 +57,14 @@ impl Account {
 
         let response = self.client.clone().call("DELETE", &path, Some(headers), Some(params) );
 
-        Ok(response.unwrap().status().is_success())
+        match response {
+            Ok(r) => {
+                Ok(serde_json::from_str(&r.text().unwrap()).unwrap())
+            }
+            Err(e) => {
+                Err(e)
+            }
+        }
 
     }
 
@@ -94,13 +102,15 @@ impl Account {
 
     /// Get currently logged in user list of latest security activity logs. Each
     /// log returns user IP address, location and date and time of log.
-    pub fn get_logs(&self) -> Result<models::LogList, AppwriteException> {
+    pub fn get_logs(&self, limit: Option<i64>, offset: Option<i64>) -> Result<models::LogList, AppwriteException> {
         let path = "/account/logs";
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
         let params: HashMap<String, ParamType> = [
+            ("limit".to_string(),  ParamType::OptionalNumber(limit)),
+            ("offset".to_string(),  ParamType::OptionalNumber(offset)),
         ].iter().cloned().collect();
 
         let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
@@ -329,7 +339,7 @@ impl Account {
 
     /// Delete all sessions from the user account and remove any sessions cookies
     /// from the end client.
-    pub fn delete_sessions(&self) -> Result<bool, AppwriteException> {
+    pub fn delete_sessions(&self) -> Result<serde_json::value::Value, AppwriteException> {
         let path = "/account/sessions";
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -340,7 +350,14 @@ impl Account {
 
         let response = self.client.clone().call("DELETE", &path, Some(headers), Some(params) );
 
-        Ok(response.unwrap().status().is_success())
+        match response {
+            Ok(r) => {
+                Ok(serde_json::from_str(&r.text().unwrap()).unwrap())
+            }
+            Err(e) => {
+                Err(e)
+            }
+        }
 
     }
 
@@ -373,7 +390,7 @@ impl Account {
     /// Use this endpoint to log out the currently logged in user from all their
     /// account sessions across all of their different devices. When using the
     /// option id argument, only the session unique ID provider will be deleted.
-    pub fn delete_session(&self, session_id: &str) -> Result<bool, AppwriteException> {
+    pub fn delete_session(&self, session_id: &str) -> Result<serde_json::value::Value, AppwriteException> {
         let path = "/account/sessions/sessionId".replace("sessionId", &session_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -384,7 +401,14 @@ impl Account {
 
         let response = self.client.clone().call("DELETE", &path, Some(headers), Some(params) );
 
-        Ok(response.unwrap().status().is_success())
+        match response {
+            Ok(r) => {
+                Ok(serde_json::from_str(&r.text().unwrap()).unwrap())
+            }
+            Err(e) => {
+                Err(e)
+            }
+        }
 
     }
 

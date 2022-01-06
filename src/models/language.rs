@@ -2,6 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
+use std::fmt::Display;
 use super::*;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -48,6 +49,17 @@ pub struct Language {
         pub name: String,
         pub code: String,
         pub nativeName: String,
+}
+
+impl Display for Language {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatBuffer = String::new();
+        formatBuffer.push_str(&format!("{}", self.name));
+        formatBuffer.push_str(&format!("{}", self.code));
+        formatBuffer.push_str(&format!("{}", self.nativeName));
+
+        write!(f, "{}", formatBuffer)
+    }
 }
 
 impl Language {

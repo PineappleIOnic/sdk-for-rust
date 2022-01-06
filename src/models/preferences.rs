@@ -2,6 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
+use std::fmt::Display;
 use super::*;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -46,6 +47,17 @@ impl<T> EmptyOption<T> {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Preferences {
     pub data: HashMap<String, Value>,
+}
+
+impl Display for Preferences {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatBuffer = String::new();
+        for (key, value) in &self.data {
+            formatBuffer.push_str(&format!("{}", value));
+        }
+
+        write!(f, "{}", formatBuffer)
+    }
 }
 
 impl Preferences {

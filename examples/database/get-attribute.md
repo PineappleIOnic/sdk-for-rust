@@ -6,6 +6,6 @@ client.set_key("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
 let database = appwrite::services::Database::new(&client);
 
-let response = database.create_collection("[NAME]", &[], &[], &[]).unwrap();
+let response = database.get_attribute("[COLLECTION_ID]", String::new()).unwrap();
 
 println!("{}", response.text().unwrap());

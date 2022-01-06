@@ -2,6 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
+use std::fmt::Display;
 use super::*;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -47,6 +48,18 @@ impl<T> EmptyOption<T> {
 pub struct UserList {
         pub sum: i64,
         pub users: Vec<User>,
+}
+
+impl Display for UserList {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatBuffer = String::new();
+        formatBuffer.push_str(&format!("{}", self.sum));
+        for item in &self.users {
+            formatBuffer.push_str(&format!("{}", item));
+        }
+
+        write!(f, "{}", formatBuffer)
+    }
 }
 
 impl UserList {

@@ -2,6 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
+use std::fmt::Display;
 use super::*;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -48,6 +49,17 @@ pub struct Phone {
         pub code: String,
         pub countryCode: String,
         pub countryName: String,
+}
+
+impl Display for Phone {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatBuffer = String::new();
+        formatBuffer.push_str(&format!("{}", self.code));
+        formatBuffer.push_str(&format!("{}", self.countryCode));
+        formatBuffer.push_str(&format!("{}", self.countryName));
+
+        write!(f, "{}", formatBuffer)
+    }
 }
 
 impl Phone {

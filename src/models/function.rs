@@ -2,6 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
+use std::fmt::Display;
 use super::*;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -47,8 +48,7 @@ impl<T> EmptyOption<T> {
 pub struct Function {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
         pub id: String,
-        #[serde(rename(serialize = "permissions", deserialize = "$permissions"))]
-        pub permissions: Permissions,
+        pub execute: Vec<String>,
         pub name: String,
         pub dateCreated: i64,
         pub dateUpdated: i64,
@@ -63,11 +63,37 @@ pub struct Function {
         pub timeout: i64,
 }
 
+impl Display for Function {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatBuffer = String::new();
+        formatBuffer.push_str(&format!("{}", self.id));
+        for item in &self.execute {
+            formatBuffer.push_str(&format!("{}", item));
+        }
+        formatBuffer.push_str(&format!("{}", self.name));
+        formatBuffer.push_str(&format!("{}", self.dateCreated));
+        formatBuffer.push_str(&format!("{}", self.dateUpdated));
+        formatBuffer.push_str(&format!("{}", self.status));
+        formatBuffer.push_str(&format!("{}", self.runtime));
+        formatBuffer.push_str(&format!("{}", self.tag));
+        formatBuffer.push_str(&format!("{}", self.vars));
+        for item in &self.events {
+            formatBuffer.push_str(&format!("{}", item));
+        }
+        formatBuffer.push_str(&format!("{}", self.schedule));
+        formatBuffer.push_str(&format!("{}", self.scheduleNext));
+        formatBuffer.push_str(&format!("{}", self.schedulePrevious));
+        formatBuffer.push_str(&format!("{}", self.timeout));
+
+        write!(f, "{}", formatBuffer)
+    }
+}
+
 impl Function {
-    pub fn new(id: String, permissions: Permissions, name: String, dateCreated: i64, dateUpdated: i64, status: String, runtime: String, tag: String, vars: String, events: Vec<String>, schedule: String, scheduleNext: i64, schedulePrevious: i64, timeout: i64, ) -> Self {
+    pub fn new(id: String, execute: Vec<String>, name: String, dateCreated: i64, dateUpdated: i64, status: String, runtime: String, tag: String, vars: String, events: Vec<String>, schedule: String, scheduleNext: i64, schedulePrevious: i64, timeout: i64, ) -> Self {
         Self {
             id: id,
-            permissions: permissions,
+            execute: execute,
             name: name,
             dateCreated: dateCreated,
             dateUpdated: dateUpdated,

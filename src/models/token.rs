@@ -2,6 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
+use std::fmt::Display;
 use super::*;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -50,6 +51,18 @@ pub struct Token {
         pub userId: String,
         pub secret: String,
         pub expire: i64,
+}
+
+impl Display for Token {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatBuffer = String::new();
+        formatBuffer.push_str(&format!("{}", self.id));
+        formatBuffer.push_str(&format!("{}", self.userId));
+        formatBuffer.push_str(&format!("{}", self.secret));
+        formatBuffer.push_str(&format!("{}", self.expire));
+
+        write!(f, "{}", formatBuffer)
+    }
 }
 
 impl Token {

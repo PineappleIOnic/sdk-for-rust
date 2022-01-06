@@ -1,7 +1,7 @@
 # Appwrite  SDK
 
 ![License](https://img.shields.io/github/license//.svg?v=1)
-![Version](https://img.shields.io/badge/api%20version-0.10.4-blue.svg?v=1)
+![Version](https://img.shields.io/badge/api%20version-0.12.0-blue.svg?v=1)
 
 
 

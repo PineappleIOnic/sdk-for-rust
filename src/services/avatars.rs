@@ -2,6 +2,7 @@ use crate::client::{Client, ParamType};
 use std::collections::HashMap;
 use crate::services::AppwriteException;
 use crate::models;
+use serde_json::json;
 
 #[derive(Clone)]
 pub struct Avatars {

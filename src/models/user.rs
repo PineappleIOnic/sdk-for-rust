@@ -2,6 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
+use std::fmt::Display;
 use super::*;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -49,15 +50,31 @@ pub struct User {
         pub id: String,
         pub name: String,
         pub registration: i64,
-        pub status: i64,
+        pub status: bool,
         pub passwordUpdate: i64,
         pub email: String,
         pub emailVerification: bool,
         pub prefs: Preferences,
 }
 
+impl Display for User {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatBuffer = String::new();
+        formatBuffer.push_str(&format!("{}", self.id));
+        formatBuffer.push_str(&format!("{}", self.name));
+        formatBuffer.push_str(&format!("{}", self.registration));
+        formatBuffer.push_str(&format!("{}", self.status));
+        formatBuffer.push_str(&format!("{}", self.passwordUpdate));
+        formatBuffer.push_str(&format!("{}", self.email));
+        formatBuffer.push_str(&format!("{}", self.emailVerification));
+        formatBuffer.push_str(&format!("{}", self.prefs));
+
+        write!(f, "{}", formatBuffer)
+    }
+}
+
 impl User {
-    pub fn new(id: String, name: String, registration: i64, status: i64, passwordUpdate: i64, email: String, emailVerification: bool, prefs: Preferences, ) -> Self {
+    pub fn new(id: String, name: String, registration: i64, status: bool, passwordUpdate: i64, email: String, emailVerification: bool, prefs: Preferences, ) -> Self {
         Self {
             id: id,
             name: name,

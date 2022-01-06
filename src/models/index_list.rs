@@ -2,6 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
+use std::fmt::Display;
 use super::*;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -44,16 +45,28 @@ impl<T> EmptyOption<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Permissions {
-        pub read: Vec<String>,
-        pub write: Vec<String>,
+pub struct IndexList {
+        pub sum: i64,
+        pub indexes: Vec<Index>,
 }
 
-impl Permissions {
-    pub fn new(read: Vec<String>, write: Vec<String>, ) -> Self {
+impl Display for IndexList {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatBuffer = String::new();
+        formatBuffer.push_str(&format!("{}", self.sum));
+        for item in &self.indexes {
+            formatBuffer.push_str(&format!("{}", item));
+        }
+
+        write!(f, "{}", formatBuffer)
+    }
+}
+
+impl IndexList {
+    pub fn new(sum: i64, indexes: Vec<Index>, ) -> Self {
         Self {
-            read: read,
-            write: write,
+            sum: sum,
+            indexes: indexes,
             }
     }
 }

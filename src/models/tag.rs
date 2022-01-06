@@ -2,6 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
+use std::fmt::Display;
 use super::*;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -51,6 +52,19 @@ pub struct Tag {
         pub dateCreated: i64,
         pub command: String,
         pub size: String,
+}
+
+impl Display for Tag {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatBuffer = String::new();
+        formatBuffer.push_str(&format!("{}", self.id));
+        formatBuffer.push_str(&format!("{}", self.functionId));
+        formatBuffer.push_str(&format!("{}", self.dateCreated));
+        formatBuffer.push_str(&format!("{}", self.command));
+        formatBuffer.push_str(&format!("{}", self.size));
+
+        write!(f, "{}", formatBuffer)
+    }
 }
 
 impl Tag {

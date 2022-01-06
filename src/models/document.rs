@@ -2,6 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
+use std::fmt::Display;
 use super::*;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -49,17 +50,39 @@ pub struct Document {
         pub id: String,
         #[serde(rename(serialize = "collection", deserialize = "$collection"))]
         pub collection: String,
-        #[serde(rename(serialize = "permissions", deserialize = "$permissions"))]
-        pub permissions: Permissions,
+        #[serde(rename(serialize = "read", deserialize = "$read"))]
+        pub read: Vec<String>,
+        #[serde(rename(serialize = "write", deserialize = "$write"))]
+        pub write: Vec<String>,
     pub data: HashMap<String, Value>,
 }
 
+impl Display for Document {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatBuffer = String::new();
+        formatBuffer.push_str(&format!("{}", self.id));
+        formatBuffer.push_str(&format!("{}", self.collection));
+        for item in &self.read {
+            formatBuffer.push_str(&format!("{}", item));
+        }
+        for item in &self.write {
+            formatBuffer.push_str(&format!("{}", item));
+        }
+        for (key, value) in &self.data {
+            formatBuffer.push_str(&format!("{}", value));
+        }
+
+        write!(f, "{}", formatBuffer)
+    }
+}
+
 impl Document {
-    pub fn new(id: String, collection: String, permissions: Permissions, ) -> Self {
+    pub fn new(id: String, collection: String, read: Vec<String>, write: Vec<String>, ) -> Self {
         Self {
             id: id,
             collection: collection,
-            permissions: permissions,
+            read: read,
+            write: write,
             data: HashMap::new(),
 }
     }

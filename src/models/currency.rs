@@ -2,6 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
+use std::fmt::Display;
 use super::*;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -52,6 +53,21 @@ pub struct Currency {
         pub rounding: f64,
         pub code: String,
         pub namePlural: String,
+}
+
+impl Display for Currency {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatBuffer = String::new();
+        formatBuffer.push_str(&format!("{}", self.symbol));
+        formatBuffer.push_str(&format!("{}", self.name));
+        formatBuffer.push_str(&format!("{}", self.symbolNative));
+        formatBuffer.push_str(&format!("{}", self.decimalDigits));
+        formatBuffer.push_str(&format!("{}", self.rounding));
+        formatBuffer.push_str(&format!("{}", self.code));
+        formatBuffer.push_str(&format!("{}", self.namePlural));
+
+        write!(f, "{}", formatBuffer)
+    }
 }
 
 impl Currency {

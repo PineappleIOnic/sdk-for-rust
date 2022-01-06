@@ -2,6 +2,7 @@ use crate::client::{Client, ParamType};
 use std::collections::HashMap;
 use crate::services::AppwriteException;
 use crate::models;
+use serde_json::json;
 
 #[derive(Clone)]
 pub struct Storage {
@@ -18,13 +19,23 @@ impl Storage {
     /// Get a list of all the user files. You can use the query params to filter
     /// your results. On admin mode, this endpoint will return a list of all of the
     /// project's files. [Learn more about different API modes](/docs/admin).
-    pub fn list_files(&self, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, order_type: Option<&str>) -> Result<models::FileList, AppwriteException> {
+    pub fn list_files(&self, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, cursor: Option<&str>, cursor_direction: Option<&str>, order_type: Option<&str>) -> Result<models::FileList, AppwriteException> {
         let path = "/storage/files";
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
         let search:&str = match search {
+            Some(data) => data,
+            None => ""
+        };
+
+        let cursor:&str = match cursor {
+            Some(data) => data,
+            None => ""
+        };
+
+        let cursor_direction:&str = match cursor_direction {
             Some(data) => data,
             None => ""
         };
@@ -38,6 +49,8 @@ impl Storage {
             ("search".to_string(), ParamType::String(search.to_string())),
             ("limit".to_string(),  ParamType::OptionalNumber(limit)),
             ("offset".to_string(),  ParamType::OptionalNumber(offset)),
+            ("cursor".to_string(), ParamType::String(cursor.to_string())),
+            ("cursorDirection".to_string(), ParamType::String(cursor_direction.to_string())),
             ("orderType".to_string(), ParamType::String(order_type.to_string())),
         ].iter().cloned().collect();
 
@@ -59,7 +72,7 @@ impl Storage {
     /// Create a new file. The user who creates the file will automatically be
     /// assigned to read and write access unless he has passed custom values for
     /// read and write arguments.
-    pub fn create_file(&self, file: std::path::PathBuf, read: Option<&[&str]>, write: Option<&[&str]>) -> Result<models::File, AppwriteException> {
+    pub fn create_file(&self, file_id: &str, file: std::path::PathBuf, read: Option<&[&str]>, write: Option<&[&str]>) -> Result<models::File, AppwriteException> {
         let path = "/storage/files";
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "multipart/form-data".to_string()),
@@ -76,6 +89,7 @@ impl Storage {
         };
 
         let params: HashMap<String, ParamType> = [
+            ("fileId".to_string(), ParamType::String(file_id.to_string())),
             ("file".to_string(), ParamType::FilePath(file)),
             ("read".to_string(), ParamType::Array(read.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
             ("write".to_string(), ParamType::Array(write.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
@@ -152,7 +166,7 @@ impl Storage {
 
     /// Delete a file by its unique ID. Only users with write permissions have
     /// access to delete this resource.
-    pub fn delete_file(&self, file_id: &str) -> Result<bool, AppwriteException> {
+    pub fn delete_file(&self, file_id: &str) -> Result<serde_json::value::Value, AppwriteException> {
         let path = "/storage/files/fileId".replace("fileId", &file_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -163,7 +177,14 @@ impl Storage {
 
         let response = self.client.clone().call("DELETE", &path, Some(headers), Some(params) );
 
-        Ok(response.unwrap().status().is_success())
+        match response {
+            Ok(r) => {
+                Ok(serde_json::from_str(&r.text().unwrap()).unwrap())
+            }
+            Err(e) => {
+                Err(e)
+            }
+        }
 
     }
 

@@ -2,6 +2,7 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use serde_json::value::Value;
+use std::fmt::Display;
 use super::*;
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -68,6 +69,36 @@ pub struct Session {
         pub countryCode: String,
         pub countryName: String,
         pub current: bool,
+}
+
+impl Display for Session {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut formatBuffer = String::new();
+        formatBuffer.push_str(&format!("{}", self.id));
+        formatBuffer.push_str(&format!("{}", self.userId));
+        formatBuffer.push_str(&format!("{}", self.expire));
+        formatBuffer.push_str(&format!("{}", self.provider));
+        formatBuffer.push_str(&format!("{}", self.providerUid));
+        formatBuffer.push_str(&format!("{}", self.providerToken));
+        formatBuffer.push_str(&format!("{}", self.ip));
+        formatBuffer.push_str(&format!("{}", self.osCode));
+        formatBuffer.push_str(&format!("{}", self.osName));
+        formatBuffer.push_str(&format!("{}", self.osVersion));
+        formatBuffer.push_str(&format!("{}", self.clientType));
+        formatBuffer.push_str(&format!("{}", self.clientCode));
+        formatBuffer.push_str(&format!("{}", self.clientName));
+        formatBuffer.push_str(&format!("{}", self.clientVersion));
+        formatBuffer.push_str(&format!("{}", self.clientEngine));
+        formatBuffer.push_str(&format!("{}", self.clientEngineVersion));
+        formatBuffer.push_str(&format!("{}", self.deviceName));
+        formatBuffer.push_str(&format!("{}", self.deviceBrand));
+        formatBuffer.push_str(&format!("{}", self.deviceModel));
+        formatBuffer.push_str(&format!("{}", self.countryCode));
+        formatBuffer.push_str(&format!("{}", self.countryName));
+        formatBuffer.push_str(&format!("{}", self.current));
+
+        write!(f, "{}", formatBuffer)
+    }
 }
 
 impl Session {

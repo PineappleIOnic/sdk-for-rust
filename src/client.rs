@@ -27,6 +27,7 @@ pub enum ParamType {
     OptionalObject(Option<HashMap<String, ParamType>>),
     OptionalFloat(Option<f64>),
     CollectionList(crate::models::CollectionList),
+    IndexList(crate::models::IndexList),
     DocumentList(crate::models::DocumentList),
     UserList(crate::models::UserList),
     SessionList(crate::models::SessionList),
@@ -42,10 +43,18 @@ pub enum ParamType {
     LanguageList(crate::models::LanguageList),
     CurrencyList(crate::models::CurrencyList),
     PhoneList(crate::models::PhoneList),
-    Permissions(crate::models::Permissions),
     Collection(crate::models::Collection),
+    AttributeList(crate::models::AttributeList),
+    AttributeString(crate::models::AttributeString),
+    AttributeInteger(crate::models::AttributeInteger),
+    AttributeFloat(crate::models::AttributeFloat),
+    AttributeBoolean(crate::models::AttributeBoolean),
+    AttributeEmail(crate::models::AttributeEmail),
+    AttributeEnum(crate::models::AttributeEnum),
+    AttributeIp(crate::models::AttributeIp),
+    AttributeUrl(crate::models::AttributeUrl),
+    Index(crate::models::Index),
     Document(crate::models::Document),
-    Rule(crate::models::Rule),
     Log(crate::models::Log),
     User(crate::models::User),
     Preferences(crate::models::Preferences),
@@ -114,8 +123,8 @@ impl Client {
     pub fn new() -> Self {
         let mut new_headers = HeaderMap::new();
 
-        new_headers.insert("x-sdk-version", "appwrite:rust:1.1.0".parse().unwrap());
-        new_headers.insert("user-agent", format!("{}-rust-{}", std::env::consts::OS, "1.1.0").parse().unwrap());
+        new_headers.insert("x-sdk-version", "appwrite:rust:v1.1.0".parse().unwrap());
+        new_headers.insert("user-agent", format!("{}-rust-{}", std::env::consts::OS, "v1.1.0").parse().unwrap());
 
         Self {
             endpoint: "https://appwrite.io/v1".parse().unwrap(),

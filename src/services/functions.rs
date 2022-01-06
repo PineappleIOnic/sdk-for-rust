@@ -2,6 +2,7 @@ use crate::client::{Client, ParamType};
 use std::collections::HashMap;
 use crate::services::AppwriteException;
 use crate::models;
+use serde_json::json;
 
 #[derive(Clone)]
 pub struct Functions {
@@ -17,13 +18,23 @@ impl Functions {
 
     /// Get a list of all the project's functions. You can use the query params to
     /// filter your results.
-    pub fn list(&self, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, order_type: Option<&str>) -> Result<models::FunctionList, AppwriteException> {
+    pub fn list(&self, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, cursor: Option<&str>, cursor_direction: Option<&str>, order_type: Option<&str>) -> Result<models::FunctionList, AppwriteException> {
         let path = "/functions";
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
         let search:&str = match search {
+            Some(data) => data,
+            None => ""
+        };
+
+        let cursor:&str = match cursor {
+            Some(data) => data,
+            None => ""
+        };
+
+        let cursor_direction:&str = match cursor_direction {
             Some(data) => data,
             None => ""
         };
@@ -37,6 +48,8 @@ impl Functions {
             ("search".to_string(), ParamType::String(search.to_string())),
             ("limit".to_string(),  ParamType::OptionalNumber(limit)),
             ("offset".to_string(),  ParamType::OptionalNumber(offset)),
+            ("cursor".to_string(), ParamType::String(cursor.to_string())),
+            ("cursorDirection".to_string(), ParamType::String(cursor_direction.to_string())),
             ("orderType".to_string(), ParamType::String(order_type.to_string())),
         ].iter().cloned().collect();
 
@@ -58,7 +71,7 @@ impl Functions {
     /// Create a new function. You can pass a list of
     /// [permissions](/docs/permissions) to allow different project users or team
     /// with access to execute the function using the client API.
-    pub fn create(&self, name: &str, execute: &[&str], runtime: &str, vars: Option<Option<HashMap<String, crate::client::ParamType>>>, events: Option<&[&str]>, schedule: Option<&str>, timeout: Option<i64>) -> Result<models::Function, AppwriteException> {
+    pub fn create(&self, function_id: &str, name: &str, execute: &[&str], runtime: &str, vars: Option<Option<HashMap<String, crate::client::ParamType>>>, events: Option<&[&str]>, schedule: Option<&str>, timeout: Option<i64>) -> Result<models::Function, AppwriteException> {
         let path = "/functions";
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -75,6 +88,7 @@ impl Functions {
         };
 
         let params: HashMap<String, ParamType> = [
+            ("functionId".to_string(), ParamType::String(function_id.to_string())),
             ("name".to_string(), ParamType::String(name.to_string())),
             ("execute".to_string(), ParamType::Array(execute.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
             ("runtime".to_string(), ParamType::String(runtime.to_string())),
@@ -166,7 +180,7 @@ impl Functions {
     }
 
     /// Delete a function by its unique ID.
-    pub fn delete(&self, function_id: &str) -> Result<bool, AppwriteException> {
+    pub fn delete(&self, function_id: &str) -> Result<serde_json::value::Value, AppwriteException> {
         let path = "/functions/functionId".replace("functionId", &function_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -177,7 +191,14 @@ impl Functions {
 
         let response = self.client.clone().call("DELETE", &path, Some(headers), Some(params) );
 
-        Ok(response.unwrap().status().is_success())
+        match response {
+            Ok(r) => {
+                Ok(serde_json::from_str(&r.text().unwrap()).unwrap())
+            }
+            Err(e) => {
+                Err(e)
+            }
+        }
 
     }
 
@@ -185,7 +206,7 @@ impl Functions {
     /// query params to filter your results. On admin mode, this endpoint will
     /// return a list of all of the project's executions. [Learn more about
     /// different API modes](/docs/admin).
-    pub fn list_executions(&self, function_id: &str, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, order_type: Option<&str>) -> Result<models::ExecutionList, AppwriteException> {
+    pub fn list_executions(&self, function_id: &str, limit: Option<i64>, offset: Option<i64>, search: Option<&str>, cursor: Option<&str>, cursor_direction: Option<&str>) -> Result<models::ExecutionList, AppwriteException> {
         let path = "/functions/functionId/executions".replace("functionId", &function_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -196,16 +217,22 @@ impl Functions {
             None => ""
         };
 
-        let order_type:&str = match order_type {
+        let cursor:&str = match cursor {
+            Some(data) => data,
+            None => ""
+        };
+
+        let cursor_direction:&str = match cursor_direction {
             Some(data) => data,
             None => ""
         };
 
         let params: HashMap<String, ParamType> = [
-            ("search".to_string(), ParamType::String(search.to_string())),
             ("limit".to_string(),  ParamType::OptionalNumber(limit)),
             ("offset".to_string(),  ParamType::OptionalNumber(offset)),
-            ("orderType".to_string(), ParamType::String(order_type.to_string())),
+            ("search".to_string(), ParamType::String(search.to_string())),
+            ("cursor".to_string(), ParamType::String(cursor.to_string())),
+            ("cursorDirection".to_string(), ParamType::String(cursor_direction.to_string())),
         ].iter().cloned().collect();
 
         let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
@@ -312,13 +339,23 @@ impl Functions {
 
     /// Get a list of all the project's code tags. You can use the query params to
     /// filter your results.
-    pub fn list_tags(&self, function_id: &str, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, order_type: Option<&str>) -> Result<models::TagList, AppwriteException> {
+    pub fn list_tags(&self, function_id: &str, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, cursor: Option<&str>, cursor_direction: Option<&str>, order_type: Option<&str>) -> Result<models::TagList, AppwriteException> {
         let path = "/functions/functionId/tags".replace("functionId", &function_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
         let search:&str = match search {
+            Some(data) => data,
+            None => ""
+        };
+
+        let cursor:&str = match cursor {
+            Some(data) => data,
+            None => ""
+        };
+
+        let cursor_direction:&str = match cursor_direction {
             Some(data) => data,
             None => ""
         };
@@ -332,6 +369,8 @@ impl Functions {
             ("search".to_string(), ParamType::String(search.to_string())),
             ("limit".to_string(),  ParamType::OptionalNumber(limit)),
             ("offset".to_string(),  ParamType::OptionalNumber(offset)),
+            ("cursor".to_string(), ParamType::String(cursor.to_string())),
+            ("cursorDirection".to_string(), ParamType::String(cursor_direction.to_string())),
             ("orderType".to_string(), ParamType::String(order_type.to_string())),
         ].iter().cloned().collect();
 
@@ -412,7 +451,7 @@ impl Functions {
     }
 
     /// Delete a code tag by its unique ID.
-    pub fn delete_tag(&self, function_id: &str, tag_id: &str) -> Result<bool, AppwriteException> {
+    pub fn delete_tag(&self, function_id: &str, tag_id: &str) -> Result<serde_json::value::Value, AppwriteException> {
         let path = "/functions/functionId/tags/tagId".replace("functionId", &function_id).replace("tagId", &tag_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -423,7 +462,14 @@ impl Functions {
 
         let response = self.client.clone().call("DELETE", &path, Some(headers), Some(params) );
 
-        Ok(response.unwrap().status().is_success())
+        match response {
+            Ok(r) => {
+                Ok(serde_json::from_str(&r.text().unwrap()).unwrap())
+            }
+            Err(e) => {
+                Err(e)
+            }
+        }
 
     }
 }
