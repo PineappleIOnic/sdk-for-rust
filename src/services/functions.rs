@@ -16,6 +16,100 @@ impl Functions {
         }
     }
 
+    /// Get a list of all the current user build logs. You can use the query params
+    /// to filter your results. On admin mode, this endpoint will return a list of
+    /// all of the project's executions. [Learn more about different API
+    /// modes](/docs/admin).
+    pub fn list_builds(&self, limit: Option<i64>, offset: Option<i64>, search: Option<&str>, cursor: Option<&str>, cursor_direction: Option<&str>) -> Result<models::BuildList, AppwriteException> {
+        let path = "/builds";
+        let headers: HashMap<String, String> = [
+            ("content-type".to_string(), "application/json".to_string()),
+        ].iter().cloned().collect();
+
+        let search:&str = match search {
+            Some(data) => data,
+            None => ""
+        };
+
+        let cursor:&str = match cursor {
+            Some(data) => data,
+            None => ""
+        };
+
+        let cursor_direction:&str = match cursor_direction {
+            Some(data) => data,
+            None => ""
+        };
+
+        let params: HashMap<String, ParamType> = [
+            ("limit".to_string(),  ParamType::OptionalNumber(limit)),
+            ("offset".to_string(),  ParamType::OptionalNumber(offset)),
+            ("search".to_string(), ParamType::String(search.to_string())),
+            ("cursor".to_string(), ParamType::String(cursor.to_string())),
+            ("cursorDirection".to_string(), ParamType::String(cursor_direction.to_string())),
+        ].iter().cloned().collect();
+
+        let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
+
+        let processedResponse:models::BuildList = match response {
+            Ok(r) => {
+                r.json().unwrap()
+            }
+            Err(e) => {
+                return Err(e);
+            }
+        };
+
+        Ok(processedResponse)
+
+    }
+
+    pub fn get_build(&self, build_id: &str) -> Result<models::Build, AppwriteException> {
+        let path = "/builds/buildId".replace("buildId", &build_id);
+        let headers: HashMap<String, String> = [
+            ("content-type".to_string(), "application/json".to_string()),
+        ].iter().cloned().collect();
+
+        let params: HashMap<String, ParamType> = [
+        ].iter().cloned().collect();
+
+        let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
+
+        let processedResponse:models::Build = match response {
+            Ok(r) => {
+                r.json().unwrap()
+            }
+            Err(e) => {
+                return Err(e);
+            }
+        };
+
+        Ok(processedResponse)
+
+    }
+
+    pub fn retry_build(&self, build_id: &str) -> Result<serde_json::value::Value, AppwriteException> {
+        let path = "/builds/buildId".replace("buildId", &build_id);
+        let headers: HashMap<String, String> = [
+            ("content-type".to_string(), "application/json".to_string()),
+        ].iter().cloned().collect();
+
+        let params: HashMap<String, ParamType> = [
+        ].iter().cloned().collect();
+
+        let response = self.client.clone().call("POST", &path, Some(headers), Some(params) );
+
+        match response {
+            Ok(r) => {
+                Ok(serde_json::from_str(&r.text().unwrap()).unwrap())
+            }
+            Err(e) => {
+                Err(e)
+            }
+        }
+
+    }
+
     /// Get a list of all the project's functions. You can use the query params to
     /// filter your results.
     pub fn list(&self, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, cursor: Option<&str>, cursor_direction: Option<&str>, order_type: Option<&str>) -> Result<models::FunctionList, AppwriteException> {
@@ -101,6 +195,31 @@ impl Functions {
         let response = self.client.clone().call("POST", &path, Some(headers), Some(params) );
 
         let processedResponse:models::Function = match response {
+            Ok(r) => {
+                r.json().unwrap()
+            }
+            Err(e) => {
+                return Err(e);
+            }
+        };
+
+        Ok(processedResponse)
+
+    }
+
+    /// Get a list of all runtimes that are currently active in your project.
+    pub fn list_runtimes(&self) -> Result<models::RuntimeList, AppwriteException> {
+        let path = "/functions/runtimes";
+        let headers: HashMap<String, String> = [
+            ("content-type".to_string(), "application/json".to_string()),
+        ].iter().cloned().collect();
+
+        let params: HashMap<String, ParamType> = [
+        ].iter().cloned().collect();
+
+        let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
+
+        let processedResponse:models::RuntimeList = match response {
             Ok(r) => {
                 r.json().unwrap()
             }
@@ -254,7 +373,7 @@ impl Functions {
     /// current execution status. You can ping the `Get Execution` endpoint to get
     /// updates on the current execution status. Once this endpoint is called, your
     /// function execution process will start asynchronously.
-    pub fn create_execution(&self, function_id: &str, data: Option<&str>) -> Result<models::Execution, AppwriteException> {
+    pub fn create_execution(&self, function_id: &str, data: Option<&str>, xasync: Option<bool>) -> Result<models::Execution, AppwriteException> {
         let path = "/functions/functionId/executions".replace("functionId", &function_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -267,6 +386,7 @@ impl Functions {
 
         let params: HashMap<String, ParamType> = [
             ("data".to_string(), ParamType::String(data.to_string())),
+            ("async".to_string(), ParamType::OptionalBool(xasync)),
         ].iter().cloned().collect();
 
         let response = self.client.clone().call("POST", &path, Some(headers), Some(params) );
@@ -399,15 +519,16 @@ impl Functions {
     /// tutorial](/docs/functions).
     /// 
     /// Use the "command" param to set the entry point used to execute your code.
-    pub fn create_tag(&self, function_id: &str, command: &str, code: std::path::PathBuf) -> Result<models::Tag, AppwriteException> {
+    pub fn create_tag(&self, function_id: &str, entrypoint: &str, code: std::path::PathBuf, automatic_deploy: bool) -> Result<models::Tag, AppwriteException> {
         let path = "/functions/functionId/tags".replace("functionId", &function_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "multipart/form-data".to_string()),
         ].iter().cloned().collect();
 
         let params: HashMap<String, ParamType> = [
-            ("command".to_string(), ParamType::String(command.to_string())),
+            ("entrypoint".to_string(), ParamType::String(entrypoint.to_string())),
             ("code".to_string(), ParamType::FilePath(code)),
+            ("automaticDeploy".to_string(), ParamType::Bool(automatic_deploy)),
         ].iter().cloned().collect();
 
         let response = self.client.clone().call("POST", &path, Some(headers), Some(params) );

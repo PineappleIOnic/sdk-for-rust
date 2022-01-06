@@ -127,7 +127,7 @@ impl Database {
     }
 
     /// Update a collection by its unique ID.
-    pub fn update_collection(&self, collection_id: &str, name: &str, permission: &str, read: Option<&[&str]>, write: Option<&[&str]>) -> Result<models::Collection, AppwriteException> {
+    pub fn update_collection(&self, collection_id: &str, name: &str, permission: &str, read: Option<&[&str]>, write: Option<&[&str]>, enabled: Option<bool>) -> Result<models::Collection, AppwriteException> {
         let path = "/database/collections/collectionId".replace("collectionId", &collection_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -148,6 +148,7 @@ impl Database {
             ("permission".to_string(), ParamType::String(permission.to_string())),
             ("read".to_string(), ParamType::Array(read.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
             ("write".to_string(), ParamType::Array(write.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
+            ("enabled".to_string(), ParamType::OptionalBool(enabled)),
         ].iter().cloned().collect();
 
         let response = self.client.clone().call("PUT", &path, Some(headers), Some(params) );
@@ -215,14 +216,14 @@ impl Database {
 
     /// Create a boolean attribute.
     /// 
-    pub fn create_boolean_attribute(&self, collection_id: &str, attribute_id: &str, required: bool, default: Option<bool>, array: Option<bool>) -> Result<models::AttributeBoolean, AppwriteException> {
+    pub fn create_boolean_attribute(&self, collection_id: &str, key: &str, required: bool, default: Option<bool>, array: Option<bool>) -> Result<models::AttributeBoolean, AppwriteException> {
         let path = "/database/collections/collectionId/attributes/boolean".replace("collectionId", &collection_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
         let params: HashMap<String, ParamType> = [
-            ("attributeId".to_string(), ParamType::String(attribute_id.to_string())),
+            ("key".to_string(), ParamType::String(key.to_string())),
             ("required".to_string(), ParamType::Bool(required)),
             ("default".to_string(), ParamType::OptionalBool(default)),
             ("array".to_string(), ParamType::OptionalBool(array)),
@@ -245,7 +246,7 @@ impl Database {
 
     /// Create an email attribute.
     /// 
-    pub fn create_email_attribute(&self, collection_id: &str, attribute_id: &str, required: bool, default: Option<&str>, array: Option<bool>) -> Result<models::AttributeEmail, AppwriteException> {
+    pub fn create_email_attribute(&self, collection_id: &str, key: &str, required: bool, default: Option<&str>, array: Option<bool>) -> Result<models::AttributeEmail, AppwriteException> {
         let path = "/database/collections/collectionId/attributes/email".replace("collectionId", &collection_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -257,7 +258,7 @@ impl Database {
         };
 
         let params: HashMap<String, ParamType> = [
-            ("attributeId".to_string(), ParamType::String(attribute_id.to_string())),
+            ("key".to_string(), ParamType::String(key.to_string())),
             ("required".to_string(), ParamType::Bool(required)),
             ("default".to_string(), ParamType::String(default.to_string())),
             ("array".to_string(), ParamType::OptionalBool(array)),
@@ -278,7 +279,7 @@ impl Database {
 
     }
 
-    pub fn create_enum_attribute(&self, collection_id: &str, attribute_id: &str, elements: &[&str], required: bool, default: Option<&str>, array: Option<bool>) -> Result<models::AttributeEnum, AppwriteException> {
+    pub fn create_enum_attribute(&self, collection_id: &str, key: &str, elements: &[&str], required: bool, default: Option<&str>, array: Option<bool>) -> Result<models::AttributeEnum, AppwriteException> {
         let path = "/database/collections/collectionId/attributes/enum".replace("collectionId", &collection_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -290,7 +291,7 @@ impl Database {
         };
 
         let params: HashMap<String, ParamType> = [
-            ("attributeId".to_string(), ParamType::String(attribute_id.to_string())),
+            ("key".to_string(), ParamType::String(key.to_string())),
             ("elements".to_string(), ParamType::Array(elements.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
             ("required".to_string(), ParamType::Bool(required)),
             ("default".to_string(), ParamType::String(default.to_string())),
@@ -315,7 +316,7 @@ impl Database {
     /// Create a float attribute. Optionally, minimum and maximum values can be
     /// provided.
     /// 
-    pub fn create_float_attribute(&self, collection_id: &str, attribute_id: &str, required: bool, min: Option<&str>, max: Option<&str>, default: Option<&str>, array: Option<bool>) -> Result<models::AttributeFloat, AppwriteException> {
+    pub fn create_float_attribute(&self, collection_id: &str, key: &str, required: bool, min: Option<&str>, max: Option<&str>, default: Option<&str>, array: Option<bool>) -> Result<models::AttributeFloat, AppwriteException> {
         let path = "/database/collections/collectionId/attributes/float".replace("collectionId", &collection_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -337,7 +338,7 @@ impl Database {
         };
 
         let params: HashMap<String, ParamType> = [
-            ("attributeId".to_string(), ParamType::String(attribute_id.to_string())),
+            ("key".to_string(), ParamType::String(key.to_string())),
             ("required".to_string(), ParamType::Bool(required)),
             ("min".to_string(), ParamType::String(min.to_string())),
             ("max".to_string(), ParamType::String(max.to_string())),
@@ -363,14 +364,14 @@ impl Database {
     /// Create an integer attribute. Optionally, minimum and maximum values can be
     /// provided.
     /// 
-    pub fn create_integer_attribute(&self, collection_id: &str, attribute_id: &str, required: bool, min: Option<i64>, max: Option<i64>, default: Option<i64>, array: Option<bool>) -> Result<models::AttributeInteger, AppwriteException> {
+    pub fn create_integer_attribute(&self, collection_id: &str, key: &str, required: bool, min: Option<i64>, max: Option<i64>, default: Option<i64>, array: Option<bool>) -> Result<models::AttributeInteger, AppwriteException> {
         let path = "/database/collections/collectionId/attributes/integer".replace("collectionId", &collection_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
         let params: HashMap<String, ParamType> = [
-            ("attributeId".to_string(), ParamType::String(attribute_id.to_string())),
+            ("key".to_string(), ParamType::String(key.to_string())),
             ("required".to_string(), ParamType::Bool(required)),
             ("min".to_string(),  ParamType::OptionalNumber(min)),
             ("max".to_string(),  ParamType::OptionalNumber(max)),
@@ -395,7 +396,7 @@ impl Database {
 
     /// Create IP address attribute.
     /// 
-    pub fn create_ip_attribute(&self, collection_id: &str, attribute_id: &str, required: bool, default: Option<&str>, array: Option<bool>) -> Result<models::AttributeIp, AppwriteException> {
+    pub fn create_ip_attribute(&self, collection_id: &str, key: &str, required: bool, default: Option<&str>, array: Option<bool>) -> Result<models::AttributeIp, AppwriteException> {
         let path = "/database/collections/collectionId/attributes/ip".replace("collectionId", &collection_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -407,7 +408,7 @@ impl Database {
         };
 
         let params: HashMap<String, ParamType> = [
-            ("attributeId".to_string(), ParamType::String(attribute_id.to_string())),
+            ("key".to_string(), ParamType::String(key.to_string())),
             ("required".to_string(), ParamType::Bool(required)),
             ("default".to_string(), ParamType::String(default.to_string())),
             ("array".to_string(), ParamType::OptionalBool(array)),
@@ -428,9 +429,9 @@ impl Database {
 
     }
 
-    /// Create a new string attribute.
+    /// Create a string attribute.
     /// 
-    pub fn create_string_attribute(&self, collection_id: &str, attribute_id: &str, size: i64, required: bool, default: Option<&str>, array: Option<bool>) -> Result<models::AttributeString, AppwriteException> {
+    pub fn create_string_attribute(&self, collection_id: &str, key: &str, size: i64, required: bool, default: Option<&str>, array: Option<bool>) -> Result<models::AttributeString, AppwriteException> {
         let path = "/database/collections/collectionId/attributes/string".replace("collectionId", &collection_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -442,7 +443,7 @@ impl Database {
         };
 
         let params: HashMap<String, ParamType> = [
-            ("attributeId".to_string(), ParamType::String(attribute_id.to_string())),
+            ("key".to_string(), ParamType::String(key.to_string())),
             ("size".to_string(),  ParamType::Number(size)),
             ("required".to_string(), ParamType::Bool(required)),
             ("default".to_string(), ParamType::String(default.to_string())),
@@ -466,7 +467,7 @@ impl Database {
 
     /// Create a URL attribute.
     /// 
-    pub fn create_url_attribute(&self, collection_id: &str, attribute_id: &str, required: bool, default: Option<&str>, array: Option<bool>) -> Result<models::AttributeUrl, AppwriteException> {
+    pub fn create_url_attribute(&self, collection_id: &str, key: &str, required: bool, default: Option<&str>, array: Option<bool>) -> Result<models::AttributeUrl, AppwriteException> {
         let path = "/database/collections/collectionId/attributes/url".replace("collectionId", &collection_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -478,7 +479,7 @@ impl Database {
         };
 
         let params: HashMap<String, ParamType> = [
-            ("attributeId".to_string(), ParamType::String(attribute_id.to_string())),
+            ("key".to_string(), ParamType::String(key.to_string())),
             ("required".to_string(), ParamType::Bool(required)),
             ("default".to_string(), ParamType::String(default.to_string())),
             ("array".to_string(), ParamType::OptionalBool(array)),
@@ -499,8 +500,8 @@ impl Database {
 
     }
 
-    pub fn get_attribute(&self, collection_id: &str, attribute_id: &str) -> Result<serde_json::value::Value, AppwriteException> {
-        let path = "/database/collections/collectionId/attributes/attributeId".replace("collectionId", &collection_id).replace("attributeId", &attribute_id);
+    pub fn get_attribute(&self, collection_id: &str, key: &str) -> Result<serde_json::value::Value, AppwriteException> {
+        let path = "/database/collections/collectionId/attributes/key".replace("collectionId", &collection_id).replace("key", &key);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
@@ -521,8 +522,8 @@ impl Database {
 
     }
 
-    pub fn delete_attribute(&self, collection_id: &str, attribute_id: &str) -> Result<serde_json::value::Value, AppwriteException> {
-        let path = "/database/collections/collectionId/attributes/attributeId".replace("collectionId", &collection_id).replace("attributeId", &attribute_id);
+    pub fn delete_attribute(&self, collection_id: &str, key: &str) -> Result<serde_json::value::Value, AppwriteException> {
+        let path = "/database/collections/collectionId/attributes/key".replace("collectionId", &collection_id).replace("key", &key);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
@@ -759,7 +760,7 @@ impl Database {
 
     }
 
-    pub fn create_index(&self, collection_id: &str, index_id: &str, xtype: &str, attributes: &[&str], orders: Option<&[&str]>) -> Result<models::Index, AppwriteException> {
+    pub fn create_index(&self, collection_id: &str, key: &str, xtype: &str, attributes: &[&str], orders: Option<&[&str]>) -> Result<models::Index, AppwriteException> {
         let path = "/database/collections/collectionId/indexes".replace("collectionId", &collection_id);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
@@ -771,7 +772,7 @@ impl Database {
         };
 
         let params: HashMap<String, ParamType> = [
-            ("indexId".to_string(), ParamType::String(index_id.to_string())),
+            ("key".to_string(), ParamType::String(key.to_string())),
             ("type".to_string(), ParamType::String(xtype.to_string())),
             ("attributes".to_string(), ParamType::Array(attributes.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
             ("orders".to_string(), ParamType::Array(orders.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
@@ -792,8 +793,8 @@ impl Database {
 
     }
 
-    pub fn get_index(&self, collection_id: &str, index_id: &str) -> Result<models::Index, AppwriteException> {
-        let path = "/database/collections/collectionId/indexes/indexId".replace("collectionId", &collection_id).replace("indexId", &index_id);
+    pub fn get_index(&self, collection_id: &str, key: &str) -> Result<models::Index, AppwriteException> {
+        let path = "/database/collections/collectionId/indexes/key".replace("collectionId", &collection_id).replace("key", &key);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
@@ -816,8 +817,8 @@ impl Database {
 
     }
 
-    pub fn delete_index(&self, collection_id: &str, index_id: &str) -> Result<serde_json::value::Value, AppwriteException> {
-        let path = "/database/collections/collectionId/indexes/indexId".replace("collectionId", &collection_id).replace("indexId", &index_id);
+    pub fn delete_index(&self, collection_id: &str, key: &str) -> Result<serde_json::value::Value, AppwriteException> {
+        let path = "/database/collections/collectionId/indexes/key".replace("collectionId", &collection_id).replace("key", &key);
         let headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();

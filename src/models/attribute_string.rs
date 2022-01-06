@@ -51,9 +51,9 @@ pub struct AttributeString {
         pub xtype: String,
         pub status: String,
         pub required: bool,
-        pub array: bool,
+        pub array: EmptyOption<bool>,
         pub size: String,
-        pub default: String,
+        pub default: EmptyOption<String>,
 }
 
 impl Display for AttributeString {
@@ -72,15 +72,15 @@ impl Display for AttributeString {
 }
 
 impl AttributeString {
-    pub fn new(key: String, xtype: String, status: String, required: bool, array: bool, size: String, default: String, ) -> Self {
+    pub fn new(key: String, xtype: String, status: String, required: bool, array: EmptyOption<bool>, size: String, default: EmptyOption<String>, ) -> Self {
         Self {
             key: key,
             xtype: xtype,
             status: status,
             required: required,
-            array: array,
+            array: EmptyOption::from(array),
             size: size,
-            default: default,
+            default: EmptyOption::from(default),
             }
     }
 }

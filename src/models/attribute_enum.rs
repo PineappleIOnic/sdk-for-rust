@@ -51,10 +51,10 @@ pub struct AttributeEnum {
         pub xtype: String,
         pub status: String,
         pub required: bool,
-        pub array: bool,
+        pub array: EmptyOption<bool>,
         pub elements: Vec<String>,
         pub format: String,
-        pub default: String,
+        pub default: EmptyOption<String>,
 }
 
 impl Display for AttributeEnum {
@@ -76,16 +76,16 @@ impl Display for AttributeEnum {
 }
 
 impl AttributeEnum {
-    pub fn new(key: String, xtype: String, status: String, required: bool, array: bool, elements: Vec<String>, format: String, default: String, ) -> Self {
+    pub fn new(key: String, xtype: String, status: String, required: bool, array: EmptyOption<bool>, elements: Vec<String>, format: String, default: EmptyOption<String>, ) -> Self {
         Self {
             key: key,
             xtype: xtype,
             status: status,
             required: required,
-            array: array,
+            array: EmptyOption::from(array),
             elements: elements,
             format: format,
-            default: default,
+            default: EmptyOption::from(default),
             }
     }
 }

@@ -54,7 +54,7 @@ pub struct Execution {
         pub dateCreated: i64,
         pub trigger: String,
         pub status: String,
-        pub exitCode: i64,
+        pub statusCode: i64,
         pub stdout: String,
         pub stderr: String,
         pub time: f64,
@@ -71,7 +71,7 @@ impl Display for Execution {
         formatBuffer.push_str(&format!("{}", self.dateCreated));
         formatBuffer.push_str(&format!("{}", self.trigger));
         formatBuffer.push_str(&format!("{}", self.status));
-        formatBuffer.push_str(&format!("{}", self.exitCode));
+        formatBuffer.push_str(&format!("{}", self.statusCode));
         formatBuffer.push_str(&format!("{}", self.stdout));
         formatBuffer.push_str(&format!("{}", self.stderr));
         formatBuffer.push_str(&format!("{}", self.time));
@@ -81,7 +81,7 @@ impl Display for Execution {
 }
 
 impl Execution {
-    pub fn new(id: String, read: Vec<String>, functionId: String, dateCreated: i64, trigger: String, status: String, exitCode: i64, stdout: String, stderr: String, time: f64, ) -> Self {
+    pub fn new(id: String, read: Vec<String>, functionId: String, dateCreated: i64, trigger: String, status: String, statusCode: i64, stdout: String, stderr: String, time: f64, ) -> Self {
         Self {
             id: id,
             read: read,
@@ -89,7 +89,7 @@ impl Execution {
             dateCreated: dateCreated,
             trigger: trigger,
             status: status,
-            exitCode: exitCode,
+            statusCode: statusCode,
             stdout: stdout,
             stderr: stderr,
             time: time,

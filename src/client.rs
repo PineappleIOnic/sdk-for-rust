@@ -36,8 +36,10 @@ pub enum ParamType {
     TeamList(crate::models::TeamList),
     MembershipList(crate::models::MembershipList),
     FunctionList(crate::models::FunctionList),
+    RuntimeList(crate::models::RuntimeList),
     TagList(crate::models::TagList),
     ExecutionList(crate::models::ExecutionList),
+    BuildList(crate::models::BuildList),
     CountryList(crate::models::CountryList),
     ContinentList(crate::models::ContinentList),
     LanguageList(crate::models::LanguageList),
@@ -65,13 +67,19 @@ pub enum ParamType {
     Team(crate::models::Team),
     Membership(crate::models::Membership),
     Function(crate::models::Function),
+    Runtime(crate::models::Runtime),
     Tag(crate::models::Tag),
     Execution(crate::models::Execution),
+    Build(crate::models::Build),
     Country(crate::models::Country),
     Continent(crate::models::Continent),
     Language(crate::models::Language),
     Currency(crate::models::Currency),
     Phone(crate::models::Phone),
+    HealthAntivirus(crate::models::HealthAntivirus),
+    HealthQueue(crate::models::HealthQueue),
+    HealthStatus(crate::models::HealthStatus),
+    HealthTime(crate::models::HealthTime),
     }
 
 // Converts optionals into normal ParamTypes
@@ -123,11 +131,11 @@ impl Client {
     pub fn new() -> Self {
         let mut new_headers = HeaderMap::new();
 
-        new_headers.insert("x-sdk-version", "appwrite:rust:v1.1.0".parse().unwrap());
-        new_headers.insert("user-agent", format!("{}-rust-{}", std::env::consts::OS, "v1.1.0").parse().unwrap());
+        new_headers.insert("x-sdk-version", "appwrite:rust:1.1.0".parse().unwrap());
+        new_headers.insert("user-agent", format!("{}-rust-{}", std::env::consts::OS, "1.1.0").parse().unwrap());
 
         Self {
-            endpoint: "https://appwrite.io/v1".parse().unwrap(),
+            endpoint: "https://HOSTNAME/v1".parse().unwrap(),
             headers: new_headers,
             client: reqwest::blocking::Client::builder()
             .build().unwrap(),

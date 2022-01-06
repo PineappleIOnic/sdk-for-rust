@@ -51,10 +51,10 @@ pub struct AttributeInteger {
         pub xtype: String,
         pub status: String,
         pub required: bool,
-        pub array: bool,
-        pub min: i64,
-        pub max: i64,
-        pub default: i64,
+        pub array: EmptyOption<bool>,
+        pub min: EmptyOption<i64>,
+        pub max: EmptyOption<i64>,
+        pub default: EmptyOption<i64>,
 }
 
 impl Display for AttributeInteger {
@@ -74,16 +74,16 @@ impl Display for AttributeInteger {
 }
 
 impl AttributeInteger {
-    pub fn new(key: String, xtype: String, status: String, required: bool, array: bool, min: i64, max: i64, default: i64, ) -> Self {
+    pub fn new(key: String, xtype: String, status: String, required: bool, array: EmptyOption<bool>, min: EmptyOption<i64>, max: EmptyOption<i64>, default: EmptyOption<i64>, ) -> Self {
         Self {
             key: key,
             xtype: xtype,
             status: status,
             required: required,
-            array: array,
-            min: min,
-            max: max,
-            default: default,
+            array: EmptyOption::from(array),
+            min: EmptyOption::from(min),
+            max: EmptyOption::from(max),
+            default: EmptyOption::from(default),
             }
     }
 }

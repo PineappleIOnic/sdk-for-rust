@@ -51,8 +51,8 @@ pub struct AttributeBoolean {
         pub xtype: String,
         pub status: String,
         pub required: bool,
-        pub array: bool,
-        pub default: bool,
+        pub array: EmptyOption<bool>,
+        pub default: EmptyOption<bool>,
 }
 
 impl Display for AttributeBoolean {
@@ -70,14 +70,14 @@ impl Display for AttributeBoolean {
 }
 
 impl AttributeBoolean {
-    pub fn new(key: String, xtype: String, status: String, required: bool, array: bool, default: bool, ) -> Self {
+    pub fn new(key: String, xtype: String, status: String, required: bool, array: EmptyOption<bool>, default: EmptyOption<bool>, ) -> Self {
         Self {
             key: key,
             xtype: xtype,
             status: status,
             required: required,
-            array: array,
-            default: default,
+            array: EmptyOption::from(array),
+            default: EmptyOption::from(default),
             }
     }
 }

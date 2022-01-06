@@ -280,8 +280,9 @@ impl Users {
 
     }
 
-    /// Update the user preferences by its unique ID. You can pass only the
-    /// specific settings you wish to update.
+    /// Update the user preferences by its unique ID. The object you pass is stored
+    /// as is, and replaces any previous value. The maximum allowed prefs size is
+    /// 64kB and throws error if exceeded.
     pub fn update_prefs(&self, user_id: &str, prefs: Option<HashMap<String, crate::client::ParamType>>) -> Result<models::Preferences, AppwriteException> {
         let path = "/users/userId/prefs".replace("userId", &user_id);
         let headers: HashMap<String, String> = [

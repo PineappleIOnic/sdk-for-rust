@@ -48,7 +48,7 @@ impl<T> EmptyOption<T> {
 pub struct Function {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
         pub id: String,
-        pub execute: Vec<String>,
+        pub execute: String,
         pub name: String,
         pub dateCreated: i64,
         pub dateUpdated: i64,
@@ -67,9 +67,7 @@ impl Display for Function {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
         formatBuffer.push_str(&format!("{}", self.id));
-        for item in &self.execute {
-            formatBuffer.push_str(&format!("{}", item));
-        }
+        formatBuffer.push_str(&format!("{}", self.execute));
         formatBuffer.push_str(&format!("{}", self.name));
         formatBuffer.push_str(&format!("{}", self.dateCreated));
         formatBuffer.push_str(&format!("{}", self.dateUpdated));
@@ -90,7 +88,7 @@ impl Display for Function {
 }
 
 impl Function {
-    pub fn new(id: String, execute: Vec<String>, name: String, dateCreated: i64, dateUpdated: i64, status: String, runtime: String, tag: String, vars: String, events: Vec<String>, schedule: String, scheduleNext: i64, schedulePrevious: i64, timeout: i64, ) -> Self {
+    pub fn new(id: String, execute: String, name: String, dateCreated: i64, dateUpdated: i64, status: String, runtime: String, tag: String, vars: String, events: Vec<String>, schedule: String, scheduleNext: i64, schedulePrevious: i64, timeout: i64, ) -> Self {
         Self {
             id: id,
             execute: execute,

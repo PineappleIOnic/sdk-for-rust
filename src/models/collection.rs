@@ -53,6 +53,7 @@ pub struct Collection {
         #[serde(rename(serialize = "write", deserialize = "$write"))]
         pub write: Vec<String>,
         pub name: String,
+        pub enabled: bool,
         pub permission: String,
         pub attributes: Vec<String>,
         pub indexes: Vec<Index>,
@@ -69,6 +70,7 @@ impl Display for Collection {
             formatBuffer.push_str(&format!("{}", item));
         }
         formatBuffer.push_str(&format!("{}", self.name));
+        formatBuffer.push_str(&format!("{}", self.enabled));
         formatBuffer.push_str(&format!("{}", self.permission));
         for item in &self.attributes {
             formatBuffer.push_str(&format!("{}", item));
@@ -82,12 +84,13 @@ impl Display for Collection {
 }
 
 impl Collection {
-    pub fn new(id: String, read: Vec<String>, write: Vec<String>, name: String, permission: String, attributes: Vec<String>, indexes: Vec<Index>, ) -> Self {
+    pub fn new(id: String, read: Vec<String>, write: Vec<String>, name: String, enabled: bool, permission: String, attributes: Vec<String>, indexes: Vec<Index>, ) -> Self {
         Self {
             id: id,
             read: read,
             write: write,
             name: name,
+            enabled: enabled,
             permission: permission,
             attributes: attributes,
             indexes: indexes,

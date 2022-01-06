@@ -50,8 +50,13 @@ pub struct Tag {
         pub id: String,
         pub functionId: String,
         pub dateCreated: i64,
-        pub command: String,
-        pub size: String,
+        pub entrypoint: String,
+        pub size: i64,
+        pub status: String,
+        pub buildId: String,
+        pub buildStdout: String,
+        pub buildStderr: String,
+        pub automaticDeploy: bool,
 }
 
 impl Display for Tag {
@@ -60,21 +65,31 @@ impl Display for Tag {
         formatBuffer.push_str(&format!("{}", self.id));
         formatBuffer.push_str(&format!("{}", self.functionId));
         formatBuffer.push_str(&format!("{}", self.dateCreated));
-        formatBuffer.push_str(&format!("{}", self.command));
+        formatBuffer.push_str(&format!("{}", self.entrypoint));
         formatBuffer.push_str(&format!("{}", self.size));
+        formatBuffer.push_str(&format!("{}", self.status));
+        formatBuffer.push_str(&format!("{}", self.buildId));
+        formatBuffer.push_str(&format!("{}", self.buildStdout));
+        formatBuffer.push_str(&format!("{}", self.buildStderr));
+        formatBuffer.push_str(&format!("{}", self.automaticDeploy));
 
         write!(f, "{}", formatBuffer)
     }
 }
 
 impl Tag {
-    pub fn new(id: String, functionId: String, dateCreated: i64, command: String, size: String, ) -> Self {
+    pub fn new(id: String, functionId: String, dateCreated: i64, entrypoint: String, size: i64, status: String, buildId: String, buildStdout: String, buildStderr: String, automaticDeploy: bool, ) -> Self {
         Self {
             id: id,
             functionId: functionId,
             dateCreated: dateCreated,
-            command: command,
+            entrypoint: entrypoint,
             size: size,
+            status: status,
+            buildId: buildId,
+            buildStdout: buildStdout,
+            buildStderr: buildStderr,
+            automaticDeploy: automaticDeploy,
             }
     }
 }

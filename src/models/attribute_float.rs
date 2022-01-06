@@ -51,10 +51,10 @@ pub struct AttributeFloat {
         pub xtype: String,
         pub status: String,
         pub required: bool,
-        pub array: bool,
-        pub min: f64,
-        pub max: f64,
-        pub default: f64,
+        pub array: EmptyOption<bool>,
+        pub min: EmptyOption<f64>,
+        pub max: EmptyOption<f64>,
+        pub default: EmptyOption<f64>,
 }
 
 impl Display for AttributeFloat {
@@ -74,16 +74,16 @@ impl Display for AttributeFloat {
 }
 
 impl AttributeFloat {
-    pub fn new(key: String, xtype: String, status: String, required: bool, array: bool, min: f64, max: f64, default: f64, ) -> Self {
+    pub fn new(key: String, xtype: String, status: String, required: bool, array: EmptyOption<bool>, min: EmptyOption<f64>, max: EmptyOption<f64>, default: EmptyOption<f64>, ) -> Self {
         Self {
             key: key,
             xtype: xtype,
             status: status,
             required: required,
-            array: array,
-            min: min,
-            max: max,
-            default: default,
+            array: EmptyOption::from(array),
+            min: EmptyOption::from(min),
+            max: EmptyOption::from(max),
+            default: EmptyOption::from(default),
             }
     }
 }
