@@ -83,7 +83,7 @@ impl Display for AttributeString {
 }
 
 impl AttributeString {
-    pub fn new(key: String, xtype: String, status: String, required: bool, array: EmptyOption<bool>, size: String, default: EmptyOption<String>, ) -> Self {
+    pub fn new(key: String, xtype: String, status: String, required: bool, array: EmptyOption<bool>, size: i64, default: EmptyOption<String>, ) -> Self {
         Self {
             key: key,
             xtype: xtype,
