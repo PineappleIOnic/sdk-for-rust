@@ -63,7 +63,7 @@ pub struct AttributeString {
         pub status: String,
         pub required: bool,
         pub array: EmptyOption<bool>,
-        pub size: String,
+        pub size: i64,
         pub default: EmptyOption<String>,
 }
 
