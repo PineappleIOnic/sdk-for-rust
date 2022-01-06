@@ -13,6 +13,17 @@ pub enum EmptyOption<T> {
     None {},
 }
 
+impl<T> Display for EmptyOption<T>
+where
+    T: Display,
+{
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        match self {
+            EmptyOption::Some(t) => write!(f, "{}", t),
+            EmptyOption::None {} => write!(f, ""),
+        }
+    }
+}
 
 impl<T> From<EmptyOption<T>> for Option<T> {
     fn from(empty_option: EmptyOption<T>) -> Option<T> {
