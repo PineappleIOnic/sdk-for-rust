@@ -4,8 +4,8 @@ client.set_endpoint("https://[HOSTNAME_OR_IP]/v1"); // Your API Endpoint
 client.set_project("5df5acd0d48c2"); // Your project ID
 client.set_key("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
-let database = appwrite::services::Database::new(&client);
+let functions = appwrite::services::Functions::new(&client);
 
-let response = database.create_collection("[COLLECTION_ID]", "[NAME]", "document", ["role:all"], ["role:all"]).unwrap();
+let response = functions.list_builds().unwrap();
 
 println!("{}", response.text().unwrap());

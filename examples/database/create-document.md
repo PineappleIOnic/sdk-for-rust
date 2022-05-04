@@ -6,6 +6,6 @@ client.set_key("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
 let database = appwrite::services::Database::new(&client);
 
-let response = database.create_document("[COLLECTION_ID]", String::new(), {}).unwrap();
+let response = database.create_document("[COLLECTION_ID]", "[DOCUMENT_ID]", {}).unwrap();
 
 println!("{}", response.text().unwrap());

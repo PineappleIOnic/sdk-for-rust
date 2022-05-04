@@ -1,11 +1,11 @@
 #![allow(unused)]
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize, Deserializer};
 use std::collections::HashMap;
 use serde_json::value::Value;
 use std::fmt::Display;
 use super::*;
 
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Serialize, Clone)]
 #[serde(deny_unknown_fields)]
 #[serde(untagged)]
 pub enum EmptyOption<T> {
@@ -22,6 +22,18 @@ where
             EmptyOption::Some(t) => write!(f, "{}", t),
             EmptyOption::None {} => write!(f, ""),
         }
+    }
+}
+
+impl<'de, T> Deserialize<'de> for EmptyOption<T>
+where
+    T: Deserialize<'de>,
+{
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        Option::deserialize(deserializer).map(Into::into)
     }
 }
 
@@ -63,7 +75,7 @@ pub struct AttributeString {
         pub status: String,
         pub required: bool,
         pub array: EmptyOption<bool>,
-        pub size: i32,
+        pub size: i64,
         pub default: EmptyOption<String>,
 }
 
@@ -83,7 +95,7 @@ impl Display for AttributeString {
 }
 
 impl AttributeString {
-    pub fn new(key: String, xtype: String, status: String, required: bool, array: EmptyOption<bool>, size: i32, default: EmptyOption<String>, ) -> Self {
+    pub fn new(key: String, xtype: String, status: String, required: bool, array: EmptyOption<bool>, size: i64, default: EmptyOption<String>, ) -> Self {
         Self {
             key: key,
             xtype: xtype,

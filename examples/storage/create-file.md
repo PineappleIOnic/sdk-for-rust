@@ -6,6 +6,6 @@ client.set_key("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
 let storage = appwrite::services::Storage::new(&client);
 
-let response = storage.create_file(String::new(), std::path::PathBuf::from("./path-to-files/image.jpg")).unwrap();
+let response = storage.create_file("[FILE_ID]", std::path::PathBuf::from("./path-to-files/image.jpg")).unwrap();
 
 println!("{}", response.text().unwrap());

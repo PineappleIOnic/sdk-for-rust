@@ -6,6 +6,6 @@ client.set_key("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
 let users = appwrite::services::Users::new(&client);
 
-let response = users.create(String::new(), "email@example.com", "password").unwrap();
+let response = users.create("[USER_ID]", "email@example.com", "password").unwrap();
 
 println!("{}", response.text().unwrap());

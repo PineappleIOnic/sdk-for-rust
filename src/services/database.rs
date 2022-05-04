@@ -59,7 +59,8 @@ impl Database {
 
         let processedResponse:models::CollectionList = match response {
             Ok(r) => {
-                r.json().unwrap()
+                println!("{}", r.text().unwrap());
+                panic!("lol. lmao.");
             }
             Err(e) => {
                 return Err(e);
