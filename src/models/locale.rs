@@ -81,13 +81,13 @@ pub struct Locale {
 impl Display for Locale {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.ip));
-        formatBuffer.push_str(&format!("{}", self.countryCode));
-        formatBuffer.push_str(&format!("{}", self.country));
-        formatBuffer.push_str(&format!("{}", self.continentCode));
-        formatBuffer.push_str(&format!("{}", self.continent));
-        formatBuffer.push_str(&format!("{}", self.eu));
-        formatBuffer.push_str(&format!("{}", self.currency));
+        formatBuffer.push_str(&format!("{:?}", self.ip));
+        formatBuffer.push_str(&format!("{:?}", self.countryCode));
+        formatBuffer.push_str(&format!("{:?}", self.country));
+        formatBuffer.push_str(&format!("{:?}", self.continentCode));
+        formatBuffer.push_str(&format!("{:?}", self.continent));
+        formatBuffer.push_str(&format!("{:?}", self.eu));
+        formatBuffer.push_str(&format!("{:?}", self.currency));
 
         write!(f, "{}", formatBuffer)
     }

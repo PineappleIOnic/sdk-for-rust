@@ -69,16 +69,16 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct AttributeList {
-        pub sum: i64,
-        pub attributes: Vec<String>,
+        pub total: i64,
+        pub attributes: Vec<Attribute>,
 }
 
 impl Display for AttributeList {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.sum));
+        formatBuffer.push_str(&format!("{:?}", self.total));
         for item in &self.attributes {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
 
         write!(f, "{}", formatBuffer)
@@ -86,9 +86,9 @@ impl Display for AttributeList {
 }
 
 impl AttributeList {
-    pub fn new(sum: i64, attributes: Vec<String>, ) -> Self {
+    pub fn new(total: i64, attributes: Vec<Attribute>, ) -> Self {
         Self {
-            sum: sum,
+            total: total,
             attributes: attributes,
             }
     }

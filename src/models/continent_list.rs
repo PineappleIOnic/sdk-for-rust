@@ -69,16 +69,16 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ContinentList {
-        pub sum: i64,
+        pub total: i64,
         pub continents: Vec<Continent>,
 }
 
 impl Display for ContinentList {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.sum));
+        formatBuffer.push_str(&format!("{:?}", self.total));
         for item in &self.continents {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
 
         write!(f, "{}", formatBuffer)
@@ -86,9 +86,9 @@ impl Display for ContinentList {
 }
 
 impl ContinentList {
-    pub fn new(sum: i64, continents: Vec<Continent>, ) -> Self {
+    pub fn new(total: i64, continents: Vec<Continent>, ) -> Self {
         Self {
-            sum: sum,
+            total: total,
             continents: continents,
             }
     }

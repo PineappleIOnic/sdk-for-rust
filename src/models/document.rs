@@ -77,19 +77,20 @@ pub struct Document {
         pub read: Vec<String>,
         #[serde(rename(serialize = "write", deserialize = "$write"))]
         pub write: Vec<String>,
-    pub data: HashMap<String, Value>,
+        #[serde(default)]
+        pub data: HashMap<String, Value>,
 }
 
 impl Display for Document {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.id));
-        formatBuffer.push_str(&format!("{}", self.collection));
+        formatBuffer.push_str(&format!("{:?}", self.id));
+        formatBuffer.push_str(&format!("{:?}", self.collection));
         for item in &self.read {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
         for item in &self.write {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
         for (key, value) in &self.data {
             formatBuffer.push_str(&format!("{}", value));

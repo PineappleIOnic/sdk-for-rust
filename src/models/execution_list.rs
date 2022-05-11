@@ -69,16 +69,16 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ExecutionList {
-        pub sum: i64,
+        pub total: i64,
         pub executions: Vec<Execution>,
 }
 
 impl Display for ExecutionList {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.sum));
+        formatBuffer.push_str(&format!("{:?}", self.total));
         for item in &self.executions {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
 
         write!(f, "{}", formatBuffer)
@@ -86,9 +86,9 @@ impl Display for ExecutionList {
 }
 
 impl ExecutionList {
-    pub fn new(sum: i64, executions: Vec<Execution>, ) -> Self {
+    pub fn new(total: i64, executions: Vec<Execution>, ) -> Self {
         Self {
-            sum: sum,
+            total: total,
             executions: executions,
             }
     }

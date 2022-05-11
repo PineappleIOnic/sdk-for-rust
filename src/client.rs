@@ -10,7 +10,9 @@ pub struct Client {
     client: reqwest::blocking::Client,
 }
 
-#[derive(Clone, Deserialize, Serialize)]
+pub static CHUNK_SIZE: u64 = 5*1024*1024; // 5MB
+
+#[derive(Clone, Deserialize, Serialize, Debug)]
 #[serde(untagged)]
 pub enum ParamType {
     Bool(bool),
@@ -20,26 +22,27 @@ pub enum ParamType {
     FilePath(PathBuf),
     Object(HashMap<String, ParamType>),
     Float(f64),
+    StreamData(Vec<u8>, String),
     OptionalBool(Option<bool>),
     OptionalNumber(Option<i64>),
     OptionalArray(Option<Vec<ParamType>>),
     OptionalFilePath(Option<PathBuf>),
     OptionalObject(Option<HashMap<String, ParamType>>),
     OptionalFloat(Option<f64>),
+    DocumentList(crate::models::DocumentList),
     CollectionList(crate::models::CollectionList),
     IndexList(crate::models::IndexList),
-    DocumentList(crate::models::DocumentList),
     UserList(crate::models::UserList),
     SessionList(crate::models::SessionList),
     LogList(crate::models::LogList),
     FileList(crate::models::FileList),
+    BucketList(crate::models::BucketList),
     TeamList(crate::models::TeamList),
     MembershipList(crate::models::MembershipList),
     FunctionList(crate::models::FunctionList),
     RuntimeList(crate::models::RuntimeList),
-    TagList(crate::models::TagList),
+    DeploymentList(crate::models::DeploymentList),
     ExecutionList(crate::models::ExecutionList),
-    BuildList(crate::models::BuildList),
     CountryList(crate::models::CountryList),
     ContinentList(crate::models::ContinentList),
     LanguageList(crate::models::LanguageList),
@@ -64,13 +67,13 @@ pub enum ParamType {
     Token(crate::models::Token),
     Locale(crate::models::Locale),
     File(crate::models::File),
+    Bucket(crate::models::Bucket),
     Team(crate::models::Team),
     Membership(crate::models::Membership),
     Function(crate::models::Function),
     Runtime(crate::models::Runtime),
-    Tag(crate::models::Tag),
+    Deployment(crate::models::Deployment),
     Execution(crate::models::Execution),
-    Build(crate::models::Build),
     Country(crate::models::Country),
     Continent(crate::models::Continent),
     Language(crate::models::Language),
@@ -131,8 +134,9 @@ impl Client {
     pub fn new() -> Self {
         let mut new_headers = HeaderMap::new();
 
-        new_headers.insert("x-sdk-version", "appwrite:rust:1.1.0".parse().unwrap());
-        new_headers.insert("user-agent", format!("{}-rust-{}", std::env::consts::OS, "1.1.0").parse().unwrap());
+        new_headers.insert("x-sdk-version", "appwrite:rust:0.0.1".parse().unwrap());
+        new_headers.insert("user-agent", format!("{}-rust-{}", std::env::consts::OS, "0.0.1").parse().unwrap());
+        new_headers.insert("X-Appwrite-Response-Format", "0.7.0".parse().unwrap());
 
         Self {
             endpoint: "https://HOSTNAME/v1".parse().unwrap(),
@@ -253,6 +257,7 @@ impl Client {
                             ParamType::FilePath(data) => form = form.file(k, data).unwrap(),
                             ParamType::Number(data) => form = form.text(k, data.to_string()),
                             ParamType::Float(data) => form = form.text(k, data.to_string()),
+                            ParamType::StreamData(data, filename) => form = form.part(k, reqwest::blocking::multipart::Part::bytes(data).file_name(filename)),
                             // This shouldn't be possible due to the flatten function, so we won't handle this for now
                             ParamType::Array(_data) => {
                                 //todo: Feed this back into a flatten function if needed

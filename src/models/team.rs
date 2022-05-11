@@ -73,28 +73,28 @@ pub struct Team {
         pub id: String,
         pub name: String,
         pub dateCreated: i64,
-        pub sum: i64,
+        pub total: i64,
 }
 
 impl Display for Team {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.id));
-        formatBuffer.push_str(&format!("{}", self.name));
-        formatBuffer.push_str(&format!("{}", self.dateCreated));
-        formatBuffer.push_str(&format!("{}", self.sum));
+        formatBuffer.push_str(&format!("{:?}", self.id));
+        formatBuffer.push_str(&format!("{:?}", self.name));
+        formatBuffer.push_str(&format!("{:?}", self.dateCreated));
+        formatBuffer.push_str(&format!("{:?}", self.total));
 
         write!(f, "{}", formatBuffer)
     }
 }
 
 impl Team {
-    pub fn new(id: String, name: String, dateCreated: i64, sum: i64, ) -> Self {
+    pub fn new(id: String, name: String, dateCreated: i64, total: i64, ) -> Self {
         Self {
             id: id,
             name: name,
             dateCreated: dateCreated,
-            sum: sum,
+            total: total,
             }
     }
 }

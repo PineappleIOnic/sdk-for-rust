@@ -69,16 +69,16 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct FileList {
-        pub sum: i64,
+        pub total: i64,
         pub files: Vec<File>,
 }
 
 impl Display for FileList {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.sum));
+        formatBuffer.push_str(&format!("{:?}", self.total));
         for item in &self.files {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
 
         write!(f, "{}", formatBuffer)
@@ -86,9 +86,9 @@ impl Display for FileList {
 }
 
 impl FileList {
-    pub fn new(sum: i64, files: Vec<File>, ) -> Self {
+    pub fn new(total: i64, files: Vec<File>, ) -> Self {
         Self {
-            sum: sum,
+            total: total,
             files: files,
             }
     }

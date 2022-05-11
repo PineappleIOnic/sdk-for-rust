@@ -68,39 +68,54 @@ impl<T> EmptyOption<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Build {
+pub struct Deployment {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
         pub id: String,
+        pub resourceId: String,
+        pub resourceType: String,
         pub dateCreated: i64,
+        pub entrypoint: String,
+        pub size: i64,
+        pub buildId: String,
+        pub activate: bool,
         pub status: String,
-        pub stdout: String,
-        pub stderr: String,
-        pub buildTime: i64,
+        pub buildStdout: String,
+        pub buildStderr: String,
 }
 
-impl Display for Build {
+impl Display for Deployment {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.id));
-        formatBuffer.push_str(&format!("{}", self.dateCreated));
-        formatBuffer.push_str(&format!("{}", self.status));
-        formatBuffer.push_str(&format!("{}", self.stdout));
-        formatBuffer.push_str(&format!("{}", self.stderr));
-        formatBuffer.push_str(&format!("{}", self.buildTime));
+        formatBuffer.push_str(&format!("{:?}", self.id));
+        formatBuffer.push_str(&format!("{:?}", self.resourceId));
+        formatBuffer.push_str(&format!("{:?}", self.resourceType));
+        formatBuffer.push_str(&format!("{:?}", self.dateCreated));
+        formatBuffer.push_str(&format!("{:?}", self.entrypoint));
+        formatBuffer.push_str(&format!("{:?}", self.size));
+        formatBuffer.push_str(&format!("{:?}", self.buildId));
+        formatBuffer.push_str(&format!("{:?}", self.activate));
+        formatBuffer.push_str(&format!("{:?}", self.status));
+        formatBuffer.push_str(&format!("{:?}", self.buildStdout));
+        formatBuffer.push_str(&format!("{:?}", self.buildStderr));
 
         write!(f, "{}", formatBuffer)
     }
 }
 
-impl Build {
-    pub fn new(id: String, dateCreated: i64, status: String, stdout: String, stderr: String, buildTime: i64, ) -> Self {
+impl Deployment {
+    pub fn new(id: String, resourceId: String, resourceType: String, dateCreated: i64, entrypoint: String, size: i64, buildId: String, activate: bool, status: String, buildStdout: String, buildStderr: String, ) -> Self {
         Self {
             id: id,
+            resourceId: resourceId,
+            resourceType: resourceType,
             dateCreated: dateCreated,
+            entrypoint: entrypoint,
+            size: size,
+            buildId: buildId,
+            activate: activate,
             status: status,
-            stdout: stdout,
-            stderr: stderr,
-            buildTime: buildTime,
+            buildStdout: buildStdout,
+            buildStderr: buildStderr,
             }
     }
 }

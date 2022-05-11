@@ -68,28 +68,28 @@ impl<T> EmptyOption<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct BuildList {
-        pub sum: i64,
-        pub builds: Vec<Build>,
+pub struct DeploymentList {
+        pub total: i64,
+        pub deployments: Vec<Deployment>,
 }
 
-impl Display for BuildList {
+impl Display for DeploymentList {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.sum));
-        for item in &self.builds {
-            formatBuffer.push_str(&format!("{}", item));
+        formatBuffer.push_str(&format!("{:?}", self.total));
+        for item in &self.deployments {
+            formatBuffer.push_str(&format!("{:?}", item));
         }
 
         write!(f, "{}", formatBuffer)
     }
 }
 
-impl BuildList {
-    pub fn new(sum: i64, builds: Vec<Build>, ) -> Self {
+impl DeploymentList {
+    pub fn new(total: i64, deployments: Vec<Deployment>, ) -> Self {
         Self {
-            sum: sum,
-            builds: builds,
+            total: total,
+            deployments: deployments,
             }
     }
 }

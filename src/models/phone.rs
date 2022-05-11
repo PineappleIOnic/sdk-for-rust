@@ -77,9 +77,9 @@ pub struct Phone {
 impl Display for Phone {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.code));
-        formatBuffer.push_str(&format!("{}", self.countryCode));
-        formatBuffer.push_str(&format!("{}", self.countryName));
+        formatBuffer.push_str(&format!("{:?}", self.code));
+        formatBuffer.push_str(&format!("{:?}", self.countryCode));
+        formatBuffer.push_str(&format!("{:?}", self.countryName));
 
         write!(f, "{}", formatBuffer)
     }

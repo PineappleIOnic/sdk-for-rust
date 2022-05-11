@@ -76,8 +76,8 @@ pub struct HealthAntivirus {
 impl Display for HealthAntivirus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.version));
-        formatBuffer.push_str(&format!("{}", self.status));
+        formatBuffer.push_str(&format!("{:?}", self.version));
+        formatBuffer.push_str(&format!("{:?}", self.status));
 
         write!(f, "{}", formatBuffer)
     }

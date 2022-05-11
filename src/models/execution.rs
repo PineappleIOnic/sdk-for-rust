@@ -86,18 +86,18 @@ pub struct Execution {
 impl Display for Execution {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.id));
+        formatBuffer.push_str(&format!("{:?}", self.id));
         for item in &self.read {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
-        formatBuffer.push_str(&format!("{}", self.functionId));
-        formatBuffer.push_str(&format!("{}", self.dateCreated));
-        formatBuffer.push_str(&format!("{}", self.trigger));
-        formatBuffer.push_str(&format!("{}", self.status));
-        formatBuffer.push_str(&format!("{}", self.statusCode));
-        formatBuffer.push_str(&format!("{}", self.stdout));
-        formatBuffer.push_str(&format!("{}", self.stderr));
-        formatBuffer.push_str(&format!("{}", self.time));
+        formatBuffer.push_str(&format!("{:?}", self.functionId));
+        formatBuffer.push_str(&format!("{:?}", self.dateCreated));
+        formatBuffer.push_str(&format!("{:?}", self.trigger));
+        formatBuffer.push_str(&format!("{:?}", self.status));
+        formatBuffer.push_str(&format!("{:?}", self.statusCode));
+        formatBuffer.push_str(&format!("{:?}", self.stdout));
+        formatBuffer.push_str(&format!("{:?}", self.stderr));
+        formatBuffer.push_str(&format!("{:?}", self.time));
 
         write!(f, "{}", formatBuffer)
     }

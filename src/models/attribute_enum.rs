@@ -83,16 +83,16 @@ pub struct AttributeEnum {
 impl Display for AttributeEnum {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.key));
-        formatBuffer.push_str(&format!("{}", self.xtype));
-        formatBuffer.push_str(&format!("{}", self.status));
-        formatBuffer.push_str(&format!("{}", self.required));
-        formatBuffer.push_str(&format!("{}", self.array));
+        formatBuffer.push_str(&format!("{:?}", self.key));
+        formatBuffer.push_str(&format!("{:?}", self.xtype));
+        formatBuffer.push_str(&format!("{:?}", self.status));
+        formatBuffer.push_str(&format!("{:?}", self.required));
+        formatBuffer.push_str(&format!("{:?}", self.array));
         for item in &self.elements {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
-        formatBuffer.push_str(&format!("{}", self.format));
-        formatBuffer.push_str(&format!("{}", self.default));
+        formatBuffer.push_str(&format!("{:?}", self.format));
+        formatBuffer.push_str(&format!("{:?}", self.default));
 
         write!(f, "{}", formatBuffer)
     }

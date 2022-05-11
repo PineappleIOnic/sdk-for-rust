@@ -78,28 +78,28 @@ pub struct Collection {
         pub name: String,
         pub enabled: bool,
         pub permission: String,
-        pub attributes: Vec<String>,
+        pub attributes: Vec<Attribute>,
         pub indexes: Vec<Index>,
 }
 
 impl Display for Collection {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.id));
+        formatBuffer.push_str(&format!("{:?}", self.id));
         for item in &self.read {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
         for item in &self.write {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
-        formatBuffer.push_str(&format!("{}", self.name));
-        formatBuffer.push_str(&format!("{}", self.enabled));
-        formatBuffer.push_str(&format!("{}", self.permission));
+        formatBuffer.push_str(&format!("{:?}", self.name));
+        formatBuffer.push_str(&format!("{:?}", self.enabled));
+        formatBuffer.push_str(&format!("{:?}", self.permission));
         for item in &self.attributes {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
         for item in &self.indexes {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
 
         write!(f, "{}", formatBuffer)
@@ -107,7 +107,7 @@ impl Display for Collection {
 }
 
 impl Collection {
-    pub fn new(id: String, read: Vec<String>, write: Vec<String>, name: String, enabled: bool, permission: String, attributes: Vec<String>, indexes: Vec<Index>, ) -> Self {
+    pub fn new(id: String, read: Vec<String>, write: Vec<String>, name: String, enabled: bool, permission: String, attributes: Vec<Attribute>, indexes: Vec<Index>, ) -> Self {
         Self {
             id: id,
             read: read,

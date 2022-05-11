@@ -69,16 +69,16 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct MembershipList {
-        pub sum: i64,
+        pub total: i64,
         pub memberships: Vec<Membership>,
 }
 
 impl Display for MembershipList {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.sum));
+        formatBuffer.push_str(&format!("{:?}", self.total));
         for item in &self.memberships {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
 
         write!(f, "{}", formatBuffer)
@@ -86,9 +86,9 @@ impl Display for MembershipList {
 }
 
 impl MembershipList {
-    pub fn new(sum: i64, memberships: Vec<Membership>, ) -> Self {
+    pub fn new(total: i64, memberships: Vec<Membership>, ) -> Self {
         Self {
-            sum: sum,
+            total: total,
             memberships: memberships,
             }
     }

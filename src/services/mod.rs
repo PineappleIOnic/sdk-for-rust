@@ -1,7 +1,7 @@
 mod account;
 mod avatars;
-mod functions;
 mod database;
+mod functions;
 mod health;
 mod locale;
 mod storage;
@@ -11,8 +11,8 @@ mod exception;
 
 pub use self::account::Account;
 pub use self::avatars::Avatars;
-pub use self::functions::Functions;
 pub use self::database::Database;
+pub use self::functions::Functions;
 pub use self::health::Health;
 pub use self::locale::Locale;
 pub use self::storage::Storage;

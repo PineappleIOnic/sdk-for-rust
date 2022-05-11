@@ -3,6 +3,7 @@ use std::collections::HashMap;
 use crate::services::AppwriteException;
 use crate::models;
 use serde_json::json;
+use std::io::Read;
 
 #[derive(Clone)]
 pub struct Teams {
@@ -23,7 +24,7 @@ impl Teams {
     /// project. [Learn more about different API modes](/docs/admin).
     pub fn list(&self, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, cursor: Option<&str>, cursor_direction: Option<&str>, order_type: Option<&str>) -> Result<models::TeamList, AppwriteException> {
         let path = "/teams";
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
@@ -47,7 +48,7 @@ impl Teams {
             None => ""
         };
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
             ("search".to_string(), ParamType::String(search.to_string())),
             ("limit".to_string(),  ParamType::OptionalNumber(limit)),
             ("offset".to_string(),  ParamType::OptionalNumber(offset)),
@@ -60,7 +61,12 @@ impl Teams {
 
         let processedResponse:models::TeamList = match response {
             Ok(r) => {
-                r.json().unwrap()
+                match r.json() {
+                    Ok(json) => json,
+                    Err(e) => {
+                        return Err(AppwriteException::new(format!("Error parsing response json: {}", e), 0, "".to_string()));
+                    }
+                }
             }
             Err(e) => {
                 return Err(e);
@@ -68,7 +74,6 @@ impl Teams {
         };
 
         Ok(processedResponse)
-
     }
 
     /// Create a new team. The user who creates the team will automatically be
@@ -76,7 +81,7 @@ impl Teams {
     /// invite new members, add new owners and delete or update the team.
     pub fn create(&self, team_id: &str, name: &str, roles: Option<&[&str]>) -> Result<models::Team, AppwriteException> {
         let path = "/teams";
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
@@ -85,7 +90,7 @@ impl Teams {
             None => &[]
         };
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
             ("teamId".to_string(), ParamType::String(team_id.to_string())),
             ("name".to_string(), ParamType::String(name.to_string())),
             ("roles".to_string(), ParamType::Array(roles.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
@@ -95,7 +100,12 @@ impl Teams {
 
         let processedResponse:models::Team = match response {
             Ok(r) => {
-                r.json().unwrap()
+                match r.json() {
+                    Ok(json) => json,
+                    Err(e) => {
+                        return Err(AppwriteException::new(format!("Error parsing response json: {}", e), 0, "".to_string()));
+                    }
+                }
             }
             Err(e) => {
                 return Err(e);
@@ -103,24 +113,28 @@ impl Teams {
         };
 
         Ok(processedResponse)
-
     }
 
     /// Get a team by its ID. All team members have read access for this resource.
     pub fn get(&self, team_id: &str) -> Result<models::Team, AppwriteException> {
         let path = "/teams/teamId".replace("teamId", &team_id);
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
 
         let processedResponse:models::Team = match response {
             Ok(r) => {
-                r.json().unwrap()
+                match r.json() {
+                    Ok(json) => json,
+                    Err(e) => {
+                        return Err(AppwriteException::new(format!("Error parsing response json: {}", e), 0, "".to_string()));
+                    }
+                }
             }
             Err(e) => {
                 return Err(e);
@@ -128,18 +142,17 @@ impl Teams {
         };
 
         Ok(processedResponse)
-
     }
 
     /// Update a team using its ID. Only members with the owner role can update the
     /// team.
     pub fn update(&self, team_id: &str, name: &str) -> Result<models::Team, AppwriteException> {
         let path = "/teams/teamId".replace("teamId", &team_id);
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
         ].iter().cloned().collect();
 
@@ -147,7 +160,12 @@ impl Teams {
 
         let processedResponse:models::Team = match response {
             Ok(r) => {
-                r.json().unwrap()
+                match r.json() {
+                    Ok(json) => json,
+                    Err(e) => {
+                        return Err(AppwriteException::new(format!("Error parsing response json: {}", e), 0, "".to_string()));
+                    }
+                }
             }
             Err(e) => {
                 return Err(e);
@@ -155,38 +173,41 @@ impl Teams {
         };
 
         Ok(processedResponse)
-
     }
 
     /// Delete a team using its ID. Only team members with the owner role can
     /// delete the team.
     pub fn delete(&self, team_id: &str) -> Result<serde_json::value::Value, AppwriteException> {
         let path = "/teams/teamId".replace("teamId", &team_id);
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         let response = self.client.clone().call("DELETE", &path, Some(headers), Some(params) );
 
         match response {
             Ok(r) => {
-                Ok(serde_json::from_str(&r.text().unwrap()).unwrap())
+                let status_code = r.status();
+                if status_code == reqwest::StatusCode::NO_CONTENT {
+                    Ok(json!(true))
+                } else {
+                    Ok(serde_json::from_str(&r.text().unwrap()).unwrap())
+                }
             }
             Err(e) => {
                 Err(e)
             }
         }
-
     }
 
     /// Use this endpoint to list a team's members using the team's ID. All team
     /// members have read access to this endpoint.
     pub fn get_memberships(&self, team_id: &str, search: Option<&str>, limit: Option<i64>, offset: Option<i64>, cursor: Option<&str>, cursor_direction: Option<&str>, order_type: Option<&str>) -> Result<models::MembershipList, AppwriteException> {
         let path = "/teams/teamId/memberships".replace("teamId", &team_id);
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
@@ -210,7 +231,7 @@ impl Teams {
             None => ""
         };
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
             ("search".to_string(), ParamType::String(search.to_string())),
             ("limit".to_string(),  ParamType::OptionalNumber(limit)),
             ("offset".to_string(),  ParamType::OptionalNumber(offset)),
@@ -223,7 +244,12 @@ impl Teams {
 
         let processedResponse:models::MembershipList = match response {
             Ok(r) => {
-                r.json().unwrap()
+                match r.json() {
+                    Ok(json) => json,
+                    Err(e) => {
+                        return Err(AppwriteException::new(format!("Error parsing response json: {}", e), 0, "".to_string()));
+                    }
+                }
             }
             Err(e) => {
                 return Err(e);
@@ -231,7 +257,6 @@ impl Teams {
         };
 
         Ok(processedResponse)
-
     }
 
     /// Invite a new member to join your team. If initiated from the client SDK, an
@@ -251,7 +276,7 @@ impl Teams {
     /// adding your platforms in the console interface.
     pub fn create_membership(&self, team_id: &str, email: &str, roles: &[&str], url: &str, name: Option<&str>) -> Result<models::Membership, AppwriteException> {
         let path = "/teams/teamId/memberships".replace("teamId", &team_id);
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
@@ -260,7 +285,7 @@ impl Teams {
             None => ""
         };
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
             ("email".to_string(), ParamType::String(email.to_string())),
             ("roles".to_string(), ParamType::Array(roles.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
             ("url".to_string(), ParamType::String(url.to_string())),
@@ -271,7 +296,12 @@ impl Teams {
 
         let processedResponse:models::Membership = match response {
             Ok(r) => {
-                r.json().unwrap()
+                match r.json() {
+                    Ok(json) => json,
+                    Err(e) => {
+                        return Err(AppwriteException::new(format!("Error parsing response json: {}", e), 0, "".to_string()));
+                    }
+                }
             }
             Err(e) => {
                 return Err(e);
@@ -279,25 +309,29 @@ impl Teams {
         };
 
         Ok(processedResponse)
-
     }
 
     /// Get a team member by the membership unique id. All team members have read
     /// access for this resource.
     pub fn get_membership(&self, team_id: &str, membership_id: &str) -> Result<models::MembershipList, AppwriteException> {
         let path = "/teams/teamId/memberships/membershipId".replace("teamId", &team_id).replace("membershipId", &membership_id);
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
 
         let processedResponse:models::MembershipList = match response {
             Ok(r) => {
-                r.json().unwrap()
+                match r.json() {
+                    Ok(json) => json,
+                    Err(e) => {
+                        return Err(AppwriteException::new(format!("Error parsing response json: {}", e), 0, "".to_string()));
+                    }
+                }
             }
             Err(e) => {
                 return Err(e);
@@ -305,7 +339,6 @@ impl Teams {
         };
 
         Ok(processedResponse)
-
     }
 
     /// Modify the roles of a team member. Only team members with the owner role
@@ -313,11 +346,11 @@ impl Teams {
     /// permissions](/docs/permissions).
     pub fn update_membership_roles(&self, team_id: &str, membership_id: &str, roles: &[&str]) -> Result<models::Membership, AppwriteException> {
         let path = "/teams/teamId/memberships/membershipId".replace("teamId", &team_id).replace("membershipId", &membership_id);
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
             ("roles".to_string(), ParamType::Array(roles.into_iter().map(|x| ParamType::String(x.to_string())).collect())),
         ].iter().cloned().collect();
 
@@ -325,7 +358,12 @@ impl Teams {
 
         let processedResponse:models::Membership = match response {
             Ok(r) => {
-                r.json().unwrap()
+                match r.json() {
+                    Ok(json) => json,
+                    Err(e) => {
+                        return Err(AppwriteException::new(format!("Error parsing response json: {}", e), 0, "".to_string()));
+                    }
+                }
             }
             Err(e) => {
                 return Err(e);
@@ -333,7 +371,6 @@ impl Teams {
         };
 
         Ok(processedResponse)
-
     }
 
     /// This endpoint allows a user to leave a team or for a team owner to delete
@@ -341,36 +378,44 @@ impl Teams {
     /// delete a user membership even if it is not accepted.
     pub fn delete_membership(&self, team_id: &str, membership_id: &str) -> Result<serde_json::value::Value, AppwriteException> {
         let path = "/teams/teamId/memberships/membershipId".replace("teamId", &team_id).replace("membershipId", &membership_id);
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
         ].iter().cloned().collect();
 
         let response = self.client.clone().call("DELETE", &path, Some(headers), Some(params) );
 
         match response {
             Ok(r) => {
-                Ok(serde_json::from_str(&r.text().unwrap()).unwrap())
+                let status_code = r.status();
+                if status_code == reqwest::StatusCode::NO_CONTENT {
+                    Ok(json!(true))
+                } else {
+                    Ok(serde_json::from_str(&r.text().unwrap()).unwrap())
+                }
             }
             Err(e) => {
                 Err(e)
             }
         }
-
     }
 
     /// Use this endpoint to allow a user to accept an invitation to join a team
     /// after being redirected back to your app from the invitation email received
     /// by the user.
+    /// 
+    /// If the request is successful, a session for the user is automatically
+    /// created.
+    /// 
     pub fn update_membership_status(&self, team_id: &str, membership_id: &str, user_id: &str, secret: &str) -> Result<models::Membership, AppwriteException> {
         let path = "/teams/teamId/memberships/membershipId/status".replace("teamId", &team_id).replace("membershipId", &membership_id);
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
             ("userId".to_string(), ParamType::String(user_id.to_string())),
             ("secret".to_string(), ParamType::String(secret.to_string())),
         ].iter().cloned().collect();
@@ -379,7 +424,12 @@ impl Teams {
 
         let processedResponse:models::Membership = match response {
             Ok(r) => {
-                r.json().unwrap()
+                match r.json() {
+                    Ok(json) => json,
+                    Err(e) => {
+                        return Err(AppwriteException::new(format!("Error parsing response json: {}", e), 0, "".to_string()));
+                    }
+                }
             }
             Err(e) => {
                 return Err(e);
@@ -387,6 +437,5 @@ impl Teams {
         };
 
         Ok(processedResponse)
-
     }
 }

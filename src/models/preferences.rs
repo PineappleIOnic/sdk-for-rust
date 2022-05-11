@@ -69,7 +69,8 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Preferences {
-    pub data: HashMap<String, Value>,
+        #[serde(default)]
+        pub data: HashMap<String, Value>,
 }
 
 impl Display for Preferences {

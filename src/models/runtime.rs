@@ -82,14 +82,14 @@ pub struct Runtime {
 impl Display for Runtime {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.id));
-        formatBuffer.push_str(&format!("{}", self.name));
-        formatBuffer.push_str(&format!("{}", self.version));
-        formatBuffer.push_str(&format!("{}", self.base));
-        formatBuffer.push_str(&format!("{}", self.image));
-        formatBuffer.push_str(&format!("{}", self.logo));
+        formatBuffer.push_str(&format!("{:?}", self.id));
+        formatBuffer.push_str(&format!("{:?}", self.name));
+        formatBuffer.push_str(&format!("{:?}", self.version));
+        formatBuffer.push_str(&format!("{:?}", self.base));
+        formatBuffer.push_str(&format!("{:?}", self.image));
+        formatBuffer.push_str(&format!("{:?}", self.logo));
         for item in &self.supports {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
 
         write!(f, "{}", formatBuffer)

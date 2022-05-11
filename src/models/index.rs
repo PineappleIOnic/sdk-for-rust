@@ -80,14 +80,14 @@ pub struct Index {
 impl Display for Index {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.key));
-        formatBuffer.push_str(&format!("{}", self.xtype));
-        formatBuffer.push_str(&format!("{}", self.status));
+        formatBuffer.push_str(&format!("{:?}", self.key));
+        formatBuffer.push_str(&format!("{:?}", self.xtype));
+        formatBuffer.push_str(&format!("{:?}", self.status));
         for item in &self.attributes {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
         for item in &self.orders {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
 
         write!(f, "{}", formatBuffer)

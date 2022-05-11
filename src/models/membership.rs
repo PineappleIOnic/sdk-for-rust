@@ -84,16 +84,16 @@ pub struct Membership {
 impl Display for Membership {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.id));
-        formatBuffer.push_str(&format!("{}", self.userId));
-        formatBuffer.push_str(&format!("{}", self.teamId));
-        formatBuffer.push_str(&format!("{}", self.name));
-        formatBuffer.push_str(&format!("{}", self.email));
-        formatBuffer.push_str(&format!("{}", self.invited));
-        formatBuffer.push_str(&format!("{}", self.joined));
-        formatBuffer.push_str(&format!("{}", self.confirm));
+        formatBuffer.push_str(&format!("{:?}", self.id));
+        formatBuffer.push_str(&format!("{:?}", self.userId));
+        formatBuffer.push_str(&format!("{:?}", self.teamId));
+        formatBuffer.push_str(&format!("{:?}", self.name));
+        formatBuffer.push_str(&format!("{:?}", self.email));
+        formatBuffer.push_str(&format!("{:?}", self.invited));
+        formatBuffer.push_str(&format!("{:?}", self.joined));
+        formatBuffer.push_str(&format!("{:?}", self.confirm));
         for item in &self.roles {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
 
         write!(f, "{}", formatBuffer)

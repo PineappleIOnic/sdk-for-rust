@@ -76,8 +76,8 @@ pub struct Country {
 impl Display for Country {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.name));
-        formatBuffer.push_str(&format!("{}", self.code));
+        formatBuffer.push_str(&format!("{:?}", self.name));
+        formatBuffer.push_str(&format!("{:?}", self.code));
 
         write!(f, "{}", formatBuffer)
     }

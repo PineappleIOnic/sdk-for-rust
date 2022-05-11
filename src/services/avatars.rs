@@ -3,6 +3,7 @@ use std::collections::HashMap;
 use crate::services::AppwriteException;
 use crate::models;
 use serde_json::json;
+use std::io::Read;
 
 #[derive(Clone)]
 pub struct Avatars {
@@ -22,11 +23,11 @@ impl Avatars {
     /// change the output settings.
     pub fn get_browser(&self, code: &str, width: Option<i64>, height: Option<i64>, quality: Option<i64>) -> Result<Vec<u8>, AppwriteException> {
         let path = "/avatars/browsers/code".replace("code", &code);
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
             ("width".to_string(),  ParamType::OptionalNumber(width)),
             ("height".to_string(),  ParamType::OptionalNumber(height)),
             ("quality".to_string(),  ParamType::OptionalNumber(quality)),
@@ -51,7 +52,6 @@ impl Avatars {
         };
 
         Ok(processedResponse)
-
     }
 
     /// The credit card endpoint will return you the icon of the credit card
@@ -59,11 +59,11 @@ impl Avatars {
     /// output settings.
     pub fn get_credit_card(&self, code: &str, width: Option<i64>, height: Option<i64>, quality: Option<i64>) -> Result<Vec<u8>, AppwriteException> {
         let path = "/avatars/credit-cards/code".replace("code", &code);
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
             ("width".to_string(),  ParamType::OptionalNumber(width)),
             ("height".to_string(),  ParamType::OptionalNumber(height)),
             ("quality".to_string(),  ParamType::OptionalNumber(quality)),
@@ -88,7 +88,6 @@ impl Avatars {
         };
 
         Ok(processedResponse)
-
     }
 
     /// Use this endpoint to fetch the favorite icon (AKA favicon) of any remote
@@ -96,11 +95,11 @@ impl Avatars {
     /// 
     pub fn get_favicon(&self, url: &str) -> Result<Vec<u8>, AppwriteException> {
         let path = "/avatars/favicon";
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
             ("url".to_string(), ParamType::String(url.to_string())),
         ].iter().cloned().collect();
 
@@ -123,7 +122,6 @@ impl Avatars {
         };
 
         Ok(processedResponse)
-
     }
 
     /// You can use this endpoint to show different country flags icons to your
@@ -131,11 +129,11 @@ impl Avatars {
     /// height and quality arguments to change the output settings.
     pub fn get_flag(&self, code: &str, width: Option<i64>, height: Option<i64>, quality: Option<i64>) -> Result<Vec<u8>, AppwriteException> {
         let path = "/avatars/flags/code".replace("code", &code);
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
             ("width".to_string(),  ParamType::OptionalNumber(width)),
             ("height".to_string(),  ParamType::OptionalNumber(height)),
             ("quality".to_string(),  ParamType::OptionalNumber(quality)),
@@ -160,7 +158,6 @@ impl Avatars {
         };
 
         Ok(processedResponse)
-
     }
 
     /// Use this endpoint to fetch a remote image URL and crop it to any image size
@@ -169,11 +166,11 @@ impl Avatars {
     /// image is properly served using a TLS protocol.
     pub fn get_image(&self, url: &str, width: Option<i64>, height: Option<i64>) -> Result<Vec<u8>, AppwriteException> {
         let path = "/avatars/image";
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
             ("url".to_string(), ParamType::String(url.to_string())),
             ("width".to_string(),  ParamType::OptionalNumber(width)),
             ("height".to_string(),  ParamType::OptionalNumber(height)),
@@ -198,7 +195,6 @@ impl Avatars {
         };
 
         Ok(processedResponse)
-
     }
 
     /// Use this endpoint to show your user initials avatar icon on your website or
@@ -213,7 +209,7 @@ impl Avatars {
     /// the same initials.
     pub fn get_initials(&self, name: Option<&str>, width: Option<i64>, height: Option<i64>, color: Option<&str>, background: Option<&str>) -> Result<Vec<u8>, AppwriteException> {
         let path = "/avatars/initials";
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
@@ -232,7 +228,7 @@ impl Avatars {
             None => ""
         };
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
             ("name".to_string(), ParamType::String(name.to_string())),
             ("width".to_string(),  ParamType::OptionalNumber(width)),
             ("height".to_string(),  ParamType::OptionalNumber(height)),
@@ -259,18 +255,17 @@ impl Avatars {
         };
 
         Ok(processedResponse)
-
     }
 
     /// Converts a given plain text to a QR code image. You can use the query
     /// parameters to change the size and style of the resulting image.
     pub fn get_qr(&self, text: &str, size: Option<i64>, margin: Option<i64>, download: Option<bool>) -> Result<Vec<u8>, AppwriteException> {
         let path = "/avatars/qr";
-        let headers: HashMap<String, String> = [
+        let  headers: HashMap<String, String> = [
             ("content-type".to_string(), "application/json".to_string()),
         ].iter().cloned().collect();
 
-        let params: HashMap<String, ParamType> = [
+        let  params: HashMap<String, ParamType> = [
             ("text".to_string(), ParamType::String(text.to_string())),
             ("size".to_string(),  ParamType::OptionalNumber(size)),
             ("margin".to_string(),  ParamType::OptionalNumber(margin)),
@@ -296,6 +291,5 @@ impl Avatars {
         };
 
         Ok(processedResponse)
-
     }
 }

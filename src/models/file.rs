@@ -71,6 +71,7 @@ impl<T> EmptyOption<T> {
 pub struct File {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
         pub id: String,
+        pub bucketId: String,
         #[serde(rename(serialize = "read", deserialize = "$read"))]
         pub read: Vec<String>,
         #[serde(rename(serialize = "write", deserialize = "$write"))]
@@ -80,32 +81,38 @@ pub struct File {
         pub signature: String,
         pub mimeType: String,
         pub sizeOriginal: i64,
+        pub chunksTotal: i64,
+        pub chunksUploaded: i64,
 }
 
 impl Display for File {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.id));
+        formatBuffer.push_str(&format!("{:?}", self.id));
+        formatBuffer.push_str(&format!("{:?}", self.bucketId));
         for item in &self.read {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
         for item in &self.write {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
-        formatBuffer.push_str(&format!("{}", self.name));
-        formatBuffer.push_str(&format!("{}", self.dateCreated));
-        formatBuffer.push_str(&format!("{}", self.signature));
-        formatBuffer.push_str(&format!("{}", self.mimeType));
-        formatBuffer.push_str(&format!("{}", self.sizeOriginal));
+        formatBuffer.push_str(&format!("{:?}", self.name));
+        formatBuffer.push_str(&format!("{:?}", self.dateCreated));
+        formatBuffer.push_str(&format!("{:?}", self.signature));
+        formatBuffer.push_str(&format!("{:?}", self.mimeType));
+        formatBuffer.push_str(&format!("{:?}", self.sizeOriginal));
+        formatBuffer.push_str(&format!("{:?}", self.chunksTotal));
+        formatBuffer.push_str(&format!("{:?}", self.chunksUploaded));
 
         write!(f, "{}", formatBuffer)
     }
 }
 
 impl File {
-    pub fn new(id: String, read: Vec<String>, write: Vec<String>, name: String, dateCreated: i64, signature: String, mimeType: String, sizeOriginal: i64, ) -> Self {
+    pub fn new(id: String, bucketId: String, read: Vec<String>, write: Vec<String>, name: String, dateCreated: i64, signature: String, mimeType: String, sizeOriginal: i64, chunksTotal: i64, chunksUploaded: i64, ) -> Self {
         Self {
             id: id,
+            bucketId: bucketId,
             read: read,
             write: write,
             name: name,
@@ -113,6 +120,8 @@ impl File {
             signature: signature,
             mimeType: mimeType,
             sizeOriginal: sizeOriginal,
+            chunksTotal: chunksTotal,
+            chunksUploaded: chunksUploaded,
             }
     }
 }

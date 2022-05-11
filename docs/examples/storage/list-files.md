@@ -6,6 +6,6 @@ client.set_key("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
 let storage = appwrite::services::Storage::new(&client);
 
-let response = storage.list_files().unwrap();
+let response = storage.list_files("[BUCKET_ID]").unwrap();
 
 println!("{}", response.text().unwrap());

@@ -69,16 +69,16 @@ impl<T> EmptyOption<T> {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct CurrencyList {
-        pub sum: i64,
+        pub total: i64,
         pub currencies: Vec<Currency>,
 }
 
 impl Display for CurrencyList {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.sum));
+        formatBuffer.push_str(&format!("{:?}", self.total));
         for item in &self.currencies {
-            formatBuffer.push_str(&format!("{}", item));
+            formatBuffer.push_str(&format!("{:?}", item));
         }
 
         write!(f, "{}", formatBuffer)
@@ -86,9 +86,9 @@ impl Display for CurrencyList {
 }
 
 impl CurrencyList {
-    pub fn new(sum: i64, currencies: Vec<Currency>, ) -> Self {
+    pub fn new(total: i64, currencies: Vec<Currency>, ) -> Self {
         Self {
-            sum: sum,
+            total: total,
             currencies: currencies,
             }
     }

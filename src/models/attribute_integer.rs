@@ -83,14 +83,14 @@ pub struct AttributeInteger {
 impl Display for AttributeInteger {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.key));
-        formatBuffer.push_str(&format!("{}", self.xtype));
-        formatBuffer.push_str(&format!("{}", self.status));
-        formatBuffer.push_str(&format!("{}", self.required));
-        formatBuffer.push_str(&format!("{}", self.array));
-        formatBuffer.push_str(&format!("{}", self.min));
-        formatBuffer.push_str(&format!("{}", self.max));
-        formatBuffer.push_str(&format!("{}", self.default));
+        formatBuffer.push_str(&format!("{:?}", self.key));
+        formatBuffer.push_str(&format!("{:?}", self.xtype));
+        formatBuffer.push_str(&format!("{:?}", self.status));
+        formatBuffer.push_str(&format!("{:?}", self.required));
+        formatBuffer.push_str(&format!("{:?}", self.array));
+        formatBuffer.push_str(&format!("{:?}", self.min));
+        formatBuffer.push_str(&format!("{:?}", self.max));
+        formatBuffer.push_str(&format!("{:?}", self.default));
 
         write!(f, "{}", formatBuffer)
     }

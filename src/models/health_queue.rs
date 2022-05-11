@@ -75,7 +75,7 @@ pub struct HealthQueue {
 impl Display for HealthQueue {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.size));
+        formatBuffer.push_str(&format!("{:?}", self.size));
 
         write!(f, "{}", formatBuffer)
     }

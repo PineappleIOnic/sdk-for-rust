@@ -75,7 +75,9 @@ pub struct Session {
         pub expire: i64,
         pub provider: String,
         pub providerUid: String,
-        pub providerToken: String,
+        pub providerAccessToken: String,
+        pub providerAccessTokenExpiry: i64,
+        pub providerRefreshToken: String,
         pub ip: String,
         pub osCode: String,
         pub osName: String,
@@ -97,42 +99,46 @@ pub struct Session {
 impl Display for Session {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.id));
-        formatBuffer.push_str(&format!("{}", self.userId));
-        formatBuffer.push_str(&format!("{}", self.expire));
-        formatBuffer.push_str(&format!("{}", self.provider));
-        formatBuffer.push_str(&format!("{}", self.providerUid));
-        formatBuffer.push_str(&format!("{}", self.providerToken));
-        formatBuffer.push_str(&format!("{}", self.ip));
-        formatBuffer.push_str(&format!("{}", self.osCode));
-        formatBuffer.push_str(&format!("{}", self.osName));
-        formatBuffer.push_str(&format!("{}", self.osVersion));
-        formatBuffer.push_str(&format!("{}", self.clientType));
-        formatBuffer.push_str(&format!("{}", self.clientCode));
-        formatBuffer.push_str(&format!("{}", self.clientName));
-        formatBuffer.push_str(&format!("{}", self.clientVersion));
-        formatBuffer.push_str(&format!("{}", self.clientEngine));
-        formatBuffer.push_str(&format!("{}", self.clientEngineVersion));
-        formatBuffer.push_str(&format!("{}", self.deviceName));
-        formatBuffer.push_str(&format!("{}", self.deviceBrand));
-        formatBuffer.push_str(&format!("{}", self.deviceModel));
-        formatBuffer.push_str(&format!("{}", self.countryCode));
-        formatBuffer.push_str(&format!("{}", self.countryName));
-        formatBuffer.push_str(&format!("{}", self.current));
+        formatBuffer.push_str(&format!("{:?}", self.id));
+        formatBuffer.push_str(&format!("{:?}", self.userId));
+        formatBuffer.push_str(&format!("{:?}", self.expire));
+        formatBuffer.push_str(&format!("{:?}", self.provider));
+        formatBuffer.push_str(&format!("{:?}", self.providerUid));
+        formatBuffer.push_str(&format!("{:?}", self.providerAccessToken));
+        formatBuffer.push_str(&format!("{:?}", self.providerAccessTokenExpiry));
+        formatBuffer.push_str(&format!("{:?}", self.providerRefreshToken));
+        formatBuffer.push_str(&format!("{:?}", self.ip));
+        formatBuffer.push_str(&format!("{:?}", self.osCode));
+        formatBuffer.push_str(&format!("{:?}", self.osName));
+        formatBuffer.push_str(&format!("{:?}", self.osVersion));
+        formatBuffer.push_str(&format!("{:?}", self.clientType));
+        formatBuffer.push_str(&format!("{:?}", self.clientCode));
+        formatBuffer.push_str(&format!("{:?}", self.clientName));
+        formatBuffer.push_str(&format!("{:?}", self.clientVersion));
+        formatBuffer.push_str(&format!("{:?}", self.clientEngine));
+        formatBuffer.push_str(&format!("{:?}", self.clientEngineVersion));
+        formatBuffer.push_str(&format!("{:?}", self.deviceName));
+        formatBuffer.push_str(&format!("{:?}", self.deviceBrand));
+        formatBuffer.push_str(&format!("{:?}", self.deviceModel));
+        formatBuffer.push_str(&format!("{:?}", self.countryCode));
+        formatBuffer.push_str(&format!("{:?}", self.countryName));
+        formatBuffer.push_str(&format!("{:?}", self.current));
 
         write!(f, "{}", formatBuffer)
     }
 }
 
 impl Session {
-    pub fn new(id: String, userId: String, expire: i64, provider: String, providerUid: String, providerToken: String, ip: String, osCode: String, osName: String, osVersion: String, clientType: String, clientCode: String, clientName: String, clientVersion: String, clientEngine: String, clientEngineVersion: String, deviceName: String, deviceBrand: String, deviceModel: String, countryCode: String, countryName: String, current: bool, ) -> Self {
+    pub fn new(id: String, userId: String, expire: i64, provider: String, providerUid: String, providerAccessToken: String, providerAccessTokenExpiry: i64, providerRefreshToken: String, ip: String, osCode: String, osName: String, osVersion: String, clientType: String, clientCode: String, clientName: String, clientVersion: String, clientEngine: String, clientEngineVersion: String, deviceName: String, deviceBrand: String, deviceModel: String, countryCode: String, countryName: String, current: bool, ) -> Self {
         Self {
             id: id,
             userId: userId,
             expire: expire,
             provider: provider,
             providerUid: providerUid,
-            providerToken: providerToken,
+            providerAccessToken: providerAccessToken,
+            providerAccessTokenExpiry: providerAccessTokenExpiry,
+            providerRefreshToken: providerRefreshToken,
             ip: ip,
             osCode: osCode,
             osName: osName,

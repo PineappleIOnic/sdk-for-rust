@@ -95,27 +95,27 @@ pub struct Log {
 impl Display for Log {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.event));
-        formatBuffer.push_str(&format!("{}", self.userId));
-        formatBuffer.push_str(&format!("{}", self.userEmail));
-        formatBuffer.push_str(&format!("{}", self.userName));
-        formatBuffer.push_str(&format!("{}", self.mode));
-        formatBuffer.push_str(&format!("{}", self.ip));
-        formatBuffer.push_str(&format!("{}", self.time));
-        formatBuffer.push_str(&format!("{}", self.osCode));
-        formatBuffer.push_str(&format!("{}", self.osName));
-        formatBuffer.push_str(&format!("{}", self.osVersion));
-        formatBuffer.push_str(&format!("{}", self.clientType));
-        formatBuffer.push_str(&format!("{}", self.clientCode));
-        formatBuffer.push_str(&format!("{}", self.clientName));
-        formatBuffer.push_str(&format!("{}", self.clientVersion));
-        formatBuffer.push_str(&format!("{}", self.clientEngine));
-        formatBuffer.push_str(&format!("{}", self.clientEngineVersion));
-        formatBuffer.push_str(&format!("{}", self.deviceName));
-        formatBuffer.push_str(&format!("{}", self.deviceBrand));
-        formatBuffer.push_str(&format!("{}", self.deviceModel));
-        formatBuffer.push_str(&format!("{}", self.countryCode));
-        formatBuffer.push_str(&format!("{}", self.countryName));
+        formatBuffer.push_str(&format!("{:?}", self.event));
+        formatBuffer.push_str(&format!("{:?}", self.userId));
+        formatBuffer.push_str(&format!("{:?}", self.userEmail));
+        formatBuffer.push_str(&format!("{:?}", self.userName));
+        formatBuffer.push_str(&format!("{:?}", self.mode));
+        formatBuffer.push_str(&format!("{:?}", self.ip));
+        formatBuffer.push_str(&format!("{:?}", self.time));
+        formatBuffer.push_str(&format!("{:?}", self.osCode));
+        formatBuffer.push_str(&format!("{:?}", self.osName));
+        formatBuffer.push_str(&format!("{:?}", self.osVersion));
+        formatBuffer.push_str(&format!("{:?}", self.clientType));
+        formatBuffer.push_str(&format!("{:?}", self.clientCode));
+        formatBuffer.push_str(&format!("{:?}", self.clientName));
+        formatBuffer.push_str(&format!("{:?}", self.clientVersion));
+        formatBuffer.push_str(&format!("{:?}", self.clientEngine));
+        formatBuffer.push_str(&format!("{:?}", self.clientEngineVersion));
+        formatBuffer.push_str(&format!("{:?}", self.deviceName));
+        formatBuffer.push_str(&format!("{:?}", self.deviceBrand));
+        formatBuffer.push_str(&format!("{:?}", self.deviceModel));
+        formatBuffer.push_str(&format!("{:?}", self.countryCode));
+        formatBuffer.push_str(&format!("{:?}", self.countryName));
 
         write!(f, "{}", formatBuffer)
     }

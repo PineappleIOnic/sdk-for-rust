@@ -82,13 +82,13 @@ pub struct AttributeString {
 impl Display for AttributeString {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.key));
-        formatBuffer.push_str(&format!("{}", self.xtype));
-        formatBuffer.push_str(&format!("{}", self.status));
-        formatBuffer.push_str(&format!("{}", self.required));
-        formatBuffer.push_str(&format!("{}", self.array));
-        formatBuffer.push_str(&format!("{}", self.size));
-        formatBuffer.push_str(&format!("{}", self.default));
+        formatBuffer.push_str(&format!("{:?}", self.key));
+        formatBuffer.push_str(&format!("{:?}", self.xtype));
+        formatBuffer.push_str(&format!("{:?}", self.status));
+        formatBuffer.push_str(&format!("{:?}", self.required));
+        formatBuffer.push_str(&format!("{:?}", self.array));
+        formatBuffer.push_str(&format!("{:?}", self.size));
+        formatBuffer.push_str(&format!("{:?}", self.default));
 
         write!(f, "{}", formatBuffer)
     }

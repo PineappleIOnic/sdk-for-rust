@@ -6,6 +6,6 @@ client.set_key("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
 let functions = appwrite::services::Functions::new(&client);
 
-let response = functions.create("[FUNCTION_ID]", "[NAME]", &[], "ruby-3.0").unwrap();
+let response = functions.create("[FUNCTION_ID]", "[NAME]", &[], "node-14.5").unwrap();
 
 println!("{}", response.text().unwrap());

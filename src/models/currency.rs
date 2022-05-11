@@ -81,13 +81,13 @@ pub struct Currency {
 impl Display for Currency {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.symbol));
-        formatBuffer.push_str(&format!("{}", self.name));
-        formatBuffer.push_str(&format!("{}", self.symbolNative));
-        formatBuffer.push_str(&format!("{}", self.decimalDigits));
-        formatBuffer.push_str(&format!("{}", self.rounding));
-        formatBuffer.push_str(&format!("{}", self.code));
-        formatBuffer.push_str(&format!("{}", self.namePlural));
+        formatBuffer.push_str(&format!("{:?}", self.symbol));
+        formatBuffer.push_str(&format!("{:?}", self.name));
+        formatBuffer.push_str(&format!("{:?}", self.symbolNative));
+        formatBuffer.push_str(&format!("{:?}", self.decimalDigits));
+        formatBuffer.push_str(&format!("{:?}", self.rounding));
+        formatBuffer.push_str(&format!("{:?}", self.code));
+        formatBuffer.push_str(&format!("{:?}", self.namePlural));
 
         write!(f, "{}", formatBuffer)
     }

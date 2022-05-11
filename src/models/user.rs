@@ -83,14 +83,14 @@ pub struct User {
 impl Display for User {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.id));
-        formatBuffer.push_str(&format!("{}", self.name));
-        formatBuffer.push_str(&format!("{}", self.registration));
-        formatBuffer.push_str(&format!("{}", self.status));
-        formatBuffer.push_str(&format!("{}", self.passwordUpdate));
-        formatBuffer.push_str(&format!("{}", self.email));
-        formatBuffer.push_str(&format!("{}", self.emailVerification));
-        formatBuffer.push_str(&format!("{}", self.prefs));
+        formatBuffer.push_str(&format!("{:?}", self.id));
+        formatBuffer.push_str(&format!("{:?}", self.name));
+        formatBuffer.push_str(&format!("{:?}", self.registration));
+        formatBuffer.push_str(&format!("{:?}", self.status));
+        formatBuffer.push_str(&format!("{:?}", self.passwordUpdate));
+        formatBuffer.push_str(&format!("{:?}", self.email));
+        formatBuffer.push_str(&format!("{:?}", self.emailVerification));
+        formatBuffer.push_str(&format!("{:?}", self.prefs));
 
         write!(f, "{}", formatBuffer)
     }

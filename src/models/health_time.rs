@@ -77,9 +77,9 @@ pub struct HealthTime {
 impl Display for HealthTime {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.remoteTime));
-        formatBuffer.push_str(&format!("{}", self.localTime));
-        formatBuffer.push_str(&format!("{}", self.diff));
+        formatBuffer.push_str(&format!("{:?}", self.remoteTime));
+        formatBuffer.push_str(&format!("{:?}", self.localTime));
+        formatBuffer.push_str(&format!("{:?}", self.diff));
 
         write!(f, "{}", formatBuffer)
     }

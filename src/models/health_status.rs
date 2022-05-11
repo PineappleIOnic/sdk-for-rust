@@ -76,8 +76,8 @@ pub struct HealthStatus {
 impl Display for HealthStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
-        formatBuffer.push_str(&format!("{}", self.ping));
-        formatBuffer.push_str(&format!("{}", self.status));
+        formatBuffer.push_str(&format!("{:?}", self.ping));
+        formatBuffer.push_str(&format!("{:?}", self.status));
 
         write!(f, "{}", formatBuffer)
     }

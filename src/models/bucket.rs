@@ -68,67 +68,65 @@ impl<T> EmptyOption<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Function {
+pub struct Bucket {
         #[serde(rename(serialize = "id", deserialize = "$id"))]
         pub id: String,
-        pub execute: Vec<String>,
-        pub name: String,
+        #[serde(rename(serialize = "read", deserialize = "$read"))]
+        pub read: Vec<String>,
+        #[serde(rename(serialize = "write", deserialize = "$write"))]
+        pub write: Vec<String>,
+        pub permission: String,
         pub dateCreated: i64,
         pub dateUpdated: i64,
-        pub status: String,
-        pub runtime: String,
-        pub deployment: String,
-        pub vars: Option<HashMap<String, crate::client::ParamType>>,
-        pub events: Vec<String>,
-        pub schedule: String,
-        pub scheduleNext: i64,
-        pub schedulePrevious: i64,
-        pub timeout: i64,
+        pub name: String,
+        pub enabled: bool,
+        pub maximumFileSize: i64,
+        pub allowedFileExtensions: Vec<String>,
+        pub encryption: bool,
+        pub antivirus: bool,
 }
 
-impl Display for Function {
+impl Display for Bucket {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut formatBuffer = String::new();
         formatBuffer.push_str(&format!("{:?}", self.id));
-        for item in &self.execute {
+        for item in &self.read {
             formatBuffer.push_str(&format!("{:?}", item));
         }
-        formatBuffer.push_str(&format!("{:?}", self.name));
+        for item in &self.write {
+            formatBuffer.push_str(&format!("{:?}", item));
+        }
+        formatBuffer.push_str(&format!("{:?}", self.permission));
         formatBuffer.push_str(&format!("{:?}", self.dateCreated));
         formatBuffer.push_str(&format!("{:?}", self.dateUpdated));
-        formatBuffer.push_str(&format!("{:?}", self.status));
-        formatBuffer.push_str(&format!("{:?}", self.runtime));
-        formatBuffer.push_str(&format!("{:?}", self.deployment));
-        formatBuffer.push_str(&format!("{:?}", self.vars));
-        for item in &self.events {
+        formatBuffer.push_str(&format!("{:?}", self.name));
+        formatBuffer.push_str(&format!("{:?}", self.enabled));
+        formatBuffer.push_str(&format!("{:?}", self.maximumFileSize));
+        for item in &self.allowedFileExtensions {
             formatBuffer.push_str(&format!("{:?}", item));
         }
-        formatBuffer.push_str(&format!("{:?}", self.schedule));
-        formatBuffer.push_str(&format!("{:?}", self.scheduleNext));
-        formatBuffer.push_str(&format!("{:?}", self.schedulePrevious));
-        formatBuffer.push_str(&format!("{:?}", self.timeout));
+        formatBuffer.push_str(&format!("{:?}", self.encryption));
+        formatBuffer.push_str(&format!("{:?}", self.antivirus));
 
         write!(f, "{}", formatBuffer)
     }
 }
 
-impl Function {
-    pub fn new(id: String, execute: Vec<String>, name: String, dateCreated: i64, dateUpdated: i64, status: String, runtime: String, deployment: String, vars: Option<HashMap<String, crate::client::ParamType>>, events: Vec<String>, schedule: String, scheduleNext: i64, schedulePrevious: i64, timeout: i64, ) -> Self {
+impl Bucket {
+    pub fn new(id: String, read: Vec<String>, write: Vec<String>, permission: String, dateCreated: i64, dateUpdated: i64, name: String, enabled: bool, maximumFileSize: i64, allowedFileExtensions: Vec<String>, encryption: bool, antivirus: bool, ) -> Self {
         Self {
             id: id,
-            execute: execute,
-            name: name,
+            read: read,
+            write: write,
+            permission: permission,
             dateCreated: dateCreated,
             dateUpdated: dateUpdated,
-            status: status,
-            runtime: runtime,
-            deployment: deployment,
-            vars: vars,
-            events: events,
-            schedule: schedule,
-            scheduleNext: scheduleNext,
-            schedulePrevious: schedulePrevious,
-            timeout: timeout,
+            name: name,
+            enabled: enabled,
+            maximumFileSize: maximumFileSize,
+            allowedFileExtensions: allowedFileExtensions,
+            encryption: encryption,
+            antivirus: antivirus,
             }
     }
 }
