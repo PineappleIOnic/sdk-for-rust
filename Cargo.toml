@@ -1,5 +1,5 @@
 [package]
-name = "appwrite"
+name = "aw-test"
 version = "0.0.1"
 authors = ["Appwrite Team <team@appwrite.io>"]
 edition = "2018"
