@@ -5,7 +5,7 @@ authors = ["Appwrite Team <team@appwrite.io>"]
 edition = "2018"
 description = "Appwrite Rust SDK"
 licence = "BSD-3-Clause"
-repository = ""
+repository = "https://github.com/PineappleIOnic/sdk-for-rust/"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
