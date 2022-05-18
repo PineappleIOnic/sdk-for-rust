@@ -1,20 +1,20 @@
-# Appwrite NAME SDK
+# Appwrite Rust SDK SDK
 
-![License](https://img.shields.io/github/license/repoowner/reponame.svg?v=1)
+![License](https://img.shields.io/github/license/PineappleIOnic/sdk-for-rust.svg?v=1)
 ![Version](https://img.shields.io/badge/api%20version-0.13.0-blue.svg?v=1)
 
 **WORK IN PROGRESS - NOT READY FOR USAGE**
 
 Appwrite is an open-source backend as a service server that abstract and simplify complex and repetitive development tasks behind a very simple to use REST API. Appwrite aims to help you develop your apps faster and in a more secure way. Use the Rust SDK to integrate your app with the Appwrite server to easily start interacting with all of Appwrite backend APIs and tools. For full API documentation and tutorials go to https://appwrite.io/docs
 
-![Appwrite](https://appwrite.io/v1/images/console.png)
+![Appwrite](https://camo.githubusercontent.com/22d26d6d9b2c060b7a843a81c00bb125c7c44422c3cb6ccf2b493211af256c85/68747470733a2f2f61707077726974652e696f2f696d616765732f6769746875622e706e67)
 
 ## Installation
 
 To install via [Crates.io](https://www.crates.io/) add the following to your Cargo.toml under dependencies:
 
 ```toml
-appwrite = "0.0.1"
+appwrite = "0.0.2"
 ```
 
 

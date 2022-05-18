@@ -111,6 +111,46 @@ impl Users {
         Ok(processedResponse)
     }
 
+    pub fn get_usage(&self, range: Option<&str>, provider: Option<&str>) -> Result<models::UsageUsers, AppwriteException> {
+        let path = "/users/usage";
+        let  headers: HashMap<String, String> = [
+            ("content-type".to_string(), "application/json".to_string()),
+        ].iter().cloned().collect();
+
+        let range:&str = match range {
+            Some(data) => data,
+            None => ""
+        };
+
+        let provider:&str = match provider {
+            Some(data) => data,
+            None => ""
+        };
+
+        let  params: HashMap<String, ParamType> = [
+            ("range".to_string(), ParamType::String(range.to_string())),
+            ("provider".to_string(), ParamType::String(provider.to_string())),
+        ].iter().cloned().collect();
+
+        let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
+
+        let processedResponse:models::UsageUsers = match response {
+            Ok(r) => {
+                match r.json() {
+                    Ok(json) => json,
+                    Err(e) => {
+                        return Err(AppwriteException::new(format!("Error parsing response json: {}", e), 0, "".to_string()));
+                    }
+                }
+            }
+            Err(e) => {
+                return Err(e);
+            }
+        };
+
+        Ok(processedResponse)
+    }
+
     /// Get a user by its unique ID.
     pub fn get(&self, user_id: &str) -> Result<models::User, AppwriteException> {
         let path = "/users/userId".replace("userId", &user_id);

@@ -43,11 +43,17 @@ pub enum ParamType {
     RuntimeList(crate::models::RuntimeList),
     DeploymentList(crate::models::DeploymentList),
     ExecutionList(crate::models::ExecutionList),
+    ProjectList(crate::models::ProjectList),
+    WebhookList(crate::models::WebhookList),
+    KeyList(crate::models::KeyList),
+    PlatformList(crate::models::PlatformList),
+    DomainList(crate::models::DomainList),
     CountryList(crate::models::CountryList),
     ContinentList(crate::models::ContinentList),
     LanguageList(crate::models::LanguageList),
     CurrencyList(crate::models::CurrencyList),
     PhoneList(crate::models::PhoneList),
+    MetricList(crate::models::MetricList),
     Collection(crate::models::Collection),
     AttributeList(crate::models::AttributeList),
     AttributeString(crate::models::AttributeString),
@@ -65,6 +71,7 @@ pub enum ParamType {
     Preferences(crate::models::Preferences),
     Session(crate::models::Session),
     Token(crate::models::Token),
+    Jwt(crate::models::Jwt),
     Locale(crate::models::Locale),
     File(crate::models::File),
     Bucket(crate::models::Bucket),
@@ -74,6 +81,11 @@ pub enum ParamType {
     Runtime(crate::models::Runtime),
     Deployment(crate::models::Deployment),
     Execution(crate::models::Execution),
+    Project(crate::models::Project),
+    Webhook(crate::models::Webhook),
+    Key(crate::models::Key),
+    Domain(crate::models::Domain),
+    Platform(crate::models::Platform),
     Country(crate::models::Country),
     Continent(crate::models::Continent),
     Language(crate::models::Language),
@@ -83,6 +95,14 @@ pub enum ParamType {
     HealthQueue(crate::models::HealthQueue),
     HealthStatus(crate::models::HealthStatus),
     HealthTime(crate::models::HealthTime),
+    Metric(crate::models::Metric),
+    UsageDatabase(crate::models::UsageDatabase),
+    UsageCollection(crate::models::UsageCollection),
+    UsageUsers(crate::models::UsageUsers),
+    UsageStorage(crate::models::UsageStorage),
+    UsageBuckets(crate::models::UsageBuckets),
+    UsageFunctions(crate::models::UsageFunctions),
+    UsageProject(crate::models::UsageProject),
     }
 
 // Converts optionals into normal ParamTypes
@@ -134,8 +154,8 @@ impl Client {
     pub fn new() -> Self {
         let mut new_headers = HeaderMap::new();
 
-        new_headers.insert("x-sdk-version", "appwrite:rust:0.0.1".parse().unwrap());
-        new_headers.insert("user-agent", format!("{}-rust-{}", std::env::consts::OS, "0.0.1").parse().unwrap());
+        new_headers.insert("x-sdk-version", "appwrite:rust:0.0.2".parse().unwrap());
+        new_headers.insert("user-agent", format!("{}-rust-{}", std::env::consts::OS, "0.0.2").parse().unwrap());
         new_headers.insert("X-Appwrite-Response-Format", "0.7.0".parse().unwrap());
 
         Self {
@@ -174,6 +194,10 @@ impl Client {
 
     pub fn set_locale(&mut self, value: &str) {
         self.add_header("X-Appwrite-Locale".to_string(), value.to_string())
+    }
+
+    pub fn set_mode(&mut self, value: &str) {
+        self.add_header("X-Appwrite-Mode".to_string(), value.to_string())
     }
 
 

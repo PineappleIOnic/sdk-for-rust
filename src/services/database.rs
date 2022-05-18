@@ -806,6 +806,37 @@ impl Database {
         }
     }
 
+    /// Get the document activity logs list by its unique ID.
+    pub fn list_document_logs(&self, collection_id: &str, document_id: &str, limit: Option<i64>, offset: Option<i64>) -> Result<models::LogList, AppwriteException> {
+        let path = "/database/collections/collectionId/documents/documentId/logs".replace("collectionId", &collection_id).replace("documentId", &document_id);
+        let  headers: HashMap<String, String> = [
+            ("content-type".to_string(), "application/json".to_string()),
+        ].iter().cloned().collect();
+
+        let  params: HashMap<String, ParamType> = [
+            ("limit".to_string(),  ParamType::OptionalNumber(limit)),
+            ("offset".to_string(),  ParamType::OptionalNumber(offset)),
+        ].iter().cloned().collect();
+
+        let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
+
+        let processedResponse:models::LogList = match response {
+            Ok(r) => {
+                match r.json() {
+                    Ok(json) => json,
+                    Err(e) => {
+                        return Err(AppwriteException::new(format!("Error parsing response json: {}", e), 0, "".to_string()));
+                    }
+                }
+            }
+            Err(e) => {
+                return Err(e);
+            }
+        };
+
+        Ok(processedResponse)
+    }
+
     pub fn list_indexes(&self, collection_id: &str) -> Result<models::IndexList, AppwriteException> {
         let path = "/database/collections/collectionId/indexes".replace("collectionId", &collection_id);
         let  headers: HashMap<String, String> = [
@@ -923,5 +954,104 @@ impl Database {
                 Err(e)
             }
         }
+    }
+
+    /// Get the collection activity logs list by its unique ID.
+    pub fn list_collection_logs(&self, collection_id: &str, limit: Option<i64>, offset: Option<i64>) -> Result<models::LogList, AppwriteException> {
+        let path = "/database/collections/collectionId/logs".replace("collectionId", &collection_id);
+        let  headers: HashMap<String, String> = [
+            ("content-type".to_string(), "application/json".to_string()),
+        ].iter().cloned().collect();
+
+        let  params: HashMap<String, ParamType> = [
+            ("limit".to_string(),  ParamType::OptionalNumber(limit)),
+            ("offset".to_string(),  ParamType::OptionalNumber(offset)),
+        ].iter().cloned().collect();
+
+        let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
+
+        let processedResponse:models::LogList = match response {
+            Ok(r) => {
+                match r.json() {
+                    Ok(json) => json,
+                    Err(e) => {
+                        return Err(AppwriteException::new(format!("Error parsing response json: {}", e), 0, "".to_string()));
+                    }
+                }
+            }
+            Err(e) => {
+                return Err(e);
+            }
+        };
+
+        Ok(processedResponse)
+    }
+
+    pub fn get_usage(&self, range: Option<&str>) -> Result<models::UsageDatabase, AppwriteException> {
+        let path = "/database/usage";
+        let  headers: HashMap<String, String> = [
+            ("content-type".to_string(), "application/json".to_string()),
+        ].iter().cloned().collect();
+
+        let range:&str = match range {
+            Some(data) => data,
+            None => ""
+        };
+
+        let  params: HashMap<String, ParamType> = [
+            ("range".to_string(), ParamType::String(range.to_string())),
+        ].iter().cloned().collect();
+
+        let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
+
+        let processedResponse:models::UsageDatabase = match response {
+            Ok(r) => {
+                match r.json() {
+                    Ok(json) => json,
+                    Err(e) => {
+                        return Err(AppwriteException::new(format!("Error parsing response json: {}", e), 0, "".to_string()));
+                    }
+                }
+            }
+            Err(e) => {
+                return Err(e);
+            }
+        };
+
+        Ok(processedResponse)
+    }
+
+    pub fn get_collection_usage(&self, collection_id: &str, range: Option<&str>) -> Result<models::UsageCollection, AppwriteException> {
+        let path = "/database/collectionId/usage".replace("collectionId", &collection_id);
+        let  headers: HashMap<String, String> = [
+            ("content-type".to_string(), "application/json".to_string()),
+        ].iter().cloned().collect();
+
+        let range:&str = match range {
+            Some(data) => data,
+            None => ""
+        };
+
+        let  params: HashMap<String, ParamType> = [
+            ("range".to_string(), ParamType::String(range.to_string())),
+        ].iter().cloned().collect();
+
+        let response = self.client.clone().call("GET", &path, Some(headers), Some(params) );
+
+        let processedResponse:models::UsageCollection = match response {
+            Ok(r) => {
+                match r.json() {
+                    Ok(json) => json,
+                    Err(e) => {
+                        return Err(AppwriteException::new(format!("Error parsing response json: {}", e), 0, "".to_string()));
+                    }
+                }
+            }
+            Err(e) => {
+                return Err(e);
+            }
+        };
+
+        Ok(processedResponse)
     }
 }

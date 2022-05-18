@@ -1,6 +1,6 @@
 [package]
 name = "aw-test"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Appwrite Team <team@appwrite.io>"]
 edition = "2018"
 description = "Appwrite Rust SDK"
